@@ -18,26 +18,32 @@ from scripts.menu.menu_windows.user_interfaces.statistics_ui import load_statist
 # КЛАСС ОКНА ГЛАВНОГО МЕНЮ
 class MainMenu:
     def __init__(self, w, h, music=None):
-        """Инициализация объекта класса окна главного меню"""
+        """
+        Инициализация главного меню
+        :param w: ширина экрана
+        :param h: высота экрана
+        :param music: музыка, проигрывающаяся в меню
+        """
 
-        self.fullscreen = False
+        self.fullscreen = False  # РЕЖИМ ЭКРАНА ПО УМОЛЧАНИЮ - ОКОННЫЙ
         self.background_color = "#483c32"
-        self.w, self.h = self.size = w, h
+        self.w, self.h = self.size = w, h  # ЗАПИСЬ РАЗМЕРОВ ЭКРАНА
 
-        self.click = pygame.mixer.Sound("data/sounds/click.mp3")
+        self.click = pygame.mixer.Sound("data/sounds/click.mp3")  # ЗВУК КЛИКА
 
         if music is None:
             self.music = pygame.mixer.Sound("data/sounds/main_music.mp3")
         else:
             self.music = music
 
-        self.custom_font = pygame.font.Font("data/fonts/base_font.ttf", 40)
-        self.window_surface = pygame.display.set_mode(self.size)
+        self.custom_font = pygame.font.Font("data/fonts/base_font.ttf", 40)  # ОПРЕДЕЛЕНИЯ СОБСТВЕННОГО ШРИФТА
+        self.window_surface = pygame.display.set_mode(self.size)  # СОЗДАНИЕ ПОВЕРХНОСТИ ДЛЯ МЕНЮ
 
-        self.status = None
+        self.status = None  # ПЕРЕМЕННАЯ, КОТОРАЯ УКАЗЫВАЕТ НА ТО, КАКОЙ ТИП МЕНЮ СЕЙЧАСТ ОТКРЫТ
+        # (главное, настройки и т.д.)
 
-        load_main_ui(self)
-        import_settings(self)
+        load_main_ui(self)  # ЗАГРУЗКА ГЛАВНОГО МЕНЮ - ПО УМОЛЧАНИЮ
+        import_settings(self)  # ПОЛУЧЕНИЕ НАСТРОЕК ИЗ ФАЙЛА settings.csv И ЗАПИСЬ В АТРИБУТЫ self (ГРОМКОСТЬ МУЗЫКИ)
 
     def start_exit_dialog(self):
         """Открытие окна выхода из игры"""

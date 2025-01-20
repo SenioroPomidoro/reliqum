@@ -5,16 +5,18 @@ from scripts.game.player import Player
 
 from scripts.helping_scripts.imports import import_csv_layout
 from scripts.helping_scripts.imports import import_graphics
+from scripts.game.weapon import Weapon
 
 
 class Level:
     def __init__(self, surface):
         self.display_surface = pygame.display.get_surface()
-        self.test_surface = surface
 
         self.passable_sprites = pygame.sprite.Group()  # Спрайты, за которыми игрок может прятаться
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
+
+        self.current_attack = None # спрайт атаки
 
         self.create_map()
 
@@ -53,7 +55,15 @@ class Level:
                             current_surface = graphics[style].subsurface(j, i, 64, 64)
                             Tile((x, y), [self.passable_sprites, self.visible_sprites], "object", current_surface, int(col))
 
-        self.player = Player((3300, 4000), [self.visible_sprites], self.obstacle_sprites, self.passable_sprites)
+        self.player = Player((3300, 4000), [self.visible_sprites], self.obstacle_sprites, self.passable_sprites, self.create_attack, self.destroy_attack)
+
+    def create_attack(self):
+        self.current_attack = Weapon(self.player, [self.visible_sprites])
+
+    def destroy_attack(self):
+        if self.current_attack is not None:
+            self.current_attack.kill()
+        self.current_attack = None
 
     def run(self):
         self.visible_sprites.custom_draw(self.player)

@@ -4,19 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 19 jan pre-second_deadline commit -----&#10;Сделана визуальная часть меню, составлен каркас для игры, всё запустить и проверить можно из файлов main.py и scripts.game.game_main.py соответственно">
-      <change afterPath="$PROJECT_DIR$/data/settings.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/helping_scripts/write.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/draw_labels.py" afterDir="false" />
+    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 20 jan commit -----">
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/down/down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/down_attack/down_attack.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/down_idle/down_idle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/left/left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/left_attack/left_attack.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/left_idle/left_idle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/right/right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/right_attack/right_attack.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/right_idle/right_idle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/up/up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/up_attack/up_attack.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/up_idle/up_idle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/axe/down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/axe/full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/axe/left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/axe/right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/axe/up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/lance/down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/lance/full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/lance/left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/lance/right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/lance/up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/game/weapon.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TZ.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TZ.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/helping_scripts/imports.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/helping_scripts/imports.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/spriites/main_hero/Idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/settings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/game_level.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/main_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/load_game_menu_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/load_game_menu_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/main_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/main_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/new_game_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/new_game_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/settings_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/settings_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/statistics_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/statistics_ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,24 +85,24 @@
     "Python.write.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/maxim/Prog/Python/projects/pyGAME",
+    "last_opened_file_path": "/home/maxim/Prog/Python/projects/pyGAME/data/images/spriites/weapons/lance",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/images/spriites/weapons/lance" />
+      <recent name="$PROJECT_DIR$/data/images/spriites/weapons" />
+      <recent name="$PROJECT_DIR$/data/images/spriites/main_hero/walk" />
+      <recent name="$PROJECT_DIR$/data/images/spriites/main_hero" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/data/game_map_files/map_test" />
-      <recent name="$PROJECT_DIR$/data/font" />
-      <recent name="$PROJECT_DIR$/data/images/spriites" />
-      <recent name="$PROJECT_DIR$/data/images/tileset_images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/scripts/menu/menu_windows/sub_main_menu_scripts" />
-      <recent name="$PROJECT_DIR$/data/images/spriites/main_hero_sprites" />
-      <recent name="$PROJECT_DIR$/data/images/tileset_images" />
-      <recent name="$PROJECT_DIR$/data/font" />
-      <recent name="$PROJECT_DIR$/data/game_map_files/level" />
+      <recent name="$PROJECT_DIR$/data/images/spriites/weapons/lance" />
+      <recent name="$PROJECT_DIR$/data/images/spriites/weapons/stick" />
+      <recent name="$PROJECT_DIR$/data/images/spriites/weapons/axe" />
+      <recent name="$PROJECT_DIR$/data/images/spriites/main_hero/right" />
+      <recent name="$PROJECT_DIR$/data/images/spriites/main_hero/left" />
     </key>
   </component>
   <component name="RunManager" selected="Python.game_main">
@@ -200,8 +220,8 @@
       <list>
         <item itemvalue="Python.game_main" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.write" />
         <item itemvalue="Python.main_menu (1)" />
+        <item itemvalue="Python.write" />
         <item itemvalue="Python.imports" />
       </list>
     </recent_temporary>
@@ -230,7 +250,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737299798907</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="----- 20 jan commit -----">
+      <option name="closed" value="true" />
+      <created>1737372391298</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1737372391298</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -249,6 +277,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="----- 19 jan pre-second_deadline commit -----&#10;Сделана визуальная часть меню, составлен каркас для игры, всё запустить и проверить можно из файлов main.py и scripts.game.game_main.py соответственно" />
-    <option name="LAST_COMMIT_MESSAGE" value="----- 19 jan pre-second_deadline commit -----&#10;Сделана визуальная часть меню, составлен каркас для игры, всё запустить и проверить можно из файлов main.py и scripts.game.game_main.py соответственно" />
+    <MESSAGE value="----- 20 jan commit -----" />
+    <option name="LAST_COMMIT_MESSAGE" value="----- 20 jan commit -----" />
   </component>
 </project>
