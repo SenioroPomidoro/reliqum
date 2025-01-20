@@ -25,4 +25,12 @@ def import_graphics(path):
     return surface_dict
 
 
+def import_settings(self):
+    with open("data/settings.csv") as file:
+        file_data = list(reader(file, delimiter=","))
+        data = {file_data[0][i]: file_data[1][i] for i in range(len(file_data[0]))}
+
+    self.main_music_value = int(data["main_music_value"])
+    self.ingame_music_value = int(data["ingame_music_value"])
+
 

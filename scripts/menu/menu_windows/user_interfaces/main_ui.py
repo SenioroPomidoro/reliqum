@@ -40,6 +40,9 @@ def load_main_ui(self):
 
     self.back_button = None
 
+    self.save_button = None
+
     image = pygame.image.load("data/images/main_images/game_label.png")
     self.game_label = pygame.transform.scale(image, (1360, 200))
-    self.label = True
+
+    self.status = "main"

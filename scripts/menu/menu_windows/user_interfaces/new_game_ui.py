@@ -13,3 +13,5 @@ def new_game_menu_ui(self):
         text="В ГЛАВНОЕ МЕНЮ",
         manager=self.manager,
     )
+
+    self.status = "new_game"

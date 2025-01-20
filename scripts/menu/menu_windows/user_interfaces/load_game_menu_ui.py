@@ -13,3 +13,5 @@ def load_game_menu_ui(self):
         text="В ГЛАВНОЕ МЕНЮ",
         manager=self.manager,
     )
+
+    self.status = "load_game"

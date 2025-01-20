@@ -3,6 +3,11 @@ import pygame
 import pygame_gui
 import pprint
 
+from scripts.menu.menu_windows.user_interfaces.draw_labels import draw_labels
+
+from scripts.helping_scripts.imports import import_settings
+from scripts.helping_scripts.write import write_settings_csv
+
 from scripts.menu.menu_windows.user_interfaces.main_ui import load_main_ui
 from scripts.menu.menu_windows.user_interfaces.load_game_menu_ui import load_game_menu_ui
 from scripts.menu.menu_windows.user_interfaces.new_game_ui import new_game_menu_ui
@@ -26,9 +31,13 @@ class MainMenu:
         else:
             self.music = music
 
-        self.custom_font = pygame.font.Font("data/fonts/base_font.ttf", 30)
+        self.custom_font = pygame.font.Font("data/fonts/base_font.ttf", 40)
         self.window_surface = pygame.display.set_mode(self.size)
+
+        self.status = None
+
         load_main_ui(self)
+        import_settings(self)
 
     def start_exit_dialog(self):
         """Открытие окна выхода из игры"""
@@ -50,6 +59,7 @@ class MainMenu:
         background.fill(pygame.Color(self.background_color))
 
         self.music.play(100)
+        self.music.set_volume(self.main_music_value / 100)
         self.music_playing = True
 
         clock = pygame.time.Clock()
@@ -70,6 +80,12 @@ class MainMenu:
                         self.fullscreen = not self.fullscreen
 
                 if event.type == pygame.USEREVENT:
+                    if event.user_type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+                        if event.ui_element == self.main_menu_music_slider:
+                            self.temprorary_main_music_val = self.main_menu_music_slider.get_current_value()
+                        if event.ui_element == self.game_music_slider:
+                            self.temprorary_ingame_music_val = self.game_music_slider.get_current_value()
+
                     if event.user_type == pygame_gui.UI_CONFIRMATION_DIALOG_CONFIRMED:
                         running = False
 
@@ -83,28 +99,27 @@ class MainMenu:
 
                         if event.ui_element == self.settings_button:
                             load_settings_ui(self)
-                            self.label = False
 
                         if event.ui_element == self.load_game_button:
                             load_game_menu_ui(self)
-                            self.label = False
 
                         if event.ui_element == self.new_game_button:
                             new_game_menu_ui(self)
-                            self.label = False
 
                         if event.ui_element == self.statistics_button:
                             load_statistics_menu_ui(self)
-                            self.label = False
+
+                        if event.ui_element == self.save_button:
+                            write_settings_csv(self)
+                            self.music.set_volume(self.main_music_val / 100)
+                            self.save_button.set_text("УСПЕШНО СОХРАНЕНО")
 
                 self.manager.process_events(event)
             self.manager.update(time_delta)
 
             self.window_surface.blit(background, (0, 0))
-            if self.label:
-                label = self.custom_font.render("F4 - ПОЛНЫЙ ЭКРАН", 1, (0, 0, 0))
-                self.window_surface.blit(label, (self.w // 90, self.h - self.custom_font.get_height()))
-                self.window_surface.blit(self.game_label, (20, 20))
-            self.manager.draw_ui(self.window_surface)
 
+            draw_labels(self)
+
+            self.manager.draw_ui(self.window_surface)
             pygame.display.flip()
