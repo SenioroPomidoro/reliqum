@@ -7,18 +7,23 @@ from scripts.helping_scripts.imports import import_csv_layout
 from scripts.helping_scripts.imports import import_graphics
 from scripts.game.weapon import Weapon
 
+from game_ui import GameUI
+
 
 class Level:
     def __init__(self, surface):
-        self.display_surface = pygame.display.get_surface()
+        self.display_surface = pygame.display.get_surface()  # ПОЛУЧЕНИЕ ТЕКУЩЕГО СЛОЯ ДЛЯ ОТРИСОВКИ
 
         self.passable_sprites = pygame.sprite.Group()  # Спрайты, за которыми игрок может прятаться
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
 
-        self.current_attack = None # спрайт атаки
+        self.current_attack = None  # спрайт атаки
 
         self.create_map()
+
+        # ui
+        self.ui = GameUI()
 
     def create_map(self):
         """Функция создания карты"""
@@ -55,10 +60,21 @@ class Level:
                             current_surface = graphics[style].subsurface(j, i, 64, 64)
                             Tile((x, y), [self.passable_sprites, self.visible_sprites], "object", current_surface, int(col))
 
-        self.player = Player((3300, 4000), [self.visible_sprites], self.obstacle_sprites, self.passable_sprites, self.create_attack, self.destroy_attack)
+        self.player = Player(
+            (3300, 4000),
+            [self.visible_sprites],
+            self.obstacle_sprites,
+            self.passable_sprites,
+            self.create_attack,
+            self.destroy_attack,
+            self.create_magic
+        )
 
     def create_attack(self):
         self.current_attack = Weapon(self.player, [self.visible_sprites])
+
+    def create_magic(self, style, strength, cost):
+        print(style, strength, cost)
 
     def destroy_attack(self):
         if self.current_attack is not None:
@@ -68,6 +84,7 @@ class Level:
     def run(self):
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
+        self.ui.display(self.player)
 
 
 class YSortCameraGroup(pygame.sprite.Group):

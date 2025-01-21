@@ -6,6 +6,7 @@ from scripts.game.game_level import Level
 
 class Game:
     def __init__(self, w, h):
+        pygame.init()
         self.w, self.h = self.size = w, h
 
     def start_game(self):

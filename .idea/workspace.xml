@@ -4,37 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 20 jan commit -----">
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/down/down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/down_attack/down_attack.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/down_idle/down_idle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/left/left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/left_attack/left_attack.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/left_idle/left_idle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/right/right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/right_attack/right_attack.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/right_idle/right_idle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/up/up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/up_attack/up_attack.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/main_hero/up_idle/up_idle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/axe/down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/axe/full.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/axe/left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/axe/right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/axe/up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/lance/down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/lance/full.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/lance/left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/lance/right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/weapons/lance/up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/game/weapon.py" afterDir="false" />
+    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 20 jan commit part 2-----&#10;Из файла main главного каталога запускается меню, из файла scripts.game.game_main игра. Это временная мера на этапе разработки, позже будет убрана">
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/magic/flame/fire.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/magic/flame/fire_attack.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/spriites/magic/heal/heal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/game/game_ui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TZ.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TZ.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/images/spriites/main_hero/Idle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/settings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/game/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/game_level.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game/game_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/game_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/game/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/main_menu.py" afterDir="false" />
     </list>
@@ -85,24 +64,24 @@
     "Python.write.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/maxim/Prog/Python/projects/pyGAME/data/images/spriites/weapons/lance",
+    "last_opened_file_path": "/home/maxim/Prog/Python/projects/pyGAME/data/images/spriites/magic/flame",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/images/spriites/magic/flame" />
       <recent name="$PROJECT_DIR$/data/images/spriites/weapons/lance" />
       <recent name="$PROJECT_DIR$/data/images/spriites/weapons" />
       <recent name="$PROJECT_DIR$/data/images/spriites/main_hero/walk" />
       <recent name="$PROJECT_DIR$/data/images/spriites/main_hero" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/images/spriites/magic/heal" />
+      <recent name="$PROJECT_DIR$/data/images/spriites/magic/flame" />
       <recent name="$PROJECT_DIR$/data/images/spriites/weapons/lance" />
       <recent name="$PROJECT_DIR$/data/images/spriites/weapons/stick" />
       <recent name="$PROJECT_DIR$/data/images/spriites/weapons/axe" />
-      <recent name="$PROJECT_DIR$/data/images/spriites/main_hero/right" />
-      <recent name="$PROJECT_DIR$/data/images/spriites/main_hero/left" />
     </key>
   </component>
   <component name="RunManager" selected="Python.game_main">
@@ -258,7 +237,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737372391298</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="----- 20 jan commit part 2-----&#10;Из файла main главного каталога запускается меню, из файла scripts.game.game_main игра. Это временная мера на этапе разработки, позже будет убрана">
+      <option name="closed" value="true" />
+      <created>1737384615882</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1737384615882</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -278,6 +265,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="----- 19 jan pre-second_deadline commit -----&#10;Сделана визуальная часть меню, составлен каркас для игры, всё запустить и проверить можно из файлов main.py и scripts.game.game_main.py соответственно" />
     <MESSAGE value="----- 20 jan commit -----" />
-    <option name="LAST_COMMIT_MESSAGE" value="----- 20 jan commit -----" />
+    <MESSAGE value="----- 20 jan commit part 2-----&#10;Из файла main главного каталога запускается меню, из файла scripts.game.game_main игра. Это временная мера на этапе разработки, позже будет убрана" />
+    <option name="LAST_COMMIT_MESSAGE" value="----- 20 jan commit part 2-----&#10;Из файла main главного каталога запускается меню, из файла scripts.game.game_main игра. Это временная мера на этапе разработки, позже будет убрана" />
   </component>
 </project>

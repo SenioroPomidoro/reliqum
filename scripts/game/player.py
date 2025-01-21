@@ -3,10 +3,14 @@ from data.settings import *
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, obstacle_sprites, passable_sprites, create_attack, destroy_attack):
+    def __init__(self, pos, groups, obstacle_sprites, passable_sprites, create_attack, destroy_attack, create_magic):
         super().__init__(groups)
         self.image = pygame.image.load('../../data/images/spriites/main_hero/down_idle/down_idle.png').convert_alpha()
         self.image = self.image.subsurface(pygame.Rect(0, 0, 50, 50))
+
+        self.obstacle_sprites = obstacle_sprites
+        self.sprite_type = "None"
+        self.sprite_id = -1
 
         self.rect = self.image.get_rect(topleft=pos)
         self.hitbox = self.rect.inflate(0, -6)  # Фича для уменьшения хитбокса
@@ -19,7 +23,6 @@ class Player(pygame.sprite.Sprite):
 
         # Ориентация
         self.direction = pygame.math.Vector2()
-        self.speed = 5
         self.attacking = False
         self.attack_cooldown = 400
         self.attack_time = None
@@ -29,15 +32,25 @@ class Player(pygame.sprite.Sprite):
         self.destroy_attack = destroy_attack
         self.weapon_index = 0
         self.weapon = list(weapon_data.keys())[self.weapon_index]
-
-        self.obstacle_sprites = obstacle_sprites
-
-        self.sprite_type = "None"
-        self.sprite_id = -1
-
         self.can_switch_weapon = True
         self.weapon_switch_time = None
-        self.switch_duration_cooldown = 200
+
+        # Магия
+        self.create_magic = create_magic
+        self.magic_index = 0
+        self.magic = list(magic_data.keys())[self.magic_index]
+        self.can_switch_magic = True
+        self.magic_switch_time = None
+
+        self.switch_duration_cooldown = 500
+
+        # Показатели персонажа
+        # Урон = урон оружия + урон игрока
+        self.stats = {"health": 100, "energy": 60, "attack": 10, "magic": 4, "speed": 6}
+        self.health = self.stats["health"]
+        self.energy = self.stats["energy"]
+        self.speed = self.stats["speed"]
+        self.exp = 123
 
     def import_player_assets(self):
         character_path = "../../data/images/spriites/main_hero/"
@@ -84,9 +97,14 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_x]:
             self.attacking = True
             self.attack_time = pygame.time.get_ticks()
-            print("magic")
 
-        if keys[pygame.K_q] and self.can_switch_weapon:
+            style = list(magic_data.keys())[self.magic_index]
+            strength = list(magic_data.values())[self.magic_index]["strength"] + self.stats["magic"]
+            cost = list(magic_data.values())[self.magic_index]["cost"]
+
+            self.create_magic(style, strength, cost)
+
+        if keys[pygame.K_q] and self.can_switch_weapon:  # СМЕНА ОРУЖИЯ
             self.can_switch_weapon = False
             self.weapon_switch_time = pygame.time.get_ticks()
             if self.weapon_index < len(list(weapon_data.keys())) - 1:
@@ -94,6 +112,15 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.weapon_index = 0
             self.weapon = list(weapon_data.keys())[self.weapon_index]
+
+        if keys[pygame.K_e] and self.can_switch_magic:  # СМЕНА МАГИИ
+            self.can_switch_magic = False
+            self.magic_switch_time = pygame.time.get_ticks()
+            if self.magic_index < len(list(magic_data.keys())) - 1:
+                self.magic_index += 1  # Смена оружия
+            else:
+                self.magic_index = 0
+            self.magic = list(magic_data.keys())[self.magic_index]
 
     def get_status(self):
         # idle status
@@ -151,9 +178,13 @@ class Player(pygame.sprite.Sprite):
                 self.attacking = False
                 self.destroy_attack()
 
-            if not self.can_switch_weapon:
-                if current_time - self.weapon_switch_time >= self.switch_duration_cooldown:
-                    self.can_switch_weapon = True
+        if not self.can_switch_weapon:
+            if current_time - self.weapon_switch_time >= self.switch_duration_cooldown:
+                self.can_switch_weapon = True
+
+        if not self.can_switch_magic:
+            if current_time - self.magic_switch_time >= self.switch_duration_cooldown:
+                self.can_switch_magic = True
 
     def animate(self):
         animation = self.animations[self.status]

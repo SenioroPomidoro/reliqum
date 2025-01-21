@@ -61,71 +61,73 @@ class MainMenu:
     def start_menu(self):
         """Запуск главного меню и его особенности"""
 
-        background = pygame.Surface(self.size)
-        background.fill(pygame.Color(self.background_color))
+        background = pygame.Surface(self.size)  # ЗАДНИЙ ФОН
+        background.fill(pygame.Color(self.background_color))  # ЗАПОЛНЕНИЯ ЗАДНЕГО ФОНА ЗАДАННЫМ ЦВЕТОМ
 
-        self.music.play(100)
-        self.music.set_volume(self.main_music_value / 100)
+        self.music.play(100)  # ВКЛЮЧЕНИЕ МУЗЫКИ
+        self.music.set_volume(self.main_music_value / 100)  # УСТАНОВКА ГРОМКОСТИ МУЗЫКИ
         self.music_playing = True
 
-        clock = pygame.time.Clock()
-        running = True
-        while running:
+        clock = pygame.time.Clock()  # ОПРЕДЕЛЕНИЕ ОБЪЕКТА ЧАСОВ
+        running = True  # ОПРЕДЕЛЕНИЕ ПАРАМЕТРА, ОПРЕДЕЛЯЮЩЕГО РАБОТАЕТ МЕНЮ ИЛИ НЕТ
+        while running:  # ЦИКЛ ОКНА ГЛАВНОГО МЕНЮ
             time_delta = clock.tick(60) / 1000.0
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.start_exit_dialog()
+            for event in pygame.event.get():  # ПОЛУЧЕНИЕ ВОНЗИКАЮЩИЙ СОБЫТИЙ В ЦИКЛЕ
+                if event.type == pygame.QUIT:  # ОБРАБОТКА ПОПЫТКИ ЗАКРЫТЬ ПРИЛОЖЕНИЕ
+                    self.start_exit_dialog()  # ВЫЗЫВАЕТСЯ ДИАЛОГОВОЕ ОКНО С ПОДТВЕРЖДЕНИЕМ ВЫХОДА
 
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_F4:
+                if event.type == pygame.KEYDOWN:  # ОБРАБОТКА СОБЫТИЙ НАЖАТИЯ НА КЛАВИШИ
+                    if event.key == pygame.K_F4:  # F4 - СМЕНА РЕЖИМА ЭКРАНА (полноэкранный/оконный)
                         if self.fullscreen:
                             pygame.display.set_mode(self.size, pygame.SCALED)
                         else:
                             pygame.display.set_mode(self.size, pygame.FULLSCREEN)
                         self.fullscreen = not self.fullscreen
 
-                if event.type == pygame.USEREVENT:
-                    if event.user_type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
-                        if event.ui_element == self.main_menu_music_slider:
+                if event.type == pygame.USEREVENT:  # ЕСЛИ ПОЛУЧЕНО ПОЛЬЗОВАТЕЛЬСКОЕ СОБЫТИЕ (в том числе и
+                    # любое из тех, что может быть получено в библиотеке для оформления ui pygame_gui)
+                    if event.user_type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:  # ОБРАБОТКА СДВИГА СЛАЙДЕРА
+                        if event.ui_element == self.main_menu_music_slider:  # ИЗМЕНЕНИЕ ГРОМКОСТИ МУЗЫКИ В МЕНЮ
                             self.temprorary_main_music_val = self.main_menu_music_slider.get_current_value()
-                        if event.ui_element == self.game_music_slider:
+                        if event.ui_element == self.game_music_slider:  # ИЗМЕНЕНИЕ ГРОМКОСТИ МУЗЫКИ В ИГРЕ
                             self.temprorary_ingame_music_val = self.game_music_slider.get_current_value()
 
-                    if event.user_type == pygame_gui.UI_CONFIRMATION_DIALOG_CONFIRMED:
-                        running = False
+                    if event.user_type == pygame_gui.UI_CONFIRMATION_DIALOG_CONFIRMED:  # ОБРАБОТКА ПОДТВЕРЖДЕНИЯ ВЫХОДА
+                        running = False  # ЦИКЛ ЗАВЕРШАЕТСЯ
 
-                    if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
-                        self.click.play()
-                        if event.ui_element == self.exit_button:
-                            self.start_exit_dialog()
+                    if event.user_type == pygame_gui.UI_BUTTON_PRESSED:  # ОБРАБОТКА СОБЫТИЙ НАЖАТИЯ НА КНОПКИ
+                        self.click.play()  # ПРОИГРЫВАНИЕ ЗВУКА НАЖАТИЯ НА КНОПКУ
 
-                        if event.ui_element == self.back_button:
-                            load_main_ui(self)
+                        if event.ui_element == self.exit_button:  # ОБРАБОТКА НАЖАТИЯ НА КНОПКУ ВЫХОДА
+                            self.start_exit_dialog()  # ЗАПУСК ДИАЛОГА ПОДТВЕРЖДЕНИЯ ВЫХОДА
 
-                        if event.ui_element == self.settings_button:
-                            load_settings_ui(self)
+                        if event.ui_element == self.back_button:  # НАЖАТИЕ НА КНОПКУ ВОЗВРАЩЕНИЯ В ГЛ. МЕНЮ
+                            load_main_ui(self)  # ЗАПУСК ГЛАВНОГО МЕНЮ
 
-                        if event.ui_element == self.load_game_button:
-                            load_game_menu_ui(self)
+                        if event.ui_element == self.settings_button:  # НАЖАТИЕ НА КНОПКУ ПЕРЕХОДА В НАСТРОЙКИ
+                            load_settings_ui(self)  # ЗАПУСК ОКНА НАСТРОЕК
 
-                        if event.ui_element == self.new_game_button:
-                            new_game_menu_ui(self)
+                        if event.ui_element == self.load_game_button:  # НАЖАТИЕ НА КНОПКУ ПЕРЕХОДА В ОКНО ЗАГРУЗКИ ИГРЫ
+                            load_game_menu_ui(self)  # ЗАПУСК ОКНА ЗАГРУЗКИ ИГРЫ
 
-                        if event.ui_element == self.statistics_button:
-                            load_statistics_menu_ui(self)
+                        if event.ui_element == self.new_game_button:  # НАЖАТИЕ НА КНОПКУ ПЕРЕХОДА В ОКНО СОЗДАНИЯ ИГРЫ
+                            new_game_menu_ui(self)  # ЗАПУСК ОКНА СОЗДАНИЯ НОВОЙ ИГРЫ
 
-                        if event.ui_element == self.save_button:
-                            write_settings_csv(self)
-                            self.music.set_volume(self.main_music_val / 100)
-                            self.save_button.set_text("УСПЕШНО СОХРАНЕНО")
+                        if event.ui_element == self.statistics_button:  # НАЖАТИЕ НА КНОПКУ ПЕРЕХОЖА В ОКНО СТАТИСТИКИ
+                            load_statistics_menu_ui(self)  # ЗАПУСК ОКНА СО СТАТИСТИКОЙ
 
-                self.manager.process_events(event)
-            self.manager.update(time_delta)
+                        if event.ui_element == self.save_button:  # НАЖАТИЕ НА КНОПКУ СОХРАНЕНИЯ В ОКНЕ НАСТРОЕК
+                            write_settings_csv(self)  # ЗАПИСЬ ИМЕЮЩИХСЯ ИЗМЕНЕНИЙ В ФАЙЛ С НАСТРОЙКАМИ
+                            self.music.set_volume(self.main_music_val / 100)  # УСТАНОВКА НОВОЙ ГРОМКОСТИ МУЗЫКИ
+                            self.save_button.set_text("УСПЕШНО СОХРАНЕНО")  # ПОДТВЕРЖДЕНИЕ СОХРАНЕНИЯ НА КНОПКЕ
 
-            self.window_surface.blit(background, (0, 0))
+                self.manager.process_events(event)  # ПЕРЕДАЧА СОБЫТИЯ МЕНЕДЖЕРУ ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
+            self.manager.update(time_delta)  # ОБНОВЛЕНИЕ МЕНЕДЖЕРА ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
 
-            draw_labels(self)
+            self.window_surface.blit(background, (0, 0))  # ЗАПОЛНЕНИЯ ОСНОВНОГО СЛОЯ ФОНОМ
 
-            self.manager.draw_ui(self.window_surface)
-            pygame.display.flip()
+            draw_labels(self)  # ОТРИСОВКА ТЕКСТОВЫХ ЧАСТЕЙ ОКНА
+
+            self.manager.draw_ui(self.window_surface)  # ОТРИСОВКА ЧАСТЕЙ ОКНА, ОТВЕЧАЮЩИХ ЗА ГРАФИЧЕСКИЙ ИНТЕРФЕЙС
+            pygame.display.flip()  # ОБНОВЛЕНИЕ ОКНА
