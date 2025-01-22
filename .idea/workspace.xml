@@ -5,17 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 20 jan commit part 2-----&#10;Из файла main главного каталога запускается меню, из файла scripts.game.game_main игра. Это временная мера на этапе разработки, позже будет убрана">
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/magic/flame/fire.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/magic/flame/fire_attack.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/spriites/magic/heal/heal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/game/game_ui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/settings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/game/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/game_level.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/sub_menu_scripts/game_level.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/game/game_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/game_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/game/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game/game_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/user_interface/game_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/sub_menu_scripts/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game/tile.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/sub_menu_scripts/tile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game/weapon.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/game/sub_menu_scripts/weapon.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/helping_scripts/write.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/main_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/sub_menu_scripts/settings_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/sub_menu_scripts/settings_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/draw_labels.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interface/draw_labels.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/load_game_menu_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interface/load_game_menu_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/main_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interface/main_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/new_game_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interface/new_game_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/settings_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interface/settings_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interfaces/statistics_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/menu/menu_windows/user_interface/statistics_ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,33 +49,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.BUTTON_EXAMPLES.executor": "Run",
-    "Python.BUTTON_SWITCH.executor": "Run",
-    "Python.UI_EXAMPLE.executor": "Run",
-    "Python.chain.executor": "Run",
-    "Python.game_level.executor": "Run",
-    "Python.game_main.executor": "Run",
-    "Python.import_csv_layout.executor": "Run",
-    "Python.imports.executor": "Run",
-    "Python.labyrinth_example.executor": "Run",
-    "Python.load_window.executor": "Run",
-    "Python.main (1).executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.main_game.executor": "Run",
-    "Python.main_menu (1).executor": "Run",
-    "Python.main_menu.executor": "Run",
-    "Python.player.executor": "Run",
-    "Python.sounds.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.write.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/maxim/Prog/Python/projects/pyGAME/data/images/spriites/magic/flame",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.BUTTON_EXAMPLES.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BUTTON_SWITCH.executor&quot;: &quot;Run&quot;,
+    &quot;Python.UI_EXAMPLE.executor&quot;: &quot;Run&quot;,
+    &quot;Python.chain.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game_level.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game_main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.import_csv_layout.executor&quot;: &quot;Run&quot;,
+    &quot;Python.imports.executor&quot;: &quot;Run&quot;,
+    &quot;Python.labyrinth_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.load_window.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_game.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_menu (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_menu.executor&quot;: &quot;Run&quot;,
+    &quot;Python.player.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sounds.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.write.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/maxim/Prog/Python/projects/pyGAME/data/images/spriites/magic/flame&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/data/images/spriites/magic/flame" />
@@ -77,14 +85,14 @@
       <recent name="$PROJECT_DIR$/data/images/spriites/main_hero" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/game/sub_menu_scripts" />
+      <recent name="$PROJECT_DIR$/scripts/game/user_interface" />
       <recent name="$PROJECT_DIR$/data/images/spriites/magic/heal" />
       <recent name="$PROJECT_DIR$/data/images/spriites/magic/flame" />
       <recent name="$PROJECT_DIR$/data/images/spriites/weapons/lance" />
-      <recent name="$PROJECT_DIR$/data/images/spriites/weapons/stick" />
-      <recent name="$PROJECT_DIR$/data/images/spriites/weapons/axe" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.game_main">
+  <component name="RunManager" selected="Python.main">
     <configuration name="game_main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyGAME" />
       <option name="ENV_FILES" value="" />
@@ -197,8 +205,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.game_main" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.game_main" />
         <item itemvalue="Python.main_menu (1)" />
         <item itemvalue="Python.write" />
         <item itemvalue="Python.imports" />

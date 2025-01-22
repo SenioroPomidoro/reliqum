@@ -3,19 +3,19 @@ import pygame
 import pygame_gui
 import pprint
 
-from scripts.menu.menu_windows.user_interfaces.draw_labels import draw_labels
+from scripts.menu.menu_windows.user_interface.draw_labels import draw_labels
 
 from scripts.helping_scripts.imports import import_settings
-from scripts.helping_scripts.write import write_settings_csv
+from scripts.menu.menu_windows.sub_menu_scripts.settings_menu import write_settings_csv
 
-from scripts.menu.menu_windows.user_interfaces.main_ui import load_main_ui
-from scripts.menu.menu_windows.user_interfaces.load_game_menu_ui import load_game_menu_ui
-from scripts.menu.menu_windows.user_interfaces.new_game_ui import new_game_menu_ui
-from scripts.menu.menu_windows.user_interfaces.settings_ui import load_settings_ui
-from scripts.menu.menu_windows.user_interfaces.statistics_ui import load_statistics_menu_ui
+from scripts.menu.menu_windows.user_interface.main_ui import load_main_ui
+from scripts.menu.menu_windows.user_interface.load_game_menu_ui import load_game_menu_ui
+from scripts.menu.menu_windows.user_interface.new_game_ui import new_game_menu_ui
+from scripts.menu.menu_windows.user_interface.settings_ui import load_settings_ui
+from scripts.menu.menu_windows.user_interface.statistics_ui import load_statistics_menu_ui
 
 
-# КЛАСС ОКНА ГЛАВНОГО МЕНЮ
+# ГЛАВНЫЙ КЛАСС ОКНА ГЛАВНОГО МЕНЮ
 class MainMenu:
     def __init__(self, w, h, music=None):
         """
@@ -71,9 +71,9 @@ class MainMenu:
         clock = pygame.time.Clock()  # ОПРЕДЕЛЕНИЕ ОБЪЕКТА ЧАСОВ
         running = True  # ОПРЕДЕЛЕНИЕ ПАРАМЕТРА, ОПРЕДЕЛЯЮЩЕГО РАБОТАЕТ МЕНЮ ИЛИ НЕТ
         while running:  # ЦИКЛ ОКНА ГЛАВНОГО МЕНЮ
-            time_delta = clock.tick(60) / 1000.0
+            time_delta = clock.tick(60) / 1000.0  # ПОЛУЧЕНИЯ ЗНАЧЕНИЯ ЧАСОВ С ПРОШЛОГО ТИКА (60 кадров в секунду)
 
-            for event in pygame.event.get():  # ПОЛУЧЕНИЕ ВОНЗИКАЮЩИЙ СОБЫТИЙ В ЦИКЛЕ
+            for event in pygame.event.get():  # ПОЛУЧЕНИЕ ВОНЗИКАЮЩИХ СОБЫТИЙ В ЦИКЛЕ
                 if event.type == pygame.QUIT:  # ОБРАБОТКА ПОПЫТКИ ЗАКРЫТЬ ПРИЛОЖЕНИЕ
                     self.start_exit_dialog()  # ВЫЗЫВАЕТСЯ ДИАЛОГОВОЕ ОКНО С ПОДТВЕРЖДЕНИЕМ ВЫХОДА
 
@@ -125,7 +125,7 @@ class MainMenu:
                 self.manager.process_events(event)  # ПЕРЕДАЧА СОБЫТИЯ МЕНЕДЖЕРУ ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
             self.manager.update(time_delta)  # ОБНОВЛЕНИЕ МЕНЕДЖЕРА ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
 
-            self.window_surface.blit(background, (0, 0))  # ЗАПОЛНЕНИЯ ОСНОВНОГО СЛОЯ ФОНОМ
+            self.window_surface.blit(background, (0, 0))  # ЗАПОЛНЕНИЕ ОСНОВНОГО СЛОЯ ФОНОМ
 
             draw_labels(self)  # ОТРИСОВКА ТЕКСТОВЫХ ЧАСТЕЙ ОКНА
 

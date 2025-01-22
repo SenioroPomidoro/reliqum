@@ -9,12 +9,12 @@ PASSABLE_IDS = [139, 140, 141, 155, 156, 157, 171, 172, 173, 240, 241, 242, 243,
 
 
 weapon_data = {
-    "axe": {"cooldown": 300, "damage": 30, "graphic": "../../data/images/spriites/weapons/axe/full.png"},
-    "lance": {"cooldown": 50, "damage": 8, "graphic": "../../data/images/spriites/weapons/lance/full.png"}
+    "axe": {"cooldown": 300, "damage": 30, "graphic": "data/images/spriites/weapons/axe/full.png"},
+    "lance": {"cooldown": 50, "damage": 8, "graphic": "data/images/spriites/weapons/lance/full.png"}
 }
 
 
 magic_data = {
-    "flame": {"strength": 5, "cost": 20, "graphic": "../../data/images/spriites/magic/flame/fire.png"},
-    "heal": {"strength": 20, "cost": 10, "graphic": "../../data/images/spriites/magic/heal/heal.png"}
+    "flame": {"strength": 5, "cost": 20, "graphic": "data/images/spriites/magic/flame/fire.png"},
+    "heal": {"strength": 20, "cost": 10, "graphic": "data/images/spriites/magic/heal/heal.png"}
 }

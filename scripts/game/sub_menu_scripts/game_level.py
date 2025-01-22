@@ -1,13 +1,13 @@
 import pygame
 from data.settings import *
-from scripts.game.tile import Tile
-from scripts.game.player import Player
+from scripts.game.sub_menu_scripts.tile import Tile
+from scripts.game.sub_menu_scripts.player import Player
 
 from scripts.helping_scripts.imports import import_csv_layout
 from scripts.helping_scripts.imports import import_graphics
-from scripts.game.weapon import Weapon
+from scripts.game.sub_menu_scripts.weapon import Weapon
 
-from game_ui import GameUI
+from scripts.game.user_interface.game_ui import GameUI
 
 
 class Level:
@@ -28,11 +28,11 @@ class Level:
     def create_map(self):
         """Функция создания карты"""
         layouts = {
-            "boundary": import_csv_layout("../../data/game_map_files/map/map_FloorBlocks.csv"),
-            "Trees": import_csv_layout("../../data/game_map_files/map/map_Trees.csv"),
-            "Objects": import_csv_layout("../../data/game_map_files/map/map_Objects.csv")
+            "boundary": import_csv_layout("data/game_map_files/map/map_FloorBlocks.csv"),
+            "Trees": import_csv_layout("data/game_map_files/map/map_Trees.csv"),
+            "Objects": import_csv_layout("data/game_map_files/map/map_Objects.csv")
         }
-        graphics = import_graphics("../../data/images/tileset_images")
+        graphics = import_graphics("data/images/tileset_images")
 
         for style, layout in layouts.items():
             for row_i, row in enumerate(layout):
@@ -64,7 +64,6 @@ class Level:
             (3300, 4000),
             [self.visible_sprites],
             self.obstacle_sprites,
-            self.passable_sprites,
             self.create_attack,
             self.destroy_attack,
             self.create_magic
@@ -96,7 +95,7 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.offset = pygame.math.Vector2()
 
         # Создание фона
-        self.floor_surface = pygame.image.load("../../data/game_map_files/map/ground.png").convert()
+        self.floor_surface = pygame.image.load("data/game_map_files/map/ground.png").convert()
         self.floor_rect = self.floor_surface.get_rect(topleft=(0, 0))
 
     def custom_draw(self, player):

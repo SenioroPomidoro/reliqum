@@ -1,14 +1,14 @@
 def draw_labels(self):
+    """Функция отрисовки текстовых элементов в тех или иных окнах в меню"""
     if self.status is None:
         return
 
-    if self.status == "main":
+    if self.status == "main":  # ОТРИСОВКА ТЕКСТОВЫХ ЭЛЕМЕНТОВ ОКНА ГЛАВНОГО МЕНЮ
         label = self.custom_font.render("F4 - ПОЛНЫЙ ЭКРАН", 1, (0, 0, 0))
         self.window_surface.blit(label, (self.w // 90, self.h - self.custom_font.get_height()))
         self.window_surface.blit(self.game_label, (20, 20))
 
-    elif self.status == "settings":
-
+    elif self.status == "settings":  # ОТРИСОВКА ТЕКСТОВЫХ ЭЛЕМЕНТОВ ОКНА НАСТРОЕК
         main_label = self.custom_font.render("МУЗЫКА В МЕНЮ", 1, (0, 0, 0))
         game_label = self.custom_font.render("МУЗЫКА В ИГРЕ", 1, (0, 0, 0))
 
