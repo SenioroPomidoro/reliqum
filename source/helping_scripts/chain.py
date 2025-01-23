@@ -1,5 +1,5 @@
-from scripts.menu.menu_windows.main_menu import MainMenu
-from scripts.game.game_main import Game
+from source.menu.menu_windows.main_menu import MainMenu
+from source.game.game_main import Game
 # ФАЙЛ ДЛЯ УСТРАНЕНИЯ ПРОБЛЕМ С ЦИКЛИЧЕСКИМ ИМПОРТОМ, СОДЕРЖИТ ФУНКЦИИ, ВОЗВРАЩАЮЩИЕ ТЕ ИЛИ ИНЫЕ ОБЪЕКТЫ ОКОН
 
 

@@ -3,16 +3,16 @@ import pygame
 import pygame_gui
 import pprint
 
-from scripts.menu.menu_windows.user_interface.draw_labels import draw_labels
+from source.menu.menu_windows.user_interface.draw_labels import draw_labels
 
-from scripts.helping_scripts.imports import import_settings
-from scripts.menu.menu_windows.sub_menu_scripts.settings_menu import write_settings_csv
+from source.helping_scripts.imports import import_settings
+from source.menu.menu_windows.sub_menu_scripts.settings_menu import write_settings_csv
 
-from scripts.menu.menu_windows.user_interface.main_ui import load_main_ui
-from scripts.menu.menu_windows.user_interface.load_game_menu_ui import load_game_menu_ui
-from scripts.menu.menu_windows.user_interface.new_game_ui import new_game_menu_ui
-from scripts.menu.menu_windows.user_interface.settings_ui import load_settings_ui
-from scripts.menu.menu_windows.user_interface.statistics_ui import load_statistics_menu_ui
+from source.menu.menu_windows.user_interface.main_ui import load_main_ui
+from source.menu.menu_windows.user_interface.load_game_menu_ui import load_game_menu_ui
+from source.menu.menu_windows.user_interface.new_game_ui import new_game_menu_ui
+from source.menu.menu_windows.user_interface.settings_ui import load_settings_ui
+from source.menu.menu_windows.user_interface.statistics_ui import load_statistics_menu_ui
 
 
 # ГЛАВНЫЙ КЛАСС ОКНА ГЛАВНОГО МЕНЮ

@@ -1,29 +1,28 @@
 import pygame
+
+from source.helping_scripts.imports import import_csv_layout
+from source.helping_scripts.imports import import_graphics
+from source.game.sub_menu_scripts.player import Player
+from source.game.sub_menu_scripts.weapon import Weapon
+from source.game.user_interface.game_ui import GameUI
+from source.game.sub_menu_scripts.tile import Tile
+
 from data.settings import *
-from scripts.game.sub_menu_scripts.tile import Tile
-from scripts.game.sub_menu_scripts.player import Player
-
-from scripts.helping_scripts.imports import import_csv_layout
-from scripts.helping_scripts.imports import import_graphics
-from scripts.game.sub_menu_scripts.weapon import Weapon
-
-from scripts.game.user_interface.game_ui import GameUI
 
 
 class Level:
-    def __init__(self, surface):
+    def __init__(self) -> None:
+        """Функция инициализации объекта класса игрового уровня"""
         self.display_surface = pygame.display.get_surface()  # ПОЛУЧЕНИЕ ТЕКУЩЕГО СЛОЯ ДЛЯ ОТРИСОВКИ
 
-        self.passable_sprites = pygame.sprite.Group()  # Спрайты, за которыми игрок может прятаться
-        self.visible_sprites = YSortCameraGroup()
-        self.obstacle_sprites = pygame.sprite.Group()
+        self.passable_sprites = pygame.sprite.Group()  # СПРАЙТЫ, ЗА КОТОРЫМИ ИГРОК МОЖЕТ ПРЯТАТЬСЯ
+        self.visible_sprites = YSortCameraGroup()  # ВИДИМЫЕ СПРАЙТЫ
+        self.obstacle_sprites = pygame.sprite.Group()  # СПРАЙТЫ, С КОТОРЫМИ У ИГРОКА ПРОИСХОДИТ СТОЛКНОВЕНИЕ
+        self.current_attack = None  # СПРАЙТ АТАКИ
 
-        self.current_attack = None  # спрайт атаки
+        self.create_map()  # СОЗДАНИЕ КАРТЫ
 
-        self.create_map()
-
-        # ui
-        self.ui = GameUI()
+        self.ui = GameUI()  # ОБЪЕКТ ДЛЯ ОТРИСОВКИ ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
 
     def create_map(self):
         """Функция создания карты"""
@@ -32,7 +31,7 @@ class Level:
             "Trees": import_csv_layout("data/game_map_files/map/map_Trees.csv"),
             "Objects": import_csv_layout("data/game_map_files/map/map_Objects.csv")
         }
-        graphics = import_graphics("data/images/tileset_images")
+        graphics = import_graphics("data/images/tileset_images")  #
 
         for style, layout in layouts.items():
             for row_i, row in enumerate(layout):
@@ -51,14 +50,16 @@ class Level:
                             i, j = int((required_element - 1) / w) * 64, (required_element - 1) % w * 64
 
                             current_surface = graphics[style].subsurface(j, i, 64, 64)
-                            Tile((x, y), [self.passable_sprites, self.visible_sprites], "tree", current_surface, int(col))
+                            Tile((x, y), [self.passable_sprites, self.visible_sprites],
+                                 "tree", current_surface, int(col))
 
                         if style == "Objects":
                             w, h = graphics[style].width // 64, graphics[style].height // 64
                             i, j = int((required_element - 1) / w) * 64, (required_element - 1) % w * 64
 
                             current_surface = graphics[style].subsurface(j, i, 64, 64)
-                            Tile((x, y), [self.passable_sprites, self.visible_sprites], "object", current_surface, int(col))
+                            Tile((x, y), [self.passable_sprites, self.visible_sprites],
+                                 "object", current_surface, int(col))
 
         self.player = Player(
             (3300, 4000),

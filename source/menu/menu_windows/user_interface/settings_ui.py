@@ -1,7 +1,7 @@
 import pygame_gui
 import pygame
 
-from scripts.helping_scripts.imports import import_settings
+from source.helping_scripts.imports import import_settings
 
 
 def load_settings_ui(self):

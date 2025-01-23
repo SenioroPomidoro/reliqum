@@ -1,6 +1,6 @@
 import pygame
 
-import scripts.game.sub_menu_scripts.player
+import source.game.sub_menu_scripts.player
 
 
 # КЛАСС ОРУЖИЯ

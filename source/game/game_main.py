@@ -1,6 +1,6 @@
 import pygame
 
-from scripts.game.sub_menu_scripts.game_level import Level
+from source.game.sub_menu_scripts.game_level import Level
 
 
 # ГЛАВНЫЙ КЛАСС ИГРОВОГО ОКНА
@@ -18,7 +18,7 @@ class Game:
         pygame.display.set_caption("Reliqum")  # УСТАНОВКА НАЗВАНИЯ ИГРОВОГО ОКНА
         window_surface = pygame.display.set_mode(self.size)  # СОЗДАНИЕ ПОВЕРХНОСТИ ДЛЯ МЕНЮ
 
-        self.level = Level(window_surface)  # СОЗДАНИЕ ИГРОВОГО УРОВНЯ
+        self.level = Level()  # СОЗДАНИЕ ИГРОВОГО УРОВНЯ
 
         clock = pygame.time.Clock()  # ОПРЕДЕЛЕНИЯ ОБЪЕКТА ЧАСОВ
         running = True  # ОПРЕДЕЛЕНИЕ ПАРАМЕТРА, ОПРЕДЕЛЯЮЩЕГО РАБОТАЕТ МЕНЮ ИЛИ НЕТ
