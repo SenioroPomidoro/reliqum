@@ -11,6 +11,7 @@ class Game:
         :param w: ширина окна
         :param h: высота окна
         """
+        self.pause = False
         self.w, self.h = self.size = w, h  # ЗАПИСЬ РАЗМЕРОВ ОКНА
 
     def start_game(self) -> None:
@@ -24,8 +25,13 @@ class Game:
         running = True  # ОПРЕДЕЛЕНИЕ ПАРАМЕТРА, ОПРЕДЕЛЯЮЩЕГО РАБОТАЕТ МЕНЮ ИЛИ НЕТ
         while running:  # ЦИКЛ ОКНА ГЛАВНОГО МЕНЮ
             for event in pygame.event.get():  # ПОЛУЧЕНИЕ ВОЗНИКАЮЩИХ СОБЫТИЙ В ЦИКЛЕ
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        self.pause = not self.pause
                 if event.type == pygame.QUIT:
                     running = False
+            if self.pause:
+                continue
             window_surface.fill((0, 0, 0))  # ЗАПОЛНЕНИЕ ОСНОВОГО СЛОЯ ОДНОТОННЫМ ЧЁРНЫМ ЦВЕТОМ
             self.level.run()  # ЗАПУСК УРОВНЯ
             pygame.display.update()  # ОБНОВЛЕНИЯ ИГРОВОГО ЭКРАНА

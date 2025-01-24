@@ -1,8 +1,9 @@
 import pygame
 from data.settings import *
+from source.game.sub_menu_scripts.entity import Entity
 
 
-class Player(pygame.sprite.Sprite):
+class Player(Entity):
     def __init__(self, pos: tuple, groups: list, obstacle_sprites: pygame.sprite.Group,
                  create_attack, destroy_attack, create_magic):
         """
@@ -17,7 +18,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__(groups)  # ВЫЗОВ РОДИТЕЛЬСКОЙ ФУНКЦИИ ИНИЦИАЛИЗАЦИИ ДЛЯ ЗАПИСИ СПРАЙТА В ГРУППЫ ИЗ groups
 
         # ПОДГРУЗКА И РАСПОЛОЖЕНИЕ ИГРОКА В СТАНДАРТНОЙ ПОЗИЦИИ - СТОИТ И СМОТРИТ ВНИЗ
-        self.image = pygame.image.load('data/images/spriites/main_hero/down_idle/down_idle.png').convert_alpha()
+        self.image = pygame.image.load('data/images/sprites/main_hero/down_idle/down_idle.png').convert_alpha()
         self.image = self.image.subsurface(pygame.Rect(0, 0, 50, 50))  # ВЫРЕЗКА ЧЕЛОВЕЧЕКА 50 НА 50 ПИКСЕЛЕЙ
 
         self.obstacle_sprites = obstacle_sprites  # ЗАПИСЬ ГРУППЫ СПРАЙТОВ, ЧЕРЕЗ КОТОРЫЕ
@@ -32,11 +33,8 @@ class Player(pygame.sprite.Sprite):
         # ГРАФИКА
         self.import_player_assets()  # ЗАГРУЗКА СПРАЙТОВ ИГРОКА
         self.status = "down"  # СТАТУС ИГРОКА, ОПРЕДЕЛЯЮЩИЙ НАПРАВЛЕНИЕ И ХАРАКТЕР ДВИЖЕНИЯ, ИЗНАЧАЛЬНО ДВИЖЕТСЯ ВНИЗ.
-        self.frame_index = 0  # ИНДЕКС ТОГО КАДРА, КОТОРЫЙ ПРОИГРЫВАЕТСЯ В ДАННЫЙ МОМЕНТ
-        self.animation_speed = 0.15  # СКОРОСТЬ АНИМАЦИИ
 
         # ОРИЕНТАЦИЯ ИГРОКА
-        self.direction = pygame.math.Vector2()  # НАПРАВЛЕНИЕ ДВИЖЕНИЯ ИГРОКА
         self.attacking = False  # АТАКУЕТ ЛИ ИГРОК. ИЗНАЧАЛЬНО - НЕТ
         self.attack_cooldown = 400  # ПРОМЕЖУТОК МЕЖДУ АТАКАМИ ИГРОКА
         self.attack_time = None  # ВРЕМЯ АТАКИ
@@ -68,7 +66,7 @@ class Player(pygame.sprite.Sprite):
 
     def import_player_assets(self) -> None:
         """Функция для импорта спрайтов игрока"""
-        character_path = "data/images/spriites/main_hero/"  # ПУТЬ ДО ПАПКИ С ПАПКАМИ СПРАЙТОВ ИГРОКА
+        character_path = "data/images/sprites/main_hero/"  # ПУТЬ ДО ПАПКИ С ПАПКАМИ СПРАЙТОВ ИГРОКА
 
         # СЛОАВРЬ С ИЗОБРАЖЕНИЯМИ СПРАЙТОВ
         self.animations = {"up": [], "down": [], "left": [], "right": [],
@@ -79,7 +77,7 @@ class Player(pygame.sprite.Sprite):
             full_path = character_path + animation
             self.animations[animation] = pygame.image.load(F"{full_path}/{animation}.png").convert_alpha()
 
-    def input(self):
+    def input(self) -> None:
         """Функция обработки нажатий на клавишы"""
         if self.attacking:  # ЕСЛИ ИГРОК В ДАННЫЙ МОМЕНТ АТАКУЕТ - НИЧЕГО НЕ ПРОИСХОДИТ
             return
@@ -151,51 +149,6 @@ class Player(pygame.sprite.Sprite):
         else:
             if "attack" in self.status:
                 self.status = self.status.replace("_attack", "")
-
-    def collision(self, direction: str) -> None:
-        """
-        Функция для обработки столкновений
-        :param direction: направление по которому происходит столкновению спрайтов
-        """
-        if direction == "horizontal":  # ОБРАБОТКА СТОЛКНОВЕНИЙ ПО ГОРИЗОНТАЛИ
-            for sprite in self.obstacle_sprites:
-                if sprite.hitbox.colliderect(self.hitbox):
-                    if self.direction.x > 0:  # ДВИЖЕНИЕ ВПРАВО
-                        self.hitbox.right = sprite.hitbox.left
-                    if self.direction.x < 0:  # ДВИЖЕНИЯ ВЛЕВО
-                        self.hitbox.left = sprite.hitbox.right
-
-        if direction == "vertical":  # ОБРАБОТКА СТОЛКНОВЕНИЙ ПО ВЕРТИКАЛИ
-            for sprite in self.obstacle_sprites:
-                if sprite.hitbox.colliderect(self.hitbox):
-                    if self.direction.y > 0:  # ДВИЖЕНИЕ ВНИЗ
-                        self.hitbox.bottom = sprite.hitbox.top
-                    if self.direction.y < 0:  # ДВИЖЕНИЕ ВВЕРХ
-                        self.hitbox.top = sprite.hitbox.bottom
-
-    def move(self, speed: int) -> None:
-        """
-        Функция, вызывающая движения игрока
-        :param speed: СКОРОСТЬ ДВИЖЕНИЯ ИГРОКА
-        """
-
-        # МОМЕНТУ НИЖЕ СТОИТЬ УДЕЛИТЬ ЧУТЬ БОЛЬШЕ ВНИМАНИЯ: ЕСЛИ У НАС ПРОИСХОДИТ ОДНОВРЕМЕННАЯ ПОПЫТКА ПЕРЕМЕЩЕНИЯ И
-        # ПО ГОРИЗОНТАЛИ И ПО ВЕРТИКАЛИ МОЖЕТ ВОЗНИКНУТЬ ТАКАЯ ПРОБЛЕМА, КАК НЕСАНКЦИОНИРОВАННОЕ УВЕЛЕЧЕНИЕ СКОРОСТИ
-        # В 2 РАЗА ВВИДУ ТОГО, ЧТО ПОЛЬЗОВАТЕЛЬ ПЕРЕМЕЩАЕТСЯ СРАЗУ НА ДВЕ КЛЕТКИ. ВО ИЗБЕЖАНИЕ ЭТОГО НУЖНО ПРЕДСТАВЛЯТЬ
-        # ДВИЖЕНИЕ ПОЛЬЗОВАТЕЛЬ В РАМКАХ НЕКОТОРОЙ ОКРУЖНОСТИ, У КОТОРОЙ ВЕКТОР ОДНОВРЕМЕННОГО ДВИЖЕНИЯ В
-        # ВЕРТИКАЛЬ И ГОРИЗОНТАЛЬ БУДЕТ СОСТАВЛЯТЬ УГОЛ С ОСЯМИ В 45 ГРАДУСОВ. ДЛЯ ВЫЧИСЛЕНИЕ КООРДИНАТ ЭТОГО ВЕКТОРА И
-        # ИСПОЛЬЗУЕТСЯ МЕТОД .normalize
-        if self.direction.magnitude() != 0:  # ЕСЛИ СУЛЧАЕТСЯ ОПИСАННАЯ ВЫШЕ СИТУАЦИЯ ОСУЩЕСТВЛЯЕМ НОРМАЛИЗАЦИЮ ВЕКТОРА
-            self.direction = self.direction.normalize()
-
-        self.hitbox.x += self.direction.x * speed  # ПЕРМЕЩАЕМ ХИТБОКС ИГРОКА НА ЗНАЧЕНИЕ СКОРОСТИ (по иксам)
-        self.collision("horizontal")  # ПРОВЕРЯЕМ СТОЛКНОВЕНИЯ
-
-        self.hitbox.y += self.direction.y * speed  # ПЕРЕМЕЩАЕМ ХИТБОКС ИГРОКА НА ЗНАЧЕНИЕ СКОРОСТИ (по игрикам)
-        self.collision("vertical")  # ПРОВЕРЯЕМ СТОЛКНОВЕНИЯ
-
-        self.rect.center = self.hitbox.center  # ЗАМЕНЯЕМ РАМКУ В КОТОРОЙ НАХОДИТСЯ ИГРОК НА ЕГО ХИТБОКС
-        # (т.к. переместили мы его)
 
     def cooldowns(self) -> None:
         """Функция-таймер для отработки задержек между действиями"""

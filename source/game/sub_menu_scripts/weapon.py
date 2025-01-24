@@ -17,7 +17,7 @@ class Weapon(pygame.sprite.Sprite):
         # уровне со всеми остальными)
         self.sprite_type = "Weapon"  # УСТАНОВКА ТИПА СПРАЙТА ОРУЖИЯ
 
-        full_path = f'data/images/spriites/weapons/{player.weapon}/{direction}.png'  # ПОЛНЫЙ ПУТЬ ДО ИЗОБРАЖЕНИЯ
+        full_path = f'data/images/sprites/weapons/{player.weapon}/{direction}.png'  # ПОЛНЫЙ ПУТЬ ДО ИЗОБРАЖЕНИЯ
         # ОРУЖИЯ С УЧЁТОМ НАПРАВЛЕНИЯ УДАРА
         self.image = pygame.image.load(full_path).convert_alpha()  # ЗАГРУЗКА ИЗОБРАЖЕНИЯ ПО ПОЛУЧЕННОМУ ПУТИ
 

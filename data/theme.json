@@ -32,9 +32,9 @@
          },
          "font":
          {
-             "size": "20",
+             "size": "25",
              "regular_resource": {
-                 "package": "fonts",
+                 "package": "data/fonts",
                  "resource": "base_font.ttf"
              }
          }

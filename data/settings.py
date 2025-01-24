@@ -11,12 +11,20 @@ PASSABLE_IDS = [139, 140, 141, 155, 156, 157, 171, 172, 173, 240, 241, 242, 243,
 
 # ДАННЫЕ О СУЩЕСТВУЮЩЕМ В ИГРЕ ОРУЖИИ
 weapon_data = {
-    "axe": {"cooldown": 300, "damage": 30, "graphic": "data/images/spriites/weapons/axe/full.png"},
-    "lance": {"cooldown": 50, "damage": 8, "graphic": "data/images/spriites/weapons/lance/full.png"}
+    "axe": {"cooldown": 300, "damage": 30, "graphic": "data/images/sprites/weapons/axe/full.png"},
+    "lance": {"cooldown": 50, "damage": 8, "graphic": "data/images/sprites/weapons/lance/full.png"}
 }
 
 # ДАННЫЕ О СУЩЕСТВУЮЩЕЙ В ИГРЕ МАГИИ
 magic_data = {
-    "flame": {"strength": 5, "cost": 20, "graphic": "data/images/spriites/magic/flame/fire.png"},
-    "heal": {"strength": 20, "cost": 10, "graphic": "data/images/spriites/magic/heal/heal.png"}
+    "flame": {"strength": 5, "cost": 20, "graphic": "data/images/sprites/magic/flame/fire.png"},
+    "heal": {"strength": 20, "cost": 10, "graphic": "data/images/sprites/magic/heal/heal.png"}
+}
+
+
+# МОНСТРЫ
+monster_data = {
+    "Eye": {"health": 100, "exp": 110, "damage": 8, "attack_type": "slash",
+            "attack_sound": "data/sounds/game_sounds/enemies/Eye/slash.wav",
+            "speed": 3, "resistance": 3, "attack_radius": 50, "notice_radius": 360}
 }

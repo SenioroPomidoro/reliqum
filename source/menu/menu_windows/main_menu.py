@@ -29,10 +29,10 @@ class MainMenu:
         self.background_color = "#483c32"
         self.w, self.h = self.size = w, h  # ЗАПИСЬ РАЗМЕРОВ ЭКРАНА
 
-        self.click = pygame.mixer.Sound("data/sounds/click.mp3")  # ЗВУК КЛИКА
+        self.click = pygame.mixer.Sound("data/sounds/menu_sounds/click.mp3")  # ЗВУК КЛИКА
 
         if music is None:
-            self.music = pygame.mixer.Sound("data/sounds/main_music.mp3")
+            self.music = pygame.mixer.Sound("data/sounds/menu_sounds/main_music.mp3")
         else:
             self.music = music
 
