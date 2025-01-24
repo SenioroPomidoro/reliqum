@@ -21,7 +21,10 @@ class Level:
         self.passable_sprites = pygame.sprite.Group()  # СПРАЙТЫ, ЗА КОТОРЫМИ ИГРОК МОЖЕТ ПРЯТАТЬСЯ
         self.visible_sprites = Camera()  # ВИДИМЫЕ СПРАЙТЫ
         self.obstacle_sprites = pygame.sprite.Group()  # СПРАЙТЫ, С КОТОРЫМИ У ИГРОКА ПРОИСХОДИТ СТОЛКНОВЕНИЕ
+
         self.current_attack = None  # СПРАЙТ АТАКИ
+        self.attack_sprites = pygame.sprite.Group()  # ГРУППА СПРАЙТОВ АТАКИ
+        self.attackable_sprites = pygame.sprite.Group()  # СПРАЙТЫ, КОТОРЫЕ МОЖНО АТАКОВАТЬ
 
         self.create_map()  # СОЗДАНИЕ КАРТЫ
 
@@ -88,11 +91,15 @@ class Level:
                                     monster_name = "Eye"
                                 if required_element == 638:
                                     monster_name = "Bamboo"
-                                Enemy(monster_name, (x, y), [self.visible_sprites], self.obstacle_sprites)
+                                Enemy(monster_name,
+                                      (x, y),
+                                      [self.visible_sprites, self.attackable_sprites],
+                                      self.obstacle_sprites,
+                                      self.damage_player)
 
     def create_attack(self) -> None:
         """Функция, создающая физическую атаку"""
-        self.current_attack = Weapon(self.player, [self.visible_sprites])
+        self.current_attack = Weapon(self.player, [self.visible_sprites, self.attack_sprites])
 
     def create_magic(self, style, strength, cost):
         """
@@ -109,11 +116,27 @@ class Level:
             self.current_attack.kill()
         self.current_attack = None
 
+    def player_attack_logic(self):
+        """Функция, отвечающая за реализацию взаимодействия между игроком и врагами"""
+        if self.attack_sprites:
+            for attack_sprite in self.attack_sprites:
+                collision_sprites = pygame.sprite.spritecollide(attack_sprite, self.attackable_sprites, False)
+                if collision_sprites:
+                    for target_sprite in collision_sprites:
+                        target_sprite.get_damage(self.player, attack_sprite.sprite_type)
+
+    def damage_player(self, amount, attack_type):
+        if self.player.vulnerable:
+            self.player.health -= amount
+            self.player.vulnerable = False
+            self.player.hurt_time = pygame.time.get_ticks()
+
     def run(self):
         """Функция отрисовки и обновления уровня, отображения игрока"""
         self.visible_sprites.custom_draw(self.player)  # ОТРИСОВКА ИГРОКА
         self.visible_sprites.update()  # ОТРИСОВКА ВИДИМЫХ СПРАЙТОВ
         self.visible_sprites.enemy_update(self.player)
+        self.player_attack_logic()
         self.ui.display(self.player)  # ОТРИСОВКА ГРАФИЧЕСКОГО ИНТЕРФЕЙСА В ИГРЕ
 
 

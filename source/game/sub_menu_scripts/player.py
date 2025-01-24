@@ -36,14 +36,15 @@ class Player(Entity):
 
         # ОРИЕНТАЦИЯ ИГРОКА
         self.attacking = False  # АТАКУЕТ ЛИ ИГРОК. ИЗНАЧАЛЬНО - НЕТ
-        self.attack_cooldown = 400  # ПРОМЕЖУТОК МЕЖДУ АТАКАМИ ИГРОКА
+        self.attack_cooldown = 200  # ПРОМЕЖУТОК МЕЖДУ АТАКАМИ ИГРОКА
         self.attack_time = None  # ВРЕМЯ АТАКИ
 
         # ОРУЖИЕ
         self.create_attack = create_attack  # ЗАПИСЬ ФУНКЦИИ, СОЗДАЮЩЕЙ АТАКУ В АТРИБУТЫ ОБЪЕКТА
         self.destroy_attack = destroy_attack  # ЗАПИСЬ ФУНКЦИИ, УНИЧТОЖАЮЩЕЙ АТАКУ В АТРИБУТЫ ОБЪЕКТА
         self.weapon_index = 0  # ИНДЕКС ВЫБРАННОГО ОРУЖИЯ, ПО УМОЛЧАНИЮ - 0
-        self.weapon = list(weapon_data.keys())[self.weapon_index]  # СПИСОК ДАННЫХ ОБ ОРУЖИИ
+        self.weapon = list(weapon_data.keys())[self.weapon_index]  # НАЗВАНИЕ ОРУЖИЯ
+        self.weapon_data = weapon_data
         self.can_switch_weapon = True  # МОЖЕТ ЛИ ИГРОК СМЕНИТЬ ОРУЖИЕ. ПО УМОЛЧАНИЮ - ДА
         self.weapon_switch_time = None  # ВРЕМЯ, КОТОРОЕ ИГРОК МЕНЯЕТ ОРУЖИЕ
 
@@ -58,11 +59,15 @@ class Player(Entity):
 
         # ЗАПИСЬ ПОКАЗАТЕЛЕЙ ПЕРСОНАЖА В АТРИБУТЫ ОБЪЕКТА ПЕРСОНАЖА
         # УРОН = УРОН ОРУЖИЯ + УРОН ИГРОКА / АНАЛОГИЧНО С МАГИЕЙ
-        self.stats = {"health": 100, "energy": 60, "attack": 10, "magic": 4, "speed": 6}
+        self.stats = {"health": 100, "energy": 60, "attack": 0, "magic": 4, "speed": 6}
         self.health = self.stats["health"]  # ЗАПИСЬ ЗДОРОВЬЯ ПЕРСОНАЖА
         self.energy = self.stats["energy"]  # ЗАПИСЬ ЭНЕРГИИ ПЕРСОНАЖА
         self.speed = self.stats["speed"]  # ЗАПИСЬ СКОРОСТИ ПЕРСОНАЖА
         self.exp = 123  # ЗАПИСЬ ОПЫТА ПЕРСОНАЖА
+
+        self.vulnerable = True
+        self.hurt_time = None
+        self.invulnerability_duration = 500
 
     def import_player_assets(self) -> None:
         """Функция для импорта спрайтов игрока"""
@@ -155,7 +160,7 @@ class Player(Entity):
         current_time = pygame.time.get_ticks()  # ТЕКУЩИЙ МОМЕНТ ВРЕМЕНИ
 
         if self.attacking:  # ЕСЛИ ИГРОК АТАКУЕТ
-            if current_time - self.attack_time >= self.attack_cooldown:  # ЕСЛИ ВРЕМЯ АТАКИ ИСТЕКЛО
+            if current_time - self.attack_time >= self.attack_cooldown + self.weapon_data[self.weapon]["cooldown"]:  # ЕСЛИ ВРЕМЯ АТАКИ ИСТЕКЛО
                 self.attacking = False  # ИГРОК НЕ АТАКУЕТ
                 self.destroy_attack()  # СПРАЙТ ОРУЖИЯ / МАГИИ УНИЧТОЖАЕТСЯ
 
@@ -166,6 +171,10 @@ class Player(Entity):
         if not self.can_switch_magic:  # ЕСЛИ ИГРОК НЕ МОЖЕТ СМЕНИТЬ МАГИЮ
             if current_time - self.magic_switch_time >= self.switch_duration_cooldown:  # ЕСЛИ КУЛДАУН СМЕНЫ ИСТЕК
                 self.can_switch_magic = True  # МЕНЯТЬ МАГИЮ МОЖНО
+
+        if not self.vulnerable:
+            if current_time - self.hurt_time >= self.invulnerability_duration:
+                self.vulnerable = True
 
     def animate(self) -> None:
         """Функция, осуществляющая анимацию движения игрока"""
@@ -183,6 +192,17 @@ class Player(Entity):
         # ОТРИСОВКА ИЗОБРАЖЕНИЯ
         self.image = animation.subsurface(pygame.Rect((0, int(self.frame_index) * 50 + 1, 50, 49)))
         self.rect = self.image.get_rect(center=self.hitbox.center)
+
+        if not self.vulnerable:
+            alpha = self.wave_value()
+            self.image.set_alpha(alpha)
+        else:
+            self.image.set_alpha(255)
+
+    def get_full_weapon_damage(self) -> int:
+        base_damage = self.stats["attack"]
+        weapon_damage = self.weapon_data[self.weapon]["damage"]
+        return base_damage + weapon_damage
 
     def update(self) -> None:
         """Функция для обновления игрока"""

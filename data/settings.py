@@ -11,8 +11,8 @@ PASSABLE_IDS = [139, 140, 141, 155, 156, 157, 171, 172, 173, 240, 241, 242, 243,
 
 # ДАННЫЕ О СУЩЕСТВУЮЩЕМ В ИГРЕ ОРУЖИИ
 weapon_data = {
-    "axe": {"cooldown": 300, "damage": 30, "graphic": "data/images/sprites/weapons/axe/full.png"},
-    "lance": {"cooldown": 50, "damage": 8, "graphic": "data/images/sprites/weapons/lance/full.png"}
+    "axe": {"cooldown": 500, "damage": 15, "graphic": "data/images/sprites/weapons/axe/full.png"},
+    "lance": {"cooldown": -50, "damage": 4, "graphic": "data/images/sprites/weapons/lance/full.png"}
 }
 
 # ДАННЫЕ О СУЩЕСТВУЮЩЕЙ В ИГРЕ МАГИИ
@@ -24,10 +24,10 @@ magic_data = {
 
 # МОНСТРЫ
 monster_data = {
-    "Eye": {"health": 100, "exp": 110, "damage": 8, "attack_type": "slash",
+    "Eye": {"health": 75, "exp": 110, "damage": 8, "attack_type": "slash",
             "attack_sound": "data/sounds/game_sounds/enemies/Eye/slash.wav",
-            "speed": 3, "resistance": 3, "attack_radius": 50, "notice_radius": 360},
-    "Bamboo": {"health": 300, "exp": 500, "damage": 20, "attack_type": "slash",
+            "speed": 4, "resistance": 2, "attack_radius": 50, "notice_radius": 360},
+    "Bamboo": {"health": 500, "exp": 500, "damage": 20, "attack_type": "slash",
                "attack_sound": "data/sounds/game_sounds/enemies/Bamboo/shash.wav",
-               "speed": 2, "resistance": 3, "attack_radius": 100, "notice_radius": 450}
+               "speed": 3, "resistance": 0.5, "attack_radius": 160, "notice_radius": 450}
 }

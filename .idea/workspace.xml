@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 22 jan commit -----&#10;Накидал комментариев к большинству существующего кода на данный момент.">
+    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 24 jan commit -----&#10;Анимации работают">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/enemy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/entity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/game_level.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/player.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +262,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737718778856</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="----- 24 jan commit -----&#10;Анимации работают">
+      <option name="closed" value="true" />
+      <created>1737719418314</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1737719418314</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -281,6 +293,7 @@
     <MESSAGE value="----- 20 jan commit part 2-----&#10;Из файла main главного каталога запускается меню, из файла scripts.game.game_main игра. Это временная мера на этапе разработки, позже будет убрана" />
     <MESSAGE value="----- 22 jan commit -----&#10;Накидал комментариев к большинству существующего кода на данный момент." />
     <MESSAGE value="----- 24 jan test_branch_commit -----&#10;Враги атакуют один раз" />
-    <option name="LAST_COMMIT_MESSAGE" value="----- 24 jan test_branch_commit -----&#10;Враги атакуют один раз" />
+    <MESSAGE value="----- 24 jan commit -----&#10;Анимации работают" />
+    <option name="LAST_COMMIT_MESSAGE" value="----- 24 jan commit -----&#10;Анимации работают" />
   </component>
 </project>
