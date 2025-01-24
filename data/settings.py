@@ -26,5 +26,8 @@ magic_data = {
 monster_data = {
     "Eye": {"health": 100, "exp": 110, "damage": 8, "attack_type": "slash",
             "attack_sound": "data/sounds/game_sounds/enemies/Eye/slash.wav",
-            "speed": 3, "resistance": 3, "attack_radius": 50, "notice_radius": 360}
+            "speed": 3, "resistance": 3, "attack_radius": 50, "notice_radius": 360},
+    "Bamboo": {"health": 300, "exp": 500, "damage": 20, "attack_type": "slash",
+               "attack_sound": "data/sounds/game_sounds/enemies/Bamboo/shash.wav",
+               "speed": 2, "resistance": 3, "attack_radius": 100, "notice_radius": 450}
 }

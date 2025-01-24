@@ -12,15 +12,16 @@ class Enemy(Entity):
         self.sprite_id = None
 
         self.import_graphics(monster_name)
-        self.status = "down"
-        self.image = pygame.image.load("data/images/sprites/monsters/Eye/down_idle/down_idle.png").convert_alpha()
+        self.status = "idle"
+        self.image = (pygame.image.load("data/images/sprites/monsters/Eye/idle/idle.png").
+                      subsurface((0, 0, 48, 48)).convert_alpha())
 
         # движение
         self.rect = self.image.get_rect(topleft=pos)
         self.hitbox = self.rect.inflate(0, -10)
         self.obstacle_sprites = obstacle_sprites
 
-        # stats
+        # показатели монстра
         self.monster_name = monster_name
         monster_info = monster_data[self.monster_name]
         self.health = monster_info["health"]
@@ -32,10 +33,11 @@ class Enemy(Entity):
         self.notice_radius = monster_info["notice_radius"]
         self.attack_type = monster_info["attack_type"]
 
+        # взаимодействие с игроком
+        self.can_attack = True
+
     def import_graphics(self, name):
-        self.animations = {"up": [], "down": [], "left": [], "right": [],
-                           "up_idle": [], "down_idle": [], "left_idle": [], "right_idle": [],
-                           "attack": []}
+        self.animations = {"idle": [], "move": [], "attack": []}
 
         main_path = F"data/images/sprites/monsters/{name}/"
         for animation in self.animations.keys():
@@ -58,7 +60,7 @@ class Enemy(Entity):
     def get_status(self, player):
         distance = self.get_player_distance_direction(player)[0]
 
-        if distance <= self.attack_radius:
+        if distance <= self.attack_radius and self.can_attack:
             self.status = "attack"
         elif distance <= self.notice_radius:
             self.status = "move"
@@ -73,8 +75,31 @@ class Enemy(Entity):
         else:
             self.direction = pygame.math.Vector2()
 
+    def animate(self):
+        animation = self.animations[self.status]
+        self.frame_index += self.animation_speed
+
+        if self.monster_name == "Eye":
+            if self.frame_index >= animation.height / 48:
+                if self.status == "attack":
+                    self.can_attack = False
+                self.frame_index = 0
+
+            self.image = animation.subsurface((0, int(self.frame_index) * 48, 48, 48))
+            self.rect = self.image.get_rect(center=self.hitbox.center)
+
+        if self.monster_name == "Bamboo":
+            if self.frame_index >= animation.width / 186:
+                if self.status == "attack":
+                    self.can_attack = False
+                self.frame_index = 0
+
+            self.image = animation.subsurface((int(self.frame_index) * 186, 0, 186, 186))
+            self.rect = self.image.get_rect(center=self.hitbox.center)
+
     def update(self):
         self.move(self.speed)
+        self.animate()
 
     def enemy_update(self, player):
         self.get_status(player)

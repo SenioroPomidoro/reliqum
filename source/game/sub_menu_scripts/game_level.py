@@ -87,7 +87,7 @@ class Level:
                                 if required_element == 640:
                                     monster_name = "Eye"
                                 if required_element == 638:
-                                    monster_name = "Eye"
+                                    monster_name = "Bamboo"
                                 Enemy(monster_name, (x, y), [self.visible_sprites], self.obstacle_sprites)
 
     def create_attack(self) -> None:
