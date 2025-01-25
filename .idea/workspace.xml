@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 24 jan commit -----&#10;Анимации работают">
+    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 24 jan commit -----">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/enemy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/entity.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/game_level.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/weapon.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/weapon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,7 +270,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737719418314</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="----- 24 jan commit -----">
+      <option name="closed" value="true" />
+      <created>1737729211192</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1737729211192</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -294,6 +302,7 @@
     <MESSAGE value="----- 22 jan commit -----&#10;Накидал комментариев к большинству существующего кода на данный момент." />
     <MESSAGE value="----- 24 jan test_branch_commit -----&#10;Враги атакуют один раз" />
     <MESSAGE value="----- 24 jan commit -----&#10;Анимации работают" />
-    <option name="LAST_COMMIT_MESSAGE" value="----- 24 jan commit -----&#10;Анимации работают" />
+    <MESSAGE value="----- 24 jan commit -----" />
+    <option name="LAST_COMMIT_MESSAGE" value="----- 24 jan commit -----" />
   </component>
 </project>

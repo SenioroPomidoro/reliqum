@@ -50,15 +50,12 @@ class Level:
                         x = col_i * TILESIZE
                         y = row_i * TILESIZE
 
-                        # НУЖНЫЙ ЭЛЕМЕНТ НА ИЗОБРАЖЕНИИ С ГРАФИКОЙ
-                        required_element = int(col) + 1
+                        required_element = int(col) + 1  # НУЖНЫЙ ЭЛЕМЕНТ НА ИЗОБРАЖЕНИИ С ГРАФИКОЙ
 
-                        # ОТРИСОВКА ПРЕПЯТСТВИЙ
-                        if style == "boundary":
+                        if style == "boundary": # ОТРИСОВКА ПРЕПЯТСТВИЙ
                             Tile((x, y), [self.obstacle_sprites], "invisible")
 
-                        # ОТРИСОВКА ДЕРЕВЬЕВ (МОЖЕТ НЕ БЫТЬ)
-                        if style == "Trees":
+                        if style == "Trees":  # ОТРИСОВКА ДЕРЕВЬЕВ
                             w, h = graphics[style].width // 64, graphics[style].height // 64
                             i, j = int((required_element - 1) / w) * 64, (required_element - 1) % w * 64
 
@@ -66,8 +63,7 @@ class Level:
                             Tile((x, y), [self.passable_sprites, self.visible_sprites],
                                  "tree", current_surface, int(col))
 
-                        # ОТРИСОВКА ОБЪЕКТОВ
-                        if style == "Objects":
+                        if style == "Objects":  # ОТРИСОВКА ОБЪЕКТОВ
                             w, h = graphics[style].width // 64, graphics[style].height // 64
                             i, j = int((required_element - 1) / w) * 64, (required_element - 1) % w * 64
 
@@ -75,9 +71,8 @@ class Level:
                             Tile((x, y), [self.passable_sprites, self.visible_sprites],
                                  "object", current_surface, int(col))
 
-                        if style == "entities":
-                            if required_element == 639:
-                                # СОЗДАНИЕ ИГРОКА
+                        if style == "entities":  # ОТРИСОВКА СУЩЕСТВ
+                            if required_element == 639:  # СОЗДАНИЕ ИГРОКА
                                 self.player = Player(
                                     (x, y),
                                     [self.visible_sprites],
@@ -87,9 +82,9 @@ class Level:
                                     self.create_magic
                                 )
                             else:
-                                if required_element == 640:
+                                if required_element == 640:  # МОНСТР-ГЛАЗ
                                     monster_name = "Eye"
-                                if required_element == 638:
+                                if required_element == 638:  # БОСС БАМБУК
                                     monster_name = "Bamboo"
                                 Enemy(monster_name,
                                       (x, y),
@@ -101,7 +96,7 @@ class Level:
         """Функция, создающая физическую атаку"""
         self.current_attack = Weapon(self.player, [self.visible_sprites, self.attack_sprites])
 
-    def create_magic(self, style, strength, cost):
+    def create_magic(self, style, strength, cost) -> None:
         """
         Функия, создающая магическую атаку
         :param style: стиль магии
@@ -110,14 +105,14 @@ class Level:
         """
         print(style, strength, cost)
 
-    def destroy_attack(self):
-        """Функция, отменяющая атаку после её проведение"""
+    def destroy_attack(self) -> None:
+        """Функция, отменяющая атаку после её проведения"""
         if self.current_attack is not None:
             self.current_attack.kill()
         self.current_attack = None
 
-    def player_attack_logic(self):
-        """Функция, отвечающая за реализацию взаимодействия между игроком и врагами"""
+    def player_attack_logic(self) -> None:
+        """Функция, отвечающая за получения урона врагами"""
         if self.attack_sprites:
             for attack_sprite in self.attack_sprites:
                 collision_sprites = pygame.sprite.spritecollide(attack_sprite, self.attackable_sprites, False)
@@ -125,66 +120,75 @@ class Level:
                     for target_sprite in collision_sprites:
                         target_sprite.get_damage(self.player, attack_sprite.sprite_type)
 
-    def damage_player(self, amount, attack_type):
+    def damage_player(self, amount, attack_type) -> None:
+        """Функция, отвечающая за получение урона игроком"""
         if self.player.vulnerable:
             self.player.health -= amount
             self.player.vulnerable = False
             self.player.hurt_time = pygame.time.get_ticks()
 
-    def run(self):
+    def run(self) -> None:
         """Функция отрисовки и обновления уровня, отображения игрока"""
         self.visible_sprites.custom_draw(self.player)  # ОТРИСОВКА ИГРОКА
         self.visible_sprites.update()  # ОТРИСОВКА ВИДИМЫХ СПРАЙТОВ
-        self.visible_sprites.enemy_update(self.player)
-        self.player_attack_logic()
+        self.visible_sprites.enemy_update(self.player)  # ОБНОВЛЕНИЯ ПОВЕДЕНИЯ ВРАГОВ
+        self.player_attack_logic()  # ПРОВЕРКА АТАКИ ИГРОКОМ
         self.ui.display(self.player)  # ОТРИСОВКА ГРАФИЧЕСКОГО ИНТЕРФЕЙСА В ИГРЕ
 
 
 # КЛАСС ИГРОВОЙ КАМЕРЫ
 class Camera(pygame.sprite.Group):
-    def __init__(self):
+    def __init__(self) -> None:
+        """Функция инициализации камеры"""
         super().__init__()
-        self.display_surface = pygame.display.get_surface()
-        self.half_w = self.display_surface.get_size()[0] // 2
-        self.half_h = self.display_surface.get_size()[1] // 2
-        self.offset = pygame.math.Vector2()
+        self.display_surface = pygame.display.get_surface()  # ПОЛУЧЕНИЕ ИГРОВОЙ КАРТЫ
+        self.half_w = self.display_surface.get_size()[0] // 2  # ПОЛОВИНА ОТ ШИРИНЫ
+        self.half_h = self.display_surface.get_size()[1] // 2  # ПОЛОВИНА ОТ ВЫСОТЫ
+        self.offset = pygame.math.Vector2()  # ВЕКТОР, ОТВЕЧАЮЩИЙ ЗА СДВИГ КАМЕРЫ
 
-        # Создание фона
-        self.floor_surface = pygame.image.load("data/game_map_files/map/ground.png").convert()
+        self.floor_surface = pygame.image.load("data/game_map_files/map/ground.png").convert()  # ЗАГРУЗКА КАРТЫ
         self.floor_rect = self.floor_surface.get_rect(topleft=(0, 0))
 
-    def custom_draw(self, player):
-        # Получеени сдвига камеры
+    def custom_draw(self, player) -> None:
+        """
+        Функция отрисовки изображения камеры
+        :param player: объект игрока
+        """
         self.offset.x = player.rect.centerx - self.half_w
         self.offset.y = player.rect.centery - self.half_h
 
-        # Отрисовка фона
+        # ОТРИСОВКА ФОНА
         floor_offset_pos = self.floor_rect.topleft - self.offset
         self.display_surface.blit(self.floor_surface, floor_offset_pos)
 
-        # Первичная отрисовка спрайтов (Над которыми будет игрок)
+        # ПЕРВИЧНАЯ ОТРИСОВКА СПРАЙТОВ (НАД КОТОРЫМИ БУДЕТ ИГРОК)
         for sprite in self.sprites():
             if sprite.sprite_id in PASSABLE_IDS:
                 offset_rect = sprite.rect.topleft - self.offset
                 self.display_surface.blit(sprite.image, offset_rect)
 
-        last = []
-        # Отрисовка промежуточных спрайтов (Положения игрока регулируется его отношением в пространстве к этому спрайту)
+        last = []  # СЮДА ОТБИРАЮТСЯ СПРАЙТЫ, КОТОРЫЕ БУДУТ РИСОВАТЬСЯ В КОНЦЕ
+        # ОТРИСОВКА ПРОМЕЖУТОЧНЫХ СПРАЙТОВ (ПОЛОЖЕНИЯ ИГРОКА РЕГУЛИРУЕТСЯ ЕГО ОТНОШЕНИЕМ В ПРОСТРАНСТВЕ К ЭТОМУ СПРАЙТУ)
         for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
             if sprite.sprite_id in PASSABLE_IDS:
                 continue
-            if sprite.sprite_type in ["tree", "object"]:  # Отбор спрайтов, под которыми будет игрок
+            if sprite.sprite_type in ["tree", "object"]:  # ОТБОР СПРАЙТОВ, ПОД КОТОРЫМИ БУДЕТ ИГРОК
                 last.append(sprite)
                 continue
             offset_rect = sprite.rect.topleft - self.offset
             self.display_surface.blit(sprite.image, offset_rect)
 
-        # Отрисовка тех спрайтов, под которыми будет игрок
+        # ОТРИСОВКА ТЕХ СПРАЙТОВ, ПОД КОТОРЫМИ БУДЕТ ИГРОК
         for sprite in last:
             offset_rect = sprite.rect.topleft - self.offset
             self.display_surface.blit(sprite.image, offset_rect)
 
     def enemy_update(self, player) -> None:
-        enemy_sprites = [sprite for sprite in self.sprites() if hasattr(sprite, "sprite_type") and sprite.sprite_type == "enemy"]
-        for enemy in enemy_sprites:
+        """
+        Метод, обновляющий врагов
+        :param player:
+        """
+        enemy_sprites = [sprite for sprite in self.sprites() if hasattr(sprite, "sprite_type") and
+                         sprite.sprite_type == "enemy"]  # ОТБОР СПРАЙТОВ ВРАГОВ
+        for enemy in enemy_sprites:  # ВВЫЗОВ  ОДНОИМЁННОГО МЕТОДА.enemy_update У ОБЪЕКТА ВРАГА
             enemy.enemy_update(player)

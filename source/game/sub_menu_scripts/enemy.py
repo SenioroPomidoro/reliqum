@@ -5,63 +5,81 @@ from data.settings import *
 from source.game.sub_menu_scripts.entity import Entity
 
 
+# КЛАСС ВРАГА
 class Enemy(Entity):
-    def __init__(self, monster_name, pos, groups, obstacle_sprites, damage_player):
-        super().__init__(groups)
-        self.sprite_type = "enemy"
-        self.sprite_id = None
+    def __init__(self, monster_name: str, pos: tuple, groups, obstacle_sprites, damage_player: int) -> None:
+        """
+        Конструктор класса врага
+        :param monster_name: имя врага
+        :param pos: позиция врага на карте
+        :param groups: группы спрайтов, в которых находится враг
+        :param obstacle_sprites: спрайты, через которые враг не может пройти
+        :param damage_player: урон, наносимый врагом игрокау
+        """
+        super().__init__(groups)  # ВЫЗВОВ КОНСТРУКТОРА РОДИТЕЛЬСКОГО КЛАССА
+        self.sprite_type = "enemy"  # ЗАПИСЬ ТИАП СПРАЙТА В АТРИБУТЫ
+        self.sprite_id = None  # ЗАПИСЬ ID СПРАЙТА В АТРИБУТЫ
 
-        self.import_graphics(monster_name)
-        self.status = "idle"
+        self.import_graphics(monster_name)  # ПОДГРУЗКА ГРАФИКИ ВРАГА
+        self.status = "idle"  # ЗАПИСЬ ИЗНАЧАЛЬНОГО СТАТУСА МОНСТРА В АТРИБУТЫ - СТОЙКА НА МЕСТЕ
         self.image = (pygame.image.load("data/images/sprites/monsters/Eye/idle/idle.png").
-                      subsurface((0, 0, 48, 48)).convert_alpha())
+                      subsurface((0, 0, 48, 48)).convert_alpha())  # ЗАГРУЗКА НАЧАЛЬНОГО ИЗОБРАЖЕНИЯ ВРАГА
 
         # движение
-        self.rect = self.image.get_rect(topleft=pos)
-        self.hitbox = self.rect.inflate(0, -10)
-        self.obstacle_sprites = obstacle_sprites
+        self.rect = self.image.get_rect(topleft=pos)  # ОПРЕДЕЛЕНИЕ НАЧАЛЬНОГО ПОЛОЖЕНИЯ ВРАГА В ПРОСТРАНСТВЕ
+        self.hitbox = self.rect.inflate(0, -10)  # ОПРЕДЕЛЕНИЕ ХИТБОКСА ВРАГА (сверху и снизу -5 пикселей)
+        self.obstacle_sprites = obstacle_sprites  # ЗАПИСЬ СПРАЙТОВ, ЧЕРЕЗ КОТОРЫЕ ВРАГ НЕ МОЖЕТ ПРОЙТИ В АТРИБУТЫ
 
         # показатели монстра
-        self.monster_name = monster_name
-        monster_info = monster_data[self.monster_name]
-        self.health = monster_info["health"]
-        self.exp = monster_info["exp"]
-        self.speed = monster_info["speed"]
-        self.attack_damage = monster_info["damage"]
-        self.resistance = monster_info["resistance"]
-        self.attack_radius = monster_info["attack_radius"]
-        self.notice_radius = monster_info["notice_radius"]
-        self.attack_type = monster_info["attack_type"]
+        self.monster_name = monster_name  # ЗАПИСЬ ИМЕНИ ВРАГА
+        monster_info = monster_data[self.monster_name]  # ИНФОРМАЦИЯ О ВРАГЕ В ВИДЕ СЛОВАРЯ
+        self.health = monster_info["health"]  # ЗАПИСЬ ЗДОРОВЬЯ ВРАГА
+        self.exp = monster_info["exp"]  # ЗАПИСЬ КОЛИЧЕСТВА ОПЫТА, ДАЮЩЕГОСЯ ЗА ВРАГА
+        self.speed = monster_info["speed"]  # ЗАПИСЬ СКОРОСТИ ВРАГА
+        self.attack_damage = monster_info["damage"]  # ЗАПИСЬ УРОНА ВРАГА
+        self.resistance = monster_info["resistance"]  # ЗАПИСЬ ТОГО, НАСКОЛЬКО СИЛЬНО ВРАГ ОТКИДЫВАЕТСЯ ПОСЛЕ УРОНА
+        self.attack_radius = monster_info["attack_radius"]  # ЗАПИСЬ РАДИУСА АТАКИ ВРАГА
+        self.notice_radius = monster_info["notice_radius"]  # ЗАПИСЬ РАДИУСА ОБНАРУЖЕНИЯ ВРАГА
+        self.attack_type = monster_info["attack_type"]  # ЗАПИСЬ ТИПА АТАКИ ВРАГА
 
         # взаимодействие с игроком
-        self.can_attack = True
-        self.attack_time = None
-        self.attack_cooldown = 400
-        self.damage_player = damage_player
+        self.can_attack = True  # МОЖЕТ ЛИ ВРАГ АТАКОВАТЬ ВРАГА
+        self.attack_time = None  # МОМЕНТ ВРЕМЕНИ В КОТОРЫЙ ВРАГ НАНЁС УРОН
+        self.attack_cooldown = 400  # КУЛДАУН МЕЖДУ УДАРАМИ ВРАГА
+        self.damage_player = damage_player  # УРОН, КОТОРЫЙ НАНОСИТСЯ ИГРОКУ ВРГАОМ
 
         # таймер бессмертия
-        self.vulnerable = True
-        self.hit_time = None
-        self.invincibility_duration = 200
+        self.vulnerable = True  # МОЖЕТ ЛИ ВРАГ ПОЛУЧАТЬ УРОН
+        self.hit_time = None  # МОМЕНТ ВРЕМЕНИ, В КОТОРЫЙ ВРАГ ПОЛУЧИЛ УРОН
+        self.invincibility_duration = 200  # ДЛИТЕЛЬНОСТЬ НЕУЯЗВИМОСТИ ВРАГА ПОСЛЕ ПОЛУЧЕНИЯ УРОНА
 
-    def import_graphics(self, name):
-        self.animations = {"idle": [], "move": [], "attack": []}
+    def import_graphics(self, name: str) -> None:
+        """
+        Функция подгрузки графики врага
+        :param name: имя монстра
+        """
+        self.animations = {"idle": [], "move": [], "attack": []}  # СЛОВАРЬ С АНИМАЦИИ ВРАГА ПО ЕГО ДЕЙСТВИЮ
 
-        main_path = F"data/images/sprites/monsters/{name}/"
-        for animation in self.animations.keys():
+        main_path = F"data/images/sprites/monsters/{name}/"  # ПУТЬ ДО ПАПКИ С ДАННЫМИ О МОНСТРЕ
+        for animation in self.animations.keys():  # ЗАПОЛНЕНИЯ СЛОВАРЯ self.animations
             full_path = main_path + animation
             self.animations[animation] = pygame.image.load(F"{full_path}/{animation}.png").convert_alpha()
 
-    def get_player_distance_direction(self, player):
-        enemy_vector = pygame.math.Vector2(self.rect.center)
-        player_vector = pygame.math.Vector2(player.rect.center)
+    def get_player_distance_direction(self, player) -> tuple:
+        """
+        Метод, расчитывающий дистанциую от игрока и возвращающий эту дистанцию вместе с вектором движения, на
+        который должен двигаться враг, чтобы добраться до игрока
+        :param player: объект игрока
+        """
+        enemy_vector = pygame.math.Vector2(self.rect.center)  # ВЕКТОР ДВИЖЕНИЯ ВРАГА
+        player_vector = pygame.math.Vector2(player.rect.center)  # ВЕКТОР ДВИЖЕНИЯ ИГРОКА
 
-        distance = (player_vector - enemy_vector).magnitude()  # получение длины вектора
+        distance = (player_vector - enemy_vector).magnitude()  # ПОЛУЧЕНИЕ ДЛИНЫ ВЕКТОРА МЕЖДУ ИГРОКОМ И ВРАГОМ
 
-        if distance > 0:
-            direction = (player_vector - enemy_vector).normalize()
-        else:
-            direction = pygame.math.Vector2(0, 0)
+        if distance > 0:  # ЕСЛИ ВЕКТОР СУЩЕСТВУЕТ (его длина ненулевая)
+            direction = (player_vector - enemy_vector).normalize()  # ПРОИЗВОДИТСЯ ЕГО ОБЯЗАТЕЛЬНАЯ НОРМАЛИЗАЦИЯ
+        else:  # ИНАЧЕ
+            direction = pygame.math.Vector2(0, 0)  # ВЕКТОР НУЛЕВОЙ
 
         return distance, direction
 

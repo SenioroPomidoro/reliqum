@@ -44,7 +44,7 @@ class Player(Entity):
         self.destroy_attack = destroy_attack  # ЗАПИСЬ ФУНКЦИИ, УНИЧТОЖАЮЩЕЙ АТАКУ В АТРИБУТЫ ОБЪЕКТА
         self.weapon_index = 0  # ИНДЕКС ВЫБРАННОГО ОРУЖИЯ, ПО УМОЛЧАНИЮ - 0
         self.weapon = list(weapon_data.keys())[self.weapon_index]  # НАЗВАНИЕ ОРУЖИЯ
-        self.weapon_data = weapon_data
+        self.weapon_data = weapon_data  # СЛОВАРЬ С ОРУЖИЕМ ЗАПИСЫВАЕТСЯ В АТРИБУТЫ
         self.can_switch_weapon = True  # МОЖЕТ ЛИ ИГРОК СМЕНИТЬ ОРУЖИЕ. ПО УМОЛЧАНИЮ - ДА
         self.weapon_switch_time = None  # ВРЕМЯ, КОТОРОЕ ИГРОК МЕНЯЕТ ОРУЖИЕ
 
@@ -65,9 +65,9 @@ class Player(Entity):
         self.speed = self.stats["speed"]  # ЗАПИСЬ СКОРОСТИ ПЕРСОНАЖА
         self.exp = 123  # ЗАПИСЬ ОПЫТА ПЕРСОНАЖА
 
-        self.vulnerable = True
-        self.hurt_time = None
-        self.invulnerability_duration = 500
+        self.vulnerable = True  # УЯЗВИМ ЛИ ИГРОК (можно ли нанести урон)
+        self.hurt_time = None  # ВРЕМЯ, В КОТОРОЕ ИГРОКА УДАРИЛИ
+        self.invulnerability_duration = 500  # ВРЕМЯ, КОТОРОЕ ИГРОК БУДЕТ НЕУЯЗВИМ
 
     def import_player_assets(self) -> None:
         """Функция для импорта спрайтов игрока"""
@@ -151,7 +151,7 @@ class Player(Entity):
                     self.status = self.status.replace("_idle", "_attack")
                 else:
                     self.status = self.status + "_attack"
-        else:
+        else:  # ИНАЧЕ СТАТУС ИГРОКА НЕ ЯВЛЯЕТСЯ АТАКУЮЩИМ
             if "attack" in self.status:
                 self.status = self.status.replace("_attack", "")
 
@@ -160,7 +160,8 @@ class Player(Entity):
         current_time = pygame.time.get_ticks()  # ТЕКУЩИЙ МОМЕНТ ВРЕМЕНИ
 
         if self.attacking:  # ЕСЛИ ИГРОК АТАКУЕТ
-            if current_time - self.attack_time >= self.attack_cooldown + self.weapon_data[self.weapon]["cooldown"]:  # ЕСЛИ ВРЕМЯ АТАКИ ИСТЕКЛО
+            if (current_time - self.attack_time >=
+                    self.attack_cooldown + self.weapon_data[self.weapon]["cooldown"]):  # ЕСЛИ ВРЕМЯ АТАКИ ИСТЕКЛО
                 self.attacking = False  # ИГРОК НЕ АТАКУЕТ
                 self.destroy_attack()  # СПРАЙТ ОРУЖИЯ / МАГИИ УНИЧТОЖАЕТСЯ
 
@@ -172,9 +173,9 @@ class Player(Entity):
             if current_time - self.magic_switch_time >= self.switch_duration_cooldown:  # ЕСЛИ КУЛДАУН СМЕНЫ ИСТЕК
                 self.can_switch_magic = True  # МЕНЯТЬ МАГИЮ МОЖНО
 
-        if not self.vulnerable:
-            if current_time - self.hurt_time >= self.invulnerability_duration:
-                self.vulnerable = True
+        if not self.vulnerable:  # ЕСЛИ ИГРОК НЕУЯЗВИМ
+            if current_time - self.hurt_time >= self.invulnerability_duration:  # ЕСЛИ ВРЕМЯ НЕУЯЗВИМОСТИ ИСТЕКЛО
+                self.vulnerable = True  # ИГРОК ТЕПЕРЬ УЯЗВИМ
 
     def animate(self) -> None:
         """Функция, осуществляющая анимацию движения игрока"""
@@ -193,16 +194,17 @@ class Player(Entity):
         self.image = animation.subsurface(pygame.Rect((0, int(self.frame_index) * 50 + 1, 50, 49)))
         self.rect = self.image.get_rect(center=self.hitbox.center)
 
-        if not self.vulnerable:
-            alpha = self.wave_value()
-            self.image.set_alpha(alpha)
-        else:
-            self.image.set_alpha(255)
+        if not self.vulnerable:  # ЕСЛИ ИГРОК НЕУЯЗВИМ
+            alpha = self.wave_value()  # ПОЛУЧАЕМ ЗНАЧЕНИЕ ПРОЗРАЧНОСТИ ПО СИНУСОИДЕ
+            self.image.set_alpha(alpha)  # СМЕНЯЕМ ЗНАЧЕНИЕ ПРОЗРАЧНОСТИ ИГРОКА
+        else:  # ИНАЧЕ
+            self.image.set_alpha(255)  # ИГРОК НЕ МИГАЕТ
 
     def get_full_weapon_damage(self) -> int:
-        base_damage = self.stats["attack"]
-        weapon_damage = self.weapon_data[self.weapon]["damage"]
-        return base_damage + weapon_damage
+        """Метод, получающий полный урон от конкретного вида оружия"""
+        base_damage = self.stats["attack"]  # УРОН ИГРОКА БЕЗ ОРУЖИЯ
+        weapon_damage = self.weapon_data[self.weapon]["damage"]  # УРОН ОРУЖИЯ
+        return base_damage + weapon_damage  # ПОЛНЫЙ УРОН
 
     def update(self) -> None:
         """Функция для обновления игрока"""
