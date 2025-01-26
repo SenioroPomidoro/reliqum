@@ -1,6 +1,6 @@
 import pygame
 from data.settings import *
-from source.game.sub_menu_scripts.entity import Entity
+from source.game.sub_game_scripts.entity import Entity
 
 
 class Player(Entity):
@@ -206,6 +206,19 @@ class Player(Entity):
         weapon_damage = self.weapon_data[self.weapon]["damage"]  # УРОН ОРУЖИЯ
         return base_damage + weapon_damage  # ПОЛНЫЙ УРОН
 
+    def get_full_magic_damage(self) -> int:
+        """Метод, получающий полный урон от конкретного вида магии (атакующей)"""
+        base_damage = self.stats["magic"]  # МАГИЧЕСКИЙ УРОН ИГРОКА
+        spell_damage = magic_data[self.magic]["strength"]  # МАГИЧЕСКИЙ УРОН ЗАКЛИНАНИЯ
+        return base_damage + spell_damage  # ПОЛНЫЙ УРОН
+
+    def energy_recovery(self) -> None:
+        """Метод, пополняющий значение энергии игрока"""
+        if self.energy < self.stats["energy"]:  # ЕСЛИ ПОЛОСА ЭНЕРГИИ НЕ ПОЛНАЯ
+            self.energy += 0.01 * self.stats["magic"]  # ЭНЕРГИЯ ПРИБАВЛЯЕТСЯ
+        else:  # ИНАЧЕ
+            self.energy = self.stats["energy"]  # ЭНЕРГИЯ СТАНОВИТСЯ МАКСИМАЛЬНОЙ
+
     def update(self) -> None:
         """Функция для обновления игрока"""
         self.input()  # ОБРАБОТКА КЛАВИШ
@@ -213,3 +226,4 @@ class Player(Entity):
         self.get_status()  # ОБНОВЛЕНИЕ СТАТУСА ИГРОКА
         self.animate()  # АНИМАЦИЯ ИГРОКА
         self.move(self.speed)  # ПЕРЕДВИЖЕНИЕ ИРОКА
+        self.energy_recovery()  # ПАСИВНОЕ ПОПОЛНЕНИЕ ЗАПАСА ЭНЕРГИИ (маны)

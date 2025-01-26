@@ -1,6 +1,6 @@
 import pygame
 
-from source.game.sub_menu_scripts.game_level import Level
+from source.game.sub_game_scripts.game_level import Level
 
 
 # ГЛАВНЫЙ КЛАСС ИГРОВОГО ОКНА
@@ -17,7 +17,7 @@ class Game:
     def start_game(self) -> None:
         """Запуск игрового окна и его особенности"""
         pygame.display.set_caption("Reliqum")  # УСТАНОВКА НАЗВАНИЯ ИГРОВОГО ОКНА
-        window_surface = pygame.display.set_mode(self.size)  # СОЗДАНИЕ ПОВЕРХНОСТИ ДЛЯ МЕНЮ
+        window_surface = pygame.display.set_mode(self.size, pygame.FULLSCREEN)  # СОЗДАНИЕ ПОВЕРХНОСТИ ДЛЯ МЕНЮ
 
         self.level = Level()  # СОЗДАНИЕ ИГРОВОГО УРОВНЯ
 

@@ -4,7 +4,7 @@ from data.settings import *
 
 # КЛАСС, КОТОРЫЙ ОТВЕЧАЕТ ЗА ТЕ ИЛИ ИНЫЕ ЭЛЕМЕНТЫ ГРАФИЧЕСКОГО ИНТЕРФЕЙСА ИГРОВОГО ОКНА
 class GameUI:
-    def __init__(self):
+    def __init__(self) -> None:
         """Инициализация объекта графической части игрового окна"""
 
         # ---
@@ -19,7 +19,7 @@ class GameUI:
         self.weapon_graphics = [pygame.image.load(weapon["graphic"]).convert_alpha() for weapon in weapon_data.values()]
         self.magic_graphics = [pygame.image.load(magic["graphic"]).convert_alpha() for magic in magic_data.values()]
 
-    def show_exp(self, exp):
+    def show_exp(self, exp) -> None:
         """
         Функция для отрисовки показателя полученого опыта
         :param exp: количество опыта, которое имеет игрок

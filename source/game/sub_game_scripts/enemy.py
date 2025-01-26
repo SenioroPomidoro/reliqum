@@ -2,12 +2,12 @@ import pygame
 
 from data.settings import *
 
-from source.game.sub_menu_scripts.entity import Entity
+from source.game.sub_game_scripts.entity import Entity
 
 
 # КЛАСС ВРАГА
 class Enemy(Entity):
-    def __init__(self, monster_name: str, pos: tuple, groups, obstacle_sprites, damage_player) -> None:
+    def __init__(self, monster_name: str, pos: tuple, groups, obstacle_sprites, damage_player, death_particles) -> None:
         """
         Конструктор класса врага
         :param monster_name: имя врага
@@ -47,6 +47,7 @@ class Enemy(Entity):
         self.attack_time = None  # МОМЕНТ ВРЕМЕНИ В КОТОРЫЙ ВРАГ НАНЁС УРОН
         self.attack_cooldown = 400  # КУЛДАУН МЕЖДУ УДАРАМИ ВРАГА
         self.damage_player = damage_player  # ФУНКЦИЯ, ОБРАБАТЫВАЮЩАЯ НАНЕСЕНИЕ УРОНА ИГРОКУ
+        self.trigger_death_particles = death_particles
 
         # таймер бессмертия
         self.vulnerable = True  # МОЖЕТ ЛИ ВРАГ ПОЛУЧАТЬ УРОН
@@ -160,17 +161,18 @@ class Enemy(Entity):
         :param attack_type: тип атаки по врагу
         """
         if self.vulnerable:  # ЕСЛИ ВРАГ УЯЗВИМ
-            self.direction = self.get_player_ditance_direction(player)[1]  # ПОЛУЧАЕМ НАПРАВЛЕНИЕ ДВИЖЕНИЯ ВРАГА
+            self.direction = self.get_player_distance_direction(player)[1]  # ПОЛУЧАЕМ НАПРАВЛЕНИЕ ДВИЖЕНИЯ ВРАГА
             if attack_type == "Weapon":  # ЕСЛИ УДАРИЛИ ОРУЖИЕМ
                 self.health -= player.get_full_weapon_damage()  # ОТНИМАЕМ ПОЛНЫЙ УРОН ОТ ОРУЖИЯ ПО ВРАГУ
             else:
-                pass
+                self.health -= player.get_full_magic_damage()
             self.hit_time = pygame.time.get_ticks()  # ВРЕМЯ, В КОТОРОЕ ВРАГА АТКОВАЛИ
             self.vulnerable = False  # ВРАГ СТАНОВИТСЯ НЕУЯЗВИМ НА НЕКОТОРОЕ ВРЕМЯ
 
     def check_death(self) -> None:
         """Метод, проверяющий жив ли враг"""
         if self.health <= 0:  # ЕСЛИ ХП ВРАГА МЕНЬШЕ 0
+            self.trigger_death_particles(self.rect.center)
             self.kill()  # ВРАГ УМИРАЕТ (его спрайт, а соответсвенно и объект уничтожается)
 
     def hit_reaction(self) -> None:

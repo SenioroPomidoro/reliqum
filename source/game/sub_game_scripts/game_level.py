@@ -1,13 +1,18 @@
 import pygame
 
-from source.game.sub_menu_scripts.enemy import Enemy
+from source.game.sub_game_scripts.enemy import Enemy
 
 from source.helping_scripts.imports import import_csv_layout
 from source.helping_scripts.imports import import_graphics
-from source.game.sub_menu_scripts.player import Player
-from source.game.sub_menu_scripts.weapon import Weapon
+from source.game.sub_game_scripts.player import Player
+from source.game.sub_game_scripts.weapon import Weapon
 from source.game.user_interface.game_ui import GameUI
-from source.game.sub_menu_scripts.tile import Tile
+from source.game.sub_game_scripts.tile import Tile
+
+from source.game.sub_game_scripts.game_effects import ParticleEffect
+
+from source.game.sub_game_scripts.magic import Magic
+
 
 from data.settings import *
 
@@ -29,6 +34,8 @@ class Level:
         self.create_map()  # СОЗДАНИЕ КАРТЫ
 
         self.ui = GameUI()  # ОБЪЕКТ ДЛЯ ОТРИСОВКИ ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
+
+        self.magic = Magic()
 
     def create_map(self) -> None:
         """Функция создания карты"""
@@ -90,7 +97,8 @@ class Level:
                                       (x, y),
                                       [self.visible_sprites, self.attackable_sprites],
                                       self.obstacle_sprites,
-                                      self.damage_player)
+                                      self.damage_player,
+                                      self.trigger_death_particles)
 
     def create_attack(self) -> None:
         """Функция, создающая физическую атаку"""
@@ -103,7 +111,12 @@ class Level:
         :param strength: сила магии
         :param cost: стоимость магии в энергии
         """
-        print(style, strength, cost)
+        if style == "heal":
+            if self.magic.heal(self.player, strength, cost):
+                ParticleEffect(self.player.rect.center, self.magic.animation_heal, [self.visible_sprites], 64)
+
+        if style == "flame":
+            self.magic.flame(self.player, cost, [self.visible_sprites, self.attack_sprites])
 
     def destroy_attack(self) -> None:
         """Функция, отменяющая атаку после её проведения"""
@@ -126,6 +139,13 @@ class Level:
             self.player.health -= amount
             self.player.vulnerable = False
             self.player.hurt_time = pygame.time.get_ticks()
+
+            frames = pygame.image.load(F"data/images/sprites/attacks/{attack_type}.png").convert_alpha()
+            ParticleEffect(self.player.rect.center, frames, [self.visible_sprites], 64)
+
+    def trigger_death_particles(self, pos) -> None:
+        frames = pygame.image.load(F"data/images/sprites/death/death.png").convert_alpha()
+        ParticleEffect(pos, frames, [self.visible_sprites], 64)
 
     def run(self) -> None:
         """Функция отрисовки и обновления уровня, отображения игрока"""
