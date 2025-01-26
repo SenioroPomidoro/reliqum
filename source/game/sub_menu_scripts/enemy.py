@@ -7,7 +7,7 @@ from source.game.sub_menu_scripts.entity import Entity
 
 # КЛАСС ВРАГА
 class Enemy(Entity):
-    def __init__(self, monster_name: str, pos: tuple, groups, obstacle_sprites, damage_player: int) -> None:
+    def __init__(self, monster_name: str, pos: tuple, groups, obstacle_sprites, damage_player) -> None:
         """
         Конструктор класса врага
         :param monster_name: имя врага
@@ -46,7 +46,7 @@ class Enemy(Entity):
         self.can_attack = True  # МОЖЕТ ЛИ ВРАГ АТАКОВАТЬ ВРАГА
         self.attack_time = None  # МОМЕНТ ВРЕМЕНИ В КОТОРЫЙ ВРАГ НАНЁС УРОН
         self.attack_cooldown = 400  # КУЛДАУН МЕЖДУ УДАРАМИ ВРАГА
-        self.damage_player = damage_player  # УРОН, КОТОРЫЙ НАНОСИТСЯ ИГРОКУ ВРГАОМ
+        self.damage_player = damage_player  # ФУНКЦИЯ, ОБРАБАТЫВАЮЩАЯ НАНЕСЕНИЕ УРОНА ИГРОКУ
 
         # таймер бессмертия
         self.vulnerable = True  # МОЖЕТ ЛИ ВРАГ ПОЛУЧАТЬ УРОН
@@ -83,90 +83,110 @@ class Enemy(Entity):
 
         return distance, direction
 
-    def get_status(self, player):
-        distance = self.get_player_distance_direction(player)[0]
+    def get_status(self, player) -> None:
+        """
+        Метод, определяющий тип поведения врага
+        :param player: объект игрока
+        """
+        distance = self.get_player_distance_direction(player)[0]  # ДИСТАНЦИЯ МЕЖДУ ИГРОКОМ И ВРАГОМ
 
-        if distance <= self.attack_radius and self.can_attack:
-            if self.status != "attack":
-                self.frame_index = 0
-            self.status = "attack"
-        elif distance <= self.notice_radius:
-            self.status = "move"
-        else:
-            self.status = "idle"
+        if distance <= self.attack_radius and self.can_attack:  # ЕСЛИ ДИСТАНЦИЯ ДОСТАТОЧНА ДЛЯ АТАКИ
+            if self.status != "attack":  # ЕСЛИ ВРАГ НЕ АТАКОВАЛ
+                self.frame_index = 0  # СТАВИТСЯ ПЕРВЫЙ КАДР (для обновления покадровой анимации)
+            self.status = "attack"  # СТАТУС ВРАГА ЯВЛЯЕТСЯ АТАКОЙ
+        elif distance <= self.notice_radius:  # ЕСЛИ ДИСТАНЦИЯ ДОСТАТОЧНА ДЛЯ ОБНАРУЖЕНИЯ
+            self.status = "move"  # ВРАГ СЛЕДУЕТ ЗА ИГРОКОМ
+        else:  # ИНАЧЕ
+            self.status = "idle"  # ВРАГ СТОИТ
 
-    def actions(self, player):
-        if self.status == "attack":
-            self.attack_time = pygame.time.get_ticks()
-            self.damage_player(self.attack_damage, self.attack_type)
-        elif self.status == "move":
-            self.direction = self.get_player_distance_direction(player)[1]
-        else:
-            self.direction = pygame.math.Vector2()
+    def actions(self, player) -> None:
+        """
+        Метод, реализующий действия врагов
+        :param player: объект игрока
+        """
+        if self.status == "attack":  # ЕСЛИ СТАТУС ВРАГА - АТАКА
+            self.attack_time = pygame.time.get_ticks()  # ПОЛУЧАЕМ ВРЕМЯ В МОМЕНТ АТАКИ
+            self.damage_player(self.attack_damage, self.attack_type)  # НАНОСИМ УРОН ИГРОКУ
+        elif self.status == "move":  # ЕСЛИ СТАТУС ВРАГА - ДВИЖЕНИЕ
+            self.direction = self.get_player_distance_direction(player)[1]  # ПОЛУЧАЕМ ВЕКТОР ДВИЖ. К ИГРОКУ
+        else:  # ИНАЧЕ
+            self.direction = pygame.math.Vector2()  # ВЕКТОР НУЛЕВОЙ (игрок стоит, self.status == "idle")
 
-    def animate(self):
-        animation = self.animations[self.status]
-        self.frame_index += self.animation_speed
+    def animate(self) -> None:
+        """Функция анмации врагов"""
+        animation = self.animations[self.status]  # НАБОР С АНИМАЦИИ ДЛЯ ТЕКУЩЕГО ВРАГА
+        self.frame_index += self.animation_speed  # ПРИБАВЛЯЕМ НЕКОТОРОЕ ЗНАЧЕНИЕ К ПОКАДРОВОЙ АНИМАЦИИ
 
-        if self.monster_name == "Eye":
-            if self.frame_index >= animation.height / 48:
-                if self.status == "attack":
-                    self.can_attack = False
-                self.frame_index = 0
+        if self.monster_name == "Eye":  # ЕСЛИ ВРАГ - ГЛАЗ
+            if self.frame_index >= animation.height / 48:  # ЕСЛИ ЦИКЛ АНИМАЦИИ ТЕКУЩЕГО ДЕЙСТВИЯ ЗАВЕРШЕН
+                if self.status == "attack":  # ЕСЛИ ВРАГ АТАКОВАЛ
+                    self.can_attack = False  # ВРАГ АТАКОВАТЬ БОЛЬШЕ НЕ МОЖЕТ
+                self.frame_index = 0  # ПОКАДРОВАЯ АНИМАЦИЯ НАЧИНАЕТСЯ С НУЛЕВОГО КАДРА
 
-            self.image = animation.subsurface((0, int(self.frame_index) * 48, 48, 48))
-            self.rect = self.image.get_rect(center=self.hitbox.center)
+            self.image = animation.subsurface((0, int(self.frame_index) * 48, 48, 48))  # ПОЛУЧЕНИЕ НУЖНОГО КАДРА
+            self.rect = self.image.get_rect(center=self.hitbox.center)  # ПОЛУЧЕНИЕ РАСПОЛОЖЕНИЯ ТЕКУЩЕГО КАДРА
 
-        if self.monster_name == "Bamboo":
-            if self.frame_index >= animation.width / 186:
-                if self.status == "attack":
-                    self.can_attack = False
-                self.frame_index = 0
+        if self.monster_name == "Bamboo":  # ЕСЛИ ВРАГ - БОСС-БАМБУК
+            if self.frame_index >= animation.width / 186:  # ЕСЛИ ЦИКЛ АНИМАЦИИ ТЕКУЩЕГО ДЕЙСТВИЯ ЗАВЕРШЕН
+                if self.status == "attack":  # ЕСЛИ ВРАГ АТАКОВАЛ
+                    self.can_attack = False  # ВРАГ АТАКОВАТЬ БОЛЬШЕ НЕ МОЖЕТ
+                self.frame_index = 0   # ПОКАДРОВАЯ АНИМАЦИЯ НАЧИНАЕТСЯ С НУЛЕВОГО КАДРА
 
-            self.image = animation.subsurface((int(self.frame_index) * 186, 0, 186, 186))
-            self.rect = self.image.get_rect(center=self.hitbox.center)
+            self.image = animation.subsurface((int(self.frame_index) * 186, 0, 186, 186))  # ПОЛУЧЕНИЕ НУЖНОГО КАДРА
+            self.rect = self.image.get_rect(center=self.hitbox.center)  # ПОЛУЧЕНИЕ РАСПОЛОЖЕНИЯ ТЕКУЩЕГО КАДРА
 
-        if not self.vulnerable:
-            alpha = self.wave_value()
-            self.image.set_alpha(alpha)
-        else:
-            self.image.set_alpha(255)
+        if not self.vulnerable:  # ЕСЛИ ВРАГ НЕУЯЗВИМ
+            alpha = self.wave_value()  # ПОЛУЧЯЕМ ЗНАЧЕНИЕ ПРОЗРАЧНОСТИ ЕГО СПРАЙТА В СООТВЕТСВИИ С СИНУСОИДОЙ
+            self.image.set_alpha(alpha)  # УСТАНАВЛИВАЕМ НУЖНОЕ ЗНАЧЕНИЕ ПРОЗРАЧНОСТИ
+        else:  # ИНАЧЕ
+            self.image.set_alpha(255)  # СПРАЙТ ВРАГА НЕ ПРОЗРАЧЕН
 
-    def cooldowns(self):
-        current_time = pygame.time.get_ticks()
-        if not self.can_attack:
-            if current_time - self.attack_time >= self.attack_cooldown:
-                self.can_attack = True
+    def cooldowns(self) -> None:
+        """Метод, обрабатывающий перезарядки врагов"""
+        current_time = pygame.time.get_ticks()  # ТЕКУЩИЙ МОМЕНТ ВРЕМЕНИ
 
-        if not self.vulnerable:
-            if current_time - self.hit_time >= self.invincibility_duration:
-                self.vulnerable = True
+        if not self.can_attack:  # ЕСЛИ ВРАГ НЕ МОЖЕТ АТАКОВАТЬ
+            if current_time - self.attack_time >= self.attack_cooldown:  # ЕСЛИ ВРЕМЯ ПЕРЕЗАРЯДКИ УДАРА ПРОШЛО
+                self.can_attack = True  # ВРАГ МОЖЕТ АТАКОВАТЬ
 
-    def get_damage(self, player, attack_type):
-        if self.vulnerable:
-            self.direction = self.get_player_distance_direction(player)[1]
-            if attack_type == "Weapon":
-                self.health -= player.get_full_weapon_damage()
+        if not self.vulnerable:  # ЕСЛИ ВРАГ НЕУЯЗВИМ
+            if current_time - self.hit_time >= self.invincibility_duration:  # ЕСЛИ ВРЕМЯ НЕУЯЗВИМОСТИ ПРОШЛО
+                self.vulnerable = True  # ВРАГ УЯЗВИМ
+
+    def get_damage(self, player, attack_type) -> None:
+        """
+        Метод, обрабатывающий урон по врагу
+        :param player: объект игрока
+        :param attack_type: тип атаки по врагу
+        """
+        if self.vulnerable:  # ЕСЛИ ВРАГ УЯЗВИМ
+            self.direction = self.get_player_ditance_direction(player)[1]  # ПОЛУЧАЕМ НАПРАВЛЕНИЕ ДВИЖЕНИЯ ВРАГА
+            if attack_type == "Weapon":  # ЕСЛИ УДАРИЛИ ОРУЖИЕМ
+                self.health -= player.get_full_weapon_damage()  # ОТНИМАЕМ ПОЛНЫЙ УРОН ОТ ОРУЖИЯ ПО ВРАГУ
             else:
                 pass
-            self.hit_time = pygame.time.get_ticks()
-            self.vulnerable = False
+            self.hit_time = pygame.time.get_ticks()  # ВРЕМЯ, В КОТОРОЕ ВРАГА АТКОВАЛИ
+            self.vulnerable = False  # ВРАГ СТАНОВИТСЯ НЕУЯЗВИМ НА НЕКОТОРОЕ ВРЕМЯ
 
-    def check_death(self):
-        if self.health <= 0:
-            self.kill()
+    def check_death(self) -> None:
+        """Метод, проверяющий жив ли враг"""
+        if self.health <= 0:  # ЕСЛИ ХП ВРАГА МЕНЬШЕ 0
+            self.kill()  # ВРАГ УМИРАЕТ (его спрайт, а соответсвенно и объект уничтожается)
 
-    def hit_reaction(self):
-        if not self.vulnerable:
-            self.direction *= -self.resistance
+    def hit_reaction(self) -> None:
+        """Метод, обрабатывающий реакцию врага на удар"""
+        if not self.vulnerable:  # ЕСЛИ ВРАГ НЕУЯЗВИМ
+            self.direction *= -self.resistance  # ВРАГ ДВИГАЕТСЯ НАЗАД НА НЕКОТОРОЕ РАССТОЯНИЕ НЕКОТОРОЕ ВРЕМЯ
 
     def update(self):
-        self.hit_reaction()
-        self.move(self.speed)
-        self.animate()
-        self.cooldowns()
-        self.check_death()
+        """Метод, обновляющий врага как объект"""
+        self.hit_reaction()  # РЕАКЦИЯ ВРАГА НА УДАР
+        self.move(self.speed)  # ДВИЖЕНИЕ ВРАГА
+        self.animate()  # АНИМАЦИЯ ВРАГА
+        self.cooldowns()  # ПЕРЕЗАРЯДКИ ВРАГА
+        self.check_death()  # ПРОВЕРКА СМЕРТИ ВРАГА
 
     def enemy_update(self, player):
-        self.get_status(player)
-        self.actions(player)
+        """Метод обновляющий врага относительно игрока"""
+        self.get_status(player)  # ПОЛУЧЕНИЯ СТАТУСА ДЕЙСТВИЯ ВРАГА
+        self.actions(player)  # ОБРАБОТКА СТАТУСА ДЕЙСТВИЯ ВРАГА

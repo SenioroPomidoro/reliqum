@@ -7,10 +7,6 @@
     <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 24 jan commit -----">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/enemy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/entity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/game_level.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/weapon.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_menu_scripts/weapon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,34 +37,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.2.executor": "Run",
-    "Python.BUTTON_EXAMPLES.executor": "Run",
-    "Python.BUTTON_SWITCH.executor": "Run",
-    "Python.UI_EXAMPLE.executor": "Run",
-    "Python.chain.executor": "Run",
-    "Python.game_level.executor": "Run",
-    "Python.game_main.executor": "Run",
-    "Python.import_csv_layout.executor": "Run",
-    "Python.imports.executor": "Run",
-    "Python.labyrinth_example.executor": "Run",
-    "Python.load_window.executor": "Run",
-    "Python.main (1).executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.main_game.executor": "Run",
-    "Python.main_menu (1).executor": "Run",
-    "Python.main_menu.executor": "Run",
-    "Python.player.executor": "Run",
-    "Python.sounds.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.write.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/maxim/Prog/Python/projects/pyGAME/data/images/sprites/monsters/Eye",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BUTTON_EXAMPLES.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BUTTON_SWITCH.executor&quot;: &quot;Run&quot;,
+    &quot;Python.UI_EXAMPLE.executor&quot;: &quot;Run&quot;,
+    &quot;Python.chain.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game_level.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game_main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.import_csv_layout.executor&quot;: &quot;Run&quot;,
+    &quot;Python.imports.executor&quot;: &quot;Run&quot;,
+    &quot;Python.labyrinth_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.load_window.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_game.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_menu (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_menu.executor&quot;: &quot;Run&quot;,
+    &quot;Python.player.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sounds.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.write.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/maxim/Prog/Python/projects/pyGAME/data/images/sprites/monsters/Eye&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/data/images/sprites/monsters/Eye" />
