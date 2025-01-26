@@ -1,4 +1,5 @@
 # ОСНОВНЫЕ ИГРОВЫЕ НАСТРОЙКИ
+BG_COLOR = "#483c32"
 SCREEN_SIZE = (1400, 900)
 TILESIZE = 64
 FPS = 60

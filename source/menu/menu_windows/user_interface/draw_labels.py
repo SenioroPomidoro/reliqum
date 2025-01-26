@@ -1,3 +1,7 @@
+import pygame
+from data.settings import BG_COLOR
+
+
 def draw_labels(self):
     """Функция отрисовки текстовых элементов в тех или иных окнах в меню"""
     if self.status is None:
@@ -20,3 +24,11 @@ def draw_labels(self):
 
         self.window_surface.blit(main_label, (self.w // 90, 100))
         self.window_surface.blit(game_label, (self.w // 90, 400))
+
+    elif self.status == "pause":
+        background = pygame.surface.Surface((self.w // 2, self.h * 4 // 5))
+        background.fill(BG_COLOR)
+        self.window_surface.blit(background, (self.w // 4, self.h // 7))
+
+        pause_label = self.custom_font.render("ПАУЗА", 1, (0, 0, 0))
+        self.window_surface.blit(pause_label, (self.w // 4 + 300, self. h // 7 + 50))

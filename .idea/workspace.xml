@@ -4,25 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 26 jan commit -----&#10;дописал некоторые комменты">
-      <change afterPath="$PROJECT_DIR$/data/images/sprites/attacks/bamboo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/sprites/death/death.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/images/sprites/magic/heal/heal_attack.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/source/game/sub_game_scripts/game_effects.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/source/game/sub_game_scripts/magic.py" afterDir="false" />
+    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 26 jan commit -----&#10;все основные механики завершены">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/images/sprites/attacks/slash.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/images/sprites/attacks/slash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/images/sprites/magic/flame/fire_attack.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/images/sprites/magic/flame/fire_attack.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TZ.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TZ.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/settings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/game_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_game_scripts/enemy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_game_scripts/entity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_game_scripts/game_level.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_game_scripts/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/tile.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_game_scripts/tile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_menu_scripts/weapon.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_game_scripts/weapon.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/game/user_interface/game_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/user_interface/game_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/helping_scripts/chain.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/main_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/sub_menu_scripts/load_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/load_scripts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/sub_menu_scripts/new_game_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/main_scripts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/sub_menu_scripts/settings_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/settings_scripts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/sub_menu_scripts/statistics_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/new_game_scripts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/draw_labels.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/draw_labels.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/load_game_menu_ui.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/main_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/main_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/new_game_ui.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/statistics_ui.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,7 +297,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737891672693</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="----- 26 jan commit -----&#10;все основные механики завершены">
+      <option name="closed" value="true" />
+      <created>1737909325238</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1737909325238</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -324,6 +331,7 @@
     <MESSAGE value="----- 24 jan commit -----&#10;Анимации работают" />
     <MESSAGE value="----- 24 jan commit -----" />
     <MESSAGE value="----- 26 jan commit -----&#10;дописал некоторые комменты" />
-    <option name="LAST_COMMIT_MESSAGE" value="----- 26 jan commit -----&#10;дописал некоторые комменты" />
+    <MESSAGE value="----- 26 jan commit -----&#10;все основные механики завершены" />
+    <option name="LAST_COMMIT_MESSAGE" value="----- 26 jan commit -----&#10;все основные механики завершены" />
   </component>
 </project>

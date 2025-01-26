@@ -1,4 +1,5 @@
 import pygame
+import pygame_gui
 from data.settings import *
 
 
@@ -112,3 +113,18 @@ class GameUI:
         # ОТОБРАЖЕНИЕ ИЗОБРАЖЕНИЙ ВЫБРАННЫХ ОРУЖИЯ И МАГИИ СООТВЕТСВЕННО
         self.weapon_overlay(player.weapon_index, player.can_switch_weapon)
         self.magic_overlay(player.magic_index, player.can_switch_magic)
+
+
+def load_pause_ui(self):
+    """Подгрузка интерфейса во время паузы"""
+    self.manager = pygame_gui.UIManager(self.size, "data/theme.json")  # МЕНЕДЖЕР ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
+    pygame.display.set_caption("Reliqum")  # УСТАНОВКА НАЗВАНИЯ ОКНА
+
+    # КНОПКА ВОЗВРАЩЕНИЯ В ГЛАВНОЕ МЕНЮ
+    self.save_and_quit_button = pygame_gui.elements.UIButton(
+        relative_rect=pygame.Rect((self.w // 3, self.h * 3 / 4), (self.w // 3, self.h // 7)),
+        text="СОХРАНИТЬ И ВЫЙТИ",
+        manager=self.manager
+    )
+
+    self.status = "pause"

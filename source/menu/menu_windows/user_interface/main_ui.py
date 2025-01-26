@@ -35,15 +35,8 @@ def load_main_ui(self):
         manager=self.manager
     )
 
-    # КНОПКА ПЕРЕХОДА В ОКНО СО СТАТИСТИКОЙ
-    self.statistics_button = pygame_gui.elements.UIButton(
-        relative_rect=pygame.Rect((self.w - self.w // 5, self.h - self.h * 1 // 12), (self.w // 6, self.h // 14)),
-        text="СТАТИСТИКА",
-        manager=self.manager
-    )
-
     # КНОПКИ, КОТОРЫХ НЕТ В ГЛАВНОМ МЕНЮ, НО НЕОБХОДИМОСТЬ ИХ ОПРЕДЕЛЕНИЯ ЗАКЛЮЧАЕТСЯ В ТОМ, ЧТО ОНИ ПРОВЕРЯЮТСЯ В
-    # ЦИКЛЕ СОБЫТИЯМИ:
+    # ЦИКЛЕ С СОБЫТИЯМИ:
     self.back_button = None
     self.save_button = None
 
