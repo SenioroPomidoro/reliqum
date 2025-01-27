@@ -21,17 +21,10 @@ def load_main_ui(self):
         manager=self.manager
     )
 
-    # КНОПКА ПЕРЕХОДА В ОКНО ЗАГРУЗКИ ИГРЫ
+    # КНОПКА ЗАПУСКА ИГРЫ
     self.load_game_button = pygame_gui.elements.UIButton(
         relative_rect=pygame.Rect((self.w // 3, self.h * 3 // 6), (self.w // 3, self.h // 7)),
-        text="ЗАГРУЗКА ИГРЫ",
-        manager=self.manager
-    )
-
-    # КНОПКА ПЕРЕХОДА В ОКНО СОЗДАНИЯ НОВОЙ ИГРЫ
-    self.new_game_button = pygame_gui.elements.UIButton(
-        relative_rect=pygame.Rect((self.w // 3, self.h * 2 // 6), (self.w // 3, self.h // 7)),
-        text="НОВАЯ ИГРА",
+        text="ИГРАТЬ",
         manager=self.manager
     )
 
@@ -39,6 +32,8 @@ def load_main_ui(self):
     # ЦИКЛЕ С СОБЫТИЯМИ:
     self.back_button = None
     self.save_button = None
+    self.quit_button = None
+    self.save_and_quit_button = None
 
     # УСТАНОВКА ИЗОБРАЖЕНИЯ С НАЗВАНИЕМ ИГРЫ
     image = pygame.image.load("data/images/main_images/game_label.png")

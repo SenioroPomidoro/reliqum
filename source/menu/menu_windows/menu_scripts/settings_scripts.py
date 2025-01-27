@@ -2,6 +2,7 @@ from csv import writer
 import pygame
 import pygame_gui
 
+
 def write_settings_csv(self):
     """Функция сохранения настроек в файл с настройками"""
     headers = ["main_music_value", "ingame_music_value"]  # ЗАГОЛОВКИ СТОЛБЦОВ В ФАЙЛЕ С НАСТРОЙКАМИ

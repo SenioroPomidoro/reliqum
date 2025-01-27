@@ -169,11 +169,15 @@ class Enemy(Entity):
             self.hit_time = pygame.time.get_ticks()  # ВРЕМЯ, В КОТОРОЕ ВРАГА АТКОВАЛИ
             self.vulnerable = False  # ВРАГ СТАНОВИТСЯ НЕУЯЗВИМ НА НЕКОТОРОЕ ВРЕМЯ
 
-    def check_death(self) -> None:
+    def check_death(self, player) -> None:
         """Метод, проверяющий жив ли враг"""
         if self.health <= 0:  # ЕСЛИ ХП ВРАГА МЕНЬШЕ 0
-            self.trigger_death_particles(self.rect.center)
+            self.trigger_death_particles(self.rect.center)  # АНИМАЦИЯ СМЕРТИ ВРАГА
             self.kill()  # ВРАГ УМИРАЕТ (его спрайт, а соответсвенно и объект уничтожается)
+            player.kill_counter += 1  # КОЛИЧЕСТВО ПОБЕЖДЕННЫХ ВРАГОВ СТАНОВИТСЯ БОЛЬШИМ НА ЕДЕНИЦУ
+
+            if self.monster_name == "Bamboo":
+                player.is_player_win = True
 
     def hit_reaction(self) -> None:
         """Метод, обрабатывающий реакцию врага на удар"""
@@ -186,9 +190,9 @@ class Enemy(Entity):
         self.move(self.speed)  # ДВИЖЕНИЕ ВРАГА
         self.animate()  # АНИМАЦИЯ ВРАГА
         self.cooldowns()  # ПЕРЕЗАРЯДКИ ВРАГА
-        self.check_death()  # ПРОВЕРКА СМЕРТИ ВРАГА
 
     def enemy_update(self, player):
         """Метод обновляющий врага относительно игрока"""
         self.get_status(player)  # ПОЛУЧЕНИЯ СТАТУСА ДЕЙСТВИЯ ВРАГА
         self.actions(player)  # ОБРАБОТКА СТАТУСА ДЕЙСТВИЯ ВРАГА
+        self.check_death(player)  # ПРОВЕРКА СМЕРТИ ВРАГА

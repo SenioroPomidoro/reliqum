@@ -20,22 +20,6 @@ class GameUI:
         self.weapon_graphics = [pygame.image.load(weapon["graphic"]).convert_alpha() for weapon in weapon_data.values()]
         self.magic_graphics = [pygame.image.load(magic["graphic"]).convert_alpha() for magic in magic_data.values()]
 
-    def show_exp(self, exp) -> None:
-        """
-        Функция для отрисовки показателя полученого опыта
-        :param exp: количество опыта, которое имеет игрок
-        """
-
-        x = self.display_surface.get_size()[0] - 20
-        y = self.display_surface.get_size()[1] - 20
-
-        text_surf = self.font.render(F"EXP: {int(exp)}", False, "black")  # ТЕКСТ EXP
-        text_rect = text_surf.get_rect(bottomright=(x, y))  # РАСПОЛОЖЕНИЯ ТЕКСТА НА ОКНЕ
-
-        pygame.draw.rect(self.display_surface, "orange", text_rect.inflate(20, 20))  # ОТРИСОВКА ФОНА ОКНА С ОПЫТОМ
-        self.display_surface.blit(text_surf, text_rect)  # ОТРИСВОКА ПОКАЗАТЕЛЯ ОПЫТА
-        pygame.draw.rect(self.display_surface, "black", text_rect.inflate(20, 20), 3)  # ОТРИСОВКА ПИКСЕЛЕЙ ГРАНИЦЫ
-
     def show_bar(self, current: int, max_amount: int, bg_rect: pygame.Rect, color: str) -> None:
         """
         Функция отрисовки
@@ -98,9 +82,38 @@ class GameUI:
 
         self.display_surface.blit(magic_surf, magic_rect)  # РАЗМЕЩЕНИЕ ИЗОБРАЖЕНИЯ МАГИИ В ОКОШКЕ ДЛЯ НЕЁ
 
-    def display(self, player) -> None:
+    def show_kills_and_tp_and_time(self, kills, need_to_kill, player, time) -> None:
+        """
+        Метод, отображающий количство убитых монстров
+        :param player: объект игрока
+        :param time: время, которое игрок пребывает на текущем уровне
+        :param kills: количество убитых на данный момент монстров
+        :param need_to_kill: количество монстров, которых нужно убить для продвижения на следующий уровень (с 1 на 2)
+        """
+        x = self.display_surface.get_size()[0] - 20
+        y = self.display_surface.get_size()[1] - 20
+
+        seconds = str(int(time) % 60).rjust(2, "0")
+        minutes = str(int(time) // 60).rjust(2, "0")
+        str_time = F"{minutes}:{seconds}"
+
+        if kills == need_to_kill - 1 and 3250 <= player.rect.x <= 3500 and 850 <= player.rect.y <= 950:
+            text = F"T - ВОЙТИ | {str_time}"
+            player.can_change = True
+        else:
+            text = F"{kills} / {need_to_kill} | {str_time}"
+            player.can_change = False
+        text_surf = self.font.render(text, False, "black")  # УБИТЫЕ ВРАГИ
+        text_rect = text_surf.get_rect(bottomright=(x, y))  # РАСПОЛОЖЕНИЯ ТЕКСТА НА ОКНЕ
+
+        pygame.draw.rect(self.display_surface, "orange", text_rect.inflate(20, 20))  # ОТРИСОВКА ФОНА ОКНА С ПОДСЧЕТОМ
+        self.display_surface.blit(text_surf, text_rect)  # ОТРИСВОКА ПОКАЗАТЕЛЯ УБИЙСТВ
+        pygame.draw.rect(self.display_surface, "black", text_rect.inflate(20, 20), 3)  # ОТРИСОВКА ПИКСЕЛЕЙ ГРАНИЦЫ
+
+    def display(self, player, time) -> None:
         """
         Функция для отобюражения всего, что описано в этом классе
+        :param time: время, которое игрок пребывает на текущем уровне
         :param player: объект игрока
         """
         # ОТОЮРАЖЕНИЕ ПОЛОСОК СО ЗДОРОЬВЕМ, ЭНЕРГИЕЙ СООТВЕТСТВЕННО
@@ -108,7 +121,7 @@ class GameUI:
         self.show_bar(player.energy, player.stats["energy"], self.energy_bar_rect, "blue")
 
         # ОТОБРАЖЕНИЕ ДАННЫХ ОБ ОПЫТЕ
-        self.show_exp(player.exp)
+        self.show_kills_and_tp_and_time(player.kill_counter, player.need_to_kill, player, time)
 
         # ОТОБРАЖЕНИЕ ИЗОБРАЖЕНИЙ ВЫБРАННЫХ ОРУЖИЯ И МАГИИ СООТВЕТСВЕННО
         self.weapon_overlay(player.weapon_index, player.can_switch_weapon)
@@ -121,10 +134,27 @@ def load_pause_ui(self):
     pygame.display.set_caption("Reliqum")  # УСТАНОВКА НАЗВАНИЯ ОКНА
 
     # КНОПКА ВОЗВРАЩЕНИЯ В ГЛАВНОЕ МЕНЮ
+    self.quit_button = pygame_gui.elements.UIButton(
+        relative_rect=pygame.Rect((self.w // 3, self.h * 3 / 4), (self.w // 3, self.h // 7)),
+        text="В ГЛАВНОЕ МЕНЮ",
+        manager=self.manager
+    )
+
+    self.status = "pause"
+
+
+def load_end_ui(self, is_win=True):
+    self.manager = pygame_gui.UIManager(self.size, "data/theme.json")  # МЕНЕДЖЕР ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
+    pygame.display.set_caption("Reliqum")  # УСТАНОВКА НАЗВАНИЯ ОКНА
+
+    # КНОПКА ВОЗВРАЩЕНИЯ В ГЛАВНОЕ МЕНЮ
     self.save_and_quit_button = pygame_gui.elements.UIButton(
         relative_rect=pygame.Rect((self.w // 3, self.h * 3 / 4), (self.w // 3, self.h // 7)),
         text="СОХРАНИТЬ И ВЫЙТИ",
         manager=self.manager
     )
 
-    self.status = "pause"
+    if is_win:
+        self.status = "end"
+    else:
+        self.status = "end_loser"

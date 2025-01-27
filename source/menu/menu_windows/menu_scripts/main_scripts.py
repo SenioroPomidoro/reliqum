@@ -5,6 +5,7 @@ from source.menu.menu_windows.menu_scripts.settings_scripts import write_setting
 from source.menu.menu_windows.user_interface.settings_ui import load_settings_ui
 from source.menu.menu_windows.user_interface.main_ui import load_main_ui
 from source.game.user_interface.game_ui import load_pause_ui
+from source.game.sub_game_scripts.game_level import Level
 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -40,8 +41,31 @@ def button_pressed_process(self, event):
         self.is_game_started = True
         load_pause_ui(self)  # ЗАГРУЗКА ИНТЕРФЕЙСА, ИСПОЛЬЗУЕМОГО ВО ВРЕМЯ ПАУЗЫ
 
-    if event.ui_element == self.new_game_button:  # НАЖАТИЕ НА КНОПКУ ПЕРЕХОДА В ОКНО СОЗДАНИЯ ИГРЫ
-        pass
+    if event.ui_element == self.quit_button:
+        self.level_1 = Level()
+        self.level_2 = Level(1)
+
+        self.level_type = 0
+
+        self.is_game_started = False
+        self.is_game_paused = False
+        self.is_game_ended = False
+        self.win = None
+
+        load_main_ui(self)
+
+    if event.ui_element == self.save_and_quit_button:
+        self.level_1 = Level()
+        self.level_2 = Level(1)
+
+        self.level_type = 0
+
+        self.is_game_started = False
+        self.is_game_paused = False
+        self.is_game_ended = False
+        self.win = None
+
+        load_main_ui(self)
 
     if event.ui_element == self.save_button:  # НАЖАТИЕ НА КНОПКУ СОХРАНЕНИЯ В ОКНЕ НАСТРОЕК
         write_settings_csv(self)  # ЗАПИСЬ ИМЕЮЩИХСЯ ИЗМЕНЕНИЙ В ФАЙЛ С НАСТРОЙКАМИ
@@ -51,7 +75,7 @@ def button_pressed_process(self, event):
 
 
 # ---------------------------------------------------------------------------------------------------------------------
-def keydown_process(self, event):
+def keydown_process(self, event, player):
     if event.key == pygame.K_F4:  # F4 - СМЕНА РЕЖИМА ЭКРАНА (полноэкранный/оконный)
         if self.fullscreen:
             pygame.display.set_mode(self.size, pygame.SCALED)
@@ -62,4 +86,9 @@ def keydown_process(self, event):
     if event.key == pygame.K_ESCAPE:
         if self.is_game_started:
             self.is_game_paused = not self.is_game_paused
+
+    if event.key == pygame.K_t:
+        if self.is_game_started and player.can_change and not self.level_type:
+            self.level_type = not self.level_type
+            self.level_2.game_time = self.level_1.game_time
 # ---------------------------------------------------------------------------------------------------------------------

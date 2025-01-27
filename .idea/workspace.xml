@@ -5,23 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 26 jan commit -----&#10;все основные механики завершены">
+      <change afterPath="$PROJECT_DIR$/data/game_map_files/boss_map/ground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/game_map_files/boss_map/map_Details.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/game_map_files/boss_map/map_Enemies.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/game_map_files/boss_map/map_Floor.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/game_map_files/boss_map/map_FloorBlocks.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/game_map_files/boss_map/map_Objects.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/game_map_files/boss_map/map_lepeha.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/game_map_files/map/map_Doors_closed.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/game_map_files/map/map_Doors_open.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TZ.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TZ.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/level/map_develop(TEMPRORAY)/map.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/data/game_map_files/level/map_develop(TEMPRORAY)/map.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/ground.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/game_map_files/map/ground.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/map_Floor.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/game_map_files/map/map_Floor.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/map_FloorBlocks.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/game_map_files/map/map_FloorBlocks.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/map_Objects.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/game_map_files/map/map_Objects.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/monsters/Eye/Faceset.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/saves/main_save_csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/saves/test_save.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/settings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/sub_game_scripts/enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_game_scripts/enemy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/sub_game_scripts/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_game_scripts/game_level.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/sub_game_scripts/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/sub_game_scripts/player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/game/user_interface/game_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/user_interface/game_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/helping_scripts/chain.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/main_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/sub_menu_scripts/load_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/load_scripts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/sub_menu_scripts/new_game_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/main_scripts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/sub_menu_scripts/settings_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/settings_scripts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/sub_menu_scripts/statistics_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/new_game_scripts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/main_stream.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/main_scripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/main_scripts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/new_game_scripts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/settings_scripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/settings_scripts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/draw_labels.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/draw_labels.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/load_game_menu_ui.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/main_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/main_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/new_game_ui.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/statistics_ui.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,36 +104,14 @@
       <recent name="$PROJECT_DIR$/data/images/spriites/weapons" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/game_map_files/boss_map" />
+      <recent name="$PROJECT_DIR$/data/game_map_files/map" />
       <recent name="$PROJECT_DIR$/data/images/sprites/magic/flame" />
       <recent name="$PROJECT_DIR$/data/images/sprites/death" />
       <recent name="$PROJECT_DIR$/data/images/sprites/monsters/Eye" />
-      <recent name="$PROJECT_DIR$/data/images/sprites/attacks" />
-      <recent name="$PROJECT_DIR$/data/images/sprites/magic/heal" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
-    <configuration name="2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pyGAME" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="enemy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyGAME" />
       <option name="ENV_FILES" value="" />
@@ -207,13 +200,35 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyGAME" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.main_menu (1)" />
         <item itemvalue="Python.game_main" />
         <item itemvalue="Python.enemy" />
-        <item itemvalue="Python.2" />
       </list>
     </recent_temporary>
   </component>

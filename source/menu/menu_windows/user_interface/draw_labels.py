@@ -32,3 +32,35 @@ def draw_labels(self):
 
         pause_label = self.custom_font.render("ПАУЗА", 1, (0, 0, 0))
         self.window_surface.blit(pause_label, (self.w // 4 + 300, self. h // 7 + 50))
+
+    elif self.status == "end":
+        background = pygame.surface.Surface((self.w // 2, self.h * 4 // 5))
+        background.fill(BG_COLOR)
+        self.window_surface.blit(background, (self.w // 4, self.h // 7))
+
+        type_label = self.custom_font.render("ПОБЕДА", 1, (0, 0, 0))
+        self.window_surface.blit(type_label, (self.w // 4 + 200, self.h // 7 + 50))
+
+        t = int(self.play_time)
+        time_label = self.custom_font.render(F"ВРЕМЯ ИГРЫ: {str(t // 60).rjust(2, "0")}:"
+                                             F"{str(t % 60).rjust(2, "0")}", 1, (0, 0, 0))
+        self.window_surface.blit(time_label, (self.w // 4 + 20, self.h // 2))
+
+        kill_label = self.custom_font.render(F"ВРАГОВ ПОБЕЖДЕНО: 17 / 17", 1, (0, 0, 0))
+        self.window_surface.blit(kill_label, (self.w // 4 + 20, self.h // 2 - 100))
+
+    elif self.status == "end_loser":
+        background = pygame.surface.Surface((self.w // 2, self.h * 4 // 5))
+        background.fill(BG_COLOR)
+        self.window_surface.blit(background, (self.w // 4, self.h // 7))
+
+        type_label = self.custom_font.render("ПОРАЖЕНИЕ", 1, (0, 0, 0))
+        self.window_surface.blit(type_label, (self.w // 4 + 200, self.h // 7 + 50))
+
+        t = int(self.play_time)
+        time_label = self.custom_font.render(F"ВРЕМЯ ИГРЫ: {str(t // 60).rjust(2, "0")}:"
+                                             F"{str(t % 60).rjust(2, "0")}", 1, (0, 0, 0))
+        self.window_surface.blit(time_label, (self.w // 4 + 20, self.h // 2))
+
+        kill_label = self.custom_font.render(F"ВРАГОВ ПОБЕЖДЕНО: {self.killed} / 17", 1, (0, 0, 0))
+        self.window_surface.blit(kill_label, (self.w // 4 + 20, self.h // 2 - 100))

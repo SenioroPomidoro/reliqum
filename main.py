@@ -1,7 +1,7 @@
 import pygame
 
 from data.settings import SCREEN_SIZE
-from source.menu.menu_windows.main_menu import MainMenu
+from source.menu.menu_windows.main_stream import MainMenu
 
 
 if __name__ == '__main__':

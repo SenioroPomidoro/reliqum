@@ -63,11 +63,17 @@ class Player(Entity):
         self.health = self.stats["health"]  # ЗАПИСЬ ЗДОРОВЬЯ ПЕРСОНАЖА
         self.energy = self.stats["energy"]  # ЗАПИСЬ ЭНЕРГИИ ПЕРСОНАЖА
         self.speed = self.stats["speed"]  # ЗАПИСЬ СКОРОСТИ ПЕРСОНАЖА
-        self.exp = 123  # ЗАПИСЬ ОПЫТА ПЕРСОНАЖА
 
         self.vulnerable = True  # УЯЗВИМ ЛИ ИГРОК (можно ли нанести урон)
         self.hurt_time = None  # ВРЕМЯ, В КОТОРОЕ ИГРОКА УДАРИЛИ
         self.invulnerability_duration = 500  # ВРЕМЯ, КОТОРОЕ ИГРОК БУДЕТ НЕУЯЗВИМ
+
+        self.kill_counter = 16  # КОЛИЧЕТСВО УНИЧТОЖЕННЫХ НА ДАННЫЙ МОМЕНТ ВРАГОВ
+        self.need_to_kill = 17  # КОЛИЧЕСТВО ВРАГОВ, КОТОРЫХ НУЖНО УНИЧТОЖИТЬ ДЛЯ ПОБЕДЫ
+        self.can_change = False  # МОЖЕТ ЛИ ИГРОК ВОЙТИ В ЛОКАЦИЮ С БОССОМ
+
+        self.is_player_win = False
+        self.is_player_lose = False
 
     def import_player_assets(self) -> None:
         """Функция для импорта спрайтов игрока"""
@@ -109,7 +115,7 @@ class Player(Entity):
             self.direction.x = 0
 
         # АТАКА
-        if keys[pygame.K_z]:  # УДАР ОРУЖИЯ
+        if keys[pygame.K_z] or keys[pygame.K_RSHIFT]:  # УДАР ОРУЖИЯ
             self.attacking = True  # ИЗМЕНЕНИЯ СОСТОЯНИЯ ИГРОКА НА АТАКУЮЩЕЕ
             self.attack_time = pygame.time.get_ticks()  # ФИКСАЦИЯ МОМЕНТА ВРЕМЕНИ, В КОТОРЫЙ ИГРОК АТАКОВАЛ
             self.create_attack()  # СОЗДАНИЕ СПРАЙТА АТАКИ
@@ -219,6 +225,10 @@ class Player(Entity):
         else:  # ИНАЧЕ
             self.energy = self.stats["energy"]  # ЭНЕРГИЯ СТАНОВИТСЯ МАКСИМАЛЬНОЙ
 
+    def check_death(self):
+        if self.health <= 0:
+            self.is_player_lose = True
+
     def update(self) -> None:
         """Функция для обновления игрока"""
         self.input()  # ОБРАБОТКА КЛАВИШ
@@ -227,3 +237,4 @@ class Player(Entity):
         self.animate()  # АНИМАЦИЯ ИГРОКА
         self.move(self.speed)  # ПЕРЕДВИЖЕНИЕ ИРОКА
         self.energy_recovery()  # ПАСИВНОЕ ПОПОЛНЕНИЕ ЗАПАСА ЭНЕРГИИ (маны)
+        self.check_death()

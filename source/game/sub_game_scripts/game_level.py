@@ -19,12 +19,21 @@ from data.settings import *
 
 # КЛАСС ИГРОВОГО УРОВНЯ
 class Level:
-    def __init__(self) -> None:
-        """Функция инициализации объекта класса игрового уровня"""
+    def __init__(self, level_index=0) -> None:
+        """
+        Функция инициализации объекта класса игрового уровня
+        :param level_index: индекс уровня. 0 - уровень с картой основного мира, 1 - карта с боссом
+        """
         self.display_surface = pygame.display.get_surface()  # ПОЛУЧЕНИЕ ТЕКУЩЕГО СЛОЯ ДЛЯ ОТРИСОВКИ
+        self.level_index = level_index
+
+        if self.level_index:
+            map_ = "boss_map"
+        else:
+            map_ = "map"
 
         self.passable_sprites = pygame.sprite.Group()  # СПРАЙТЫ, ЗА КОТОРЫМИ ИГРОК МОЖЕТ ПРЯТАТЬСЯ
-        self.visible_sprites = Camera()  # ВИДИМЫЕ СПРАЙТЫ
+        self.visible_sprites = Camera(map_)  # ВИДИМЫЕ СПРАЙТЫ
         self.obstacle_sprites = pygame.sprite.Group()  # СПРАЙТЫ, С КОТОРЫМИ У ИГРОКА ПРОИСХОДИТ СТОЛКНОВЕНИЕ
 
         self.current_attack = None  # СПРАЙТ АТАКИ
@@ -35,18 +44,29 @@ class Level:
 
         self.ui = GameUI()  # ОБЪЕКТ ДЛЯ ОТРИСОВКИ ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
 
-        self.magic = Magic()
+        self.magic = Magic()  # ОБЪЕКТ, ОТВЕЧАЮЩИЙ ЗА ИСПОЛЬЗОВАНИЕ МАГИИ
+        self.game_time = 0
 
     def create_map(self) -> None:
         """Функция создания карты"""
 
         # ЗАГРУЗКА РАЗЛИЧНЫХ СЛОЁВ ПЕРВОГО УРОВНЯ
-        layouts = {
-            "boundary": import_csv_layout("data/game_map_files/map/map_FloorBlocks.csv"),
-            "Trees": import_csv_layout("data/game_map_files/map/map_Trees.csv"),
-            "Objects": import_csv_layout("data/game_map_files/map/map_Objects.csv"),
-            "entities": import_csv_layout("data/game_map_files/map/map_Enemies.csv")
-        }
+        if self.level_index == 0:
+            layouts = {
+                "boundary": import_csv_layout(F"data/game_map_files/map/map_FloorBlocks.csv"),
+                "Trees": import_csv_layout(F"data/game_map_files/map/map_Trees.csv"),
+                "Objects": import_csv_layout(F"data/game_map_files/map/map_Objects.csv"),
+                "entities": import_csv_layout(F"data/game_map_files/map/map_Enemies.csv"),
+                "door_closed": import_csv_layout(F"data/game_map_files/map/map_Doors_closed.csv"),
+                "door_open": import_csv_layout(F"data/game_map_files/map/map_Doors_open.csv")
+            }
+        else:
+            layouts = {
+                "boundary": import_csv_layout(F"data/game_map_files/boss_map/map_FloorBlocks.csv"),
+                "Objects": import_csv_layout(F"data/game_map_files/boss_map/map_Objects.csv"),
+                "entities": import_csv_layout(F"data/game_map_files/boss_map/map_Enemies.csv")
+
+                }
         graphics = import_graphics("data/images/tileset_images")  # ЗАГРУЗКА ИЗОБРАЖЕНИЙ С ГРАФИКОЙ
 
         # ОТРИСОВКА КАРТЫ
@@ -59,7 +79,7 @@ class Level:
 
                         required_element = int(col) + 1  # НУЖНЫЙ ЭЛЕМЕНТ НА ИЗОБРАЖЕНИИ С ГРАФИКОЙ
 
-                        if style == "boundary": # ОТРИСОВКА ПРЕПЯТСТВИЙ
+                        if style == "boundary":  # ОТРИСОВКА ПРЕПЯТСТВИЙ
                             Tile((x, y), [self.obstacle_sprites], "invisible")
 
                         if style == "Trees":  # ОТРИСОВКА ДЕРЕВЬЕВ
@@ -78,6 +98,22 @@ class Level:
                             Tile((x, y), [self.passable_sprites, self.visible_sprites],
                                  "object", current_surface, int(col))
 
+                        if style == "door_open":
+                            w, h = graphics["Objects"].width // 64, graphics["Objects"].height // 64
+                            i, j = int((required_element - 1) / w) * 64, (required_element - 1) % w * 64
+
+                            current_surface = graphics["Objects"].subsurface(j, i, 64, 64)
+                            Tile((x, y), [self.passable_sprites, self.visible_sprites],
+                                 "door_open", current_surface, int(col))
+
+                        if style == "door_closed":
+                            w, h = graphics["Objects"].width // 64, graphics["Objects"].height // 64
+                            i, j = int((required_element - 1) / w) * 64, (required_element - 1) % w * 64
+
+                            current_surface = graphics["Objects"].subsurface(j, i, 64, 64)
+                            Tile((x, y), [self.obstacle_sprites, self.visible_sprites],
+                                 "door_closed", current_surface, int(col))
+
                         if style == "entities":  # ОТРИСОВКА СУЩЕСТВ
                             if required_element == 639:  # СОЗДАНИЕ ИГРОКА
                                 self.player = Player(
@@ -88,11 +124,16 @@ class Level:
                                     self.destroy_attack,
                                     self.create_magic
                                 )
+                                if self.level_index:
+                                    self.player.kill_counter = 16
                             else:
                                 if required_element == 640:  # МОНСТР-ГЛАЗ
                                     monster_name = "Eye"
                                 if required_element == 638:  # БОСС БАМБУК
-                                    monster_name = "Bamboo"
+                                    if self.level_index:
+                                        monster_name = "Bamboo"
+                                    else:
+                                        monster_name = "Eye"
                                 Enemy(monster_name,
                                       (x, y),
                                       [self.visible_sprites, self.attackable_sprites],
@@ -147,18 +188,29 @@ class Level:
         frames = pygame.image.load(F"data/images/sprites/death/death.png").convert_alpha()
         ParticleEffect(pos, frames, [self.visible_sprites], 64)
 
+    def check_win(self) -> bool:
+        """Функция проверки на победу"""
+        if self.player.is_player_win:  # ЕСЛИ ИГРОК ПОБЕДИЛ ГЛАВНОГО БОССА
+            return True
+        return False
+
+    def check_lose(self) -> bool:
+        if self.player.is_player_lose:
+            return True
+        return False
+
     def run(self) -> None:
         """Функция отрисовки и обновления уровня, отображения игрока"""
-        self.visible_sprites.custom_draw(self.player)  # ОТРИСОВКА ИГРОКА
+        self.visible_sprites.custom_draw(self.player, is_boss=self.level_index)  # ОТРИСОВКА ИГРОКА
         self.visible_sprites.update()  # ОТРИСОВКА ВИДИМЫХ СПРАЙТОВ
         self.visible_sprites.enemy_update(self.player)  # ОБНОВЛЕНИЯ ПОВЕДЕНИЯ ВРАГОВ
         self.player_attack_logic()  # ПРОВЕРКА АТАКИ ИГРОКОМ
-        self.ui.display(self.player)  # ОТРИСОВКА ГРАФИЧЕСКОГО ИНТЕРФЕЙСА В ИГРЕ
+        self.ui.display(self.player, self.game_time)  # ОТРИСОВКА ГРАФИЧЕСКОГО ИНТЕРФЕЙСА В ИГРЕ
 
 
 # КЛАСС ИГРОВОЙ КАМЕРЫ
 class Camera(pygame.sprite.Group):
-    def __init__(self) -> None:
+    def __init__(self, map_) -> None:
         """Функция инициализации камеры"""
         super().__init__()
         self.display_surface = pygame.display.get_surface()  # ПОЛУЧЕНИЕ ИГРОВОЙ КАРТЫ
@@ -166,16 +218,28 @@ class Camera(pygame.sprite.Group):
         self.half_h = self.display_surface.get_size()[1] // 2  # ПОЛОВИНА ОТ ВЫСОТЫ
         self.offset = pygame.math.Vector2()  # ВЕКТОР, ОТВЕЧАЮЩИЙ ЗА СДВИГ КАМЕРЫ
 
-        self.floor_surface = pygame.image.load("data/game_map_files/map/ground.png").convert()  # ЗАГРУЗКА КАРТЫ
+        self.floor_surface = pygame.image.load(F"data/game_map_files/{map_}/ground.png").convert()  # ЗАГРУЗКА КАРТЫ
         self.floor_rect = self.floor_surface.get_rect(topleft=(0, 0))
 
-    def custom_draw(self, player) -> None:
+    def custom_draw(self, player, is_boss=False) -> None:
         """
         Функция отрисовки изображения камеры
+        :param is_boss: находится ли игрок в локации с боссом (в этом случае нужно, чтобы камера не заходила за стенки
         :param player: объект игрока
         """
         self.offset.x = player.rect.centerx - self.half_w
         self.offset.y = player.rect.centery - self.half_h
+
+        if is_boss:
+            if self.offset.x < 0:
+                self.offset.x = 0
+            if self.offset.x > 517:
+                self.offset.x = 517
+
+            if self.offset.y < 0:
+                self.offset.y = 0
+            if self.offset.y > 1017:
+                self.offset.y = 1017
 
         # ОТРИСОВКА ФОНА
         floor_offset_pos = self.floor_rect.topleft - self.offset
@@ -190,12 +254,25 @@ class Camera(pygame.sprite.Group):
         last = []  # СЮДА ОТБИРАЮТСЯ СПРАЙТЫ, КОТОРЫЕ БУДУТ РИСОВАТЬСЯ В КОНЦЕ
         # ОТРИСОВКА ПРОМЕЖУТОЧНЫХ СПРАЙТОВ (ПОЛОЖЕНИЯ ИГРОКА РЕГУЛИРУЕТСЯ ЕГО ОТНОШЕНИЕМ В ПРОСТРАНСТВЕ К ЭТОМУ СПРАЙТУ)
         for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
+            offset_rect = sprite.rect.topleft - self.offset
+
+            if sprite.sprite_type == "door_open" and player.kill_counter < 15:
+                continue
+
+            if sprite.sprite_type == "door_closed":
+                if player.kill_counter >= 15:
+                    sprite.kill()
+                else:
+                    self.display_surface.blit(sprite.image, offset_rect)
+                continue
+
             if sprite.sprite_id in PASSABLE_IDS:
                 continue
+
             if sprite.sprite_type in ["tree", "object"]:  # ОТБОР СПРАЙТОВ, ПОД КОТОРЫМИ БУДЕТ ИГРОК
                 last.append(sprite)
                 continue
-            offset_rect = sprite.rect.topleft - self.offset
+
             self.display_surface.blit(sprite.image, offset_rect)
 
         # ОТРИСОВКА ТЕХ СПРАЙТОВ, ПОД КОТОРЫМИ БУДЕТ ИГРОК
