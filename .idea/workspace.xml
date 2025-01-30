@@ -4,31 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 27 jan commit -----&#10;Добавлена возможность выиграть/проиграть, проект приближен к завершенной стадии. Обновлена пояснительная записка">
-      <change afterPath="$PROJECT_DIR$/source/helping_scripts/races_append.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/source/menu/menu_scripts/statistics_scripts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/source/menu/user_interface/statistics_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/settings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/sounds/music_volume.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/game_main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_game_scripts/enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/enemy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_game_scripts/entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/entity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_game_scripts/game_effects.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/game_effects.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_game_scripts/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/game_level.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_game_scripts/magic.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/magic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_game_scripts/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_game_scripts/tile.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/tile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/sub_game_scripts/weapon.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/weapon.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/user_interface/game_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/user_interface/game_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/helping_scripts/imports.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/helping_scripts/imports.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/main_stream.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/main_stream.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/load_scripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/best_races/best_races.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/main_scripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_scripts/main_scripts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/settings_scripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_scripts/settings_scripts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/draw_labels.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/user_interface/draw_labels.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/main_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/user_interface/main_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_windows/user_interface/settings_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/user_interface/settings_ui.py" afterDir="false" />
+    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 30 jan commit -----&#10;Из незаконченного осталась только внедрение музыки в игру, а также лёгкое изменение структуры кода и чуть комментариев. Была закончена механика ведения статистики">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TZ.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TZ.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,7 +301,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737986500450</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="----- 30 jan commit -----&#10;Из незаконченного осталась только внедрение музыки в игру, а также лёгкое изменение структуры кода и чуть комментариев.">
+      <option name="closed" value="true" />
+      <created>1738243377198</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1738243377198</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -351,6 +337,8 @@
     <MESSAGE value="----- 26 jan commit -----&#10;дописал некоторые комменты" />
     <MESSAGE value="----- 26 jan commit -----&#10;все основные механики завершены" />
     <MESSAGE value="----- 27 jan commit -----&#10;Добавлена возможность выиграть/проиграть, проект приближен к завершенной стадии. Обновлена пояснительная записка" />
-    <option name="LAST_COMMIT_MESSAGE" value="----- 27 jan commit -----&#10;Добавлена возможность выиграть/проиграть, проект приближен к завершенной стадии. Обновлена пояснительная записка" />
+    <MESSAGE value="----- 30 jan commit -----&#10;Из незаконченного осталась только внедрение музыки в игру, а также лёгкое изменение структуры кода и чуть комментариев. Была закончена механика ведения статистики" />
+    <MESSAGE value="----- 30 jan commit -----&#10;Из незаконченного осталась только внедрение музыки в игру, а также лёгкое изменение структуры кода и чуть комментариев. Была закончена механика ведения статистики" />
+    <option name="LAST_COMMIT_MESSAGE" value="----- 30 jan commit -----&#10;Из незаконченного осталась только внедрение музыки в игру, а также лёгкое изменение структуры кода и чуть комментариев. Была закончена механика ведения статистики" />
   </component>
 </project>
