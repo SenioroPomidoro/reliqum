@@ -1,17 +1,17 @@
 import pygame
 
-from source.game.sub_game_scripts.enemy import Enemy
+from source.game.game_scripts.enemy import Enemy
 
 from source.helping_scripts.imports import import_csv_layout
 from source.helping_scripts.imports import import_graphics
-from source.game.sub_game_scripts.player import Player
-from source.game.sub_game_scripts.weapon import Weapon
+from source.game.game_scripts.player import Player
+from source.game.game_scripts.weapon import Weapon
 from source.game.user_interface.game_ui import GameUI
-from source.game.sub_game_scripts.tile import Tile
+from source.game.game_scripts.tile import Tile
 
-from source.game.sub_game_scripts.game_effects import ParticleEffect
+from source.game.game_scripts.game_effects import ParticleEffect
 
-from source.game.sub_game_scripts.magic import Magic
+from source.game.game_scripts.magic import Magic
 
 
 from data.settings import *
@@ -260,7 +260,7 @@ class Camera(pygame.sprite.Group):
                 continue
 
             if sprite.sprite_type == "door_closed":
-                if player.kill_counter >= 15:
+                if player.kill_counter >= 16:
                     sprite.kill()
                 else:
                     self.display_surface.blit(sprite.image, offset_rect)

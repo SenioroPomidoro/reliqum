@@ -2,7 +2,7 @@ import pygame
 
 from data.settings import *
 
-from source.game.sub_game_scripts.entity import Entity
+from source.game.game_scripts.entity import Entity
 
 
 # КЛАСС ВРАГА

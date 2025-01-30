@@ -1,6 +1,6 @@
 import pygame
 from data.settings import *
-from source.game.sub_game_scripts.game_effects import ParticleEffect
+from source.game.game_scripts.game_effects import ParticleEffect
 from random import randint
 
 

@@ -148,7 +148,7 @@ def load_end_ui(self, is_win=True):
     pygame.display.set_caption("Reliqum")  # УСТАНОВКА НАЗВАНИЯ ОКНА
 
     # КНОПКА ВОЗВРАЩЕНИЯ В ГЛАВНОЕ МЕНЮ
-    self.save_and_quit_button = pygame_gui.elements.UIButton(
+    self.quit_button = pygame_gui.elements.UIButton(
         relative_rect=pygame.Rect((self.w // 3, self.h * 3 / 4), (self.w // 3, self.h // 7)),
         text="СОХРАНИТЬ И ВЫЙТИ",
         manager=self.manager

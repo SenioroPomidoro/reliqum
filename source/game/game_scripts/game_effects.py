@@ -8,7 +8,7 @@ class ParticleEffect(pygame.sprite.Sprite):
         Конструктор объектов класса визуальных эффектов
         :param pos: позиция эффекта
         :param animation: анимация эффекта (по кадрам)
-        :param groups: группы спрайтов, в которых будет находится эффект
+        :param groups: группы спрайтов, в которых будет находиться эффект
         """
         super().__init__(groups)
 
