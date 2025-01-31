@@ -1,7 +1,7 @@
 import pygame_gui
 import pygame
 
-from source.helping_scripts.imports import import_settings
+from source.helping_scripts.imports import import_music_settings
 
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -11,7 +11,7 @@ def load_settings_ui(self):
     # -----------------------------------------------------------------------------------------------------------------
     self.manager = pygame_gui.UIManager(self.size, "data/theme.json")  # МЕНЕДЖЕР ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
     pygame.display.set_caption("НАСТРОЙКИ")  # УСТАНОВКА НАЗВАНИЯ ОКНА
-    import_settings(self)  # ЗАПИСЬ НАСТРОЕК В АТРИБУТЫ ОБЪЕКТА КЛАССА ОКНА
+    import_music_settings(self)  # ЗАПИСЬ НАСТРОЕК В АТРИБУТЫ ОБЪЕКТА КЛАССА ОКНА
 
     # -----------------------------------------------------------------------------------------------------------------
     # КНОПКА ВОЗВРАЩЕНИЯ В ГЛАВНОЕ МЕНЮ

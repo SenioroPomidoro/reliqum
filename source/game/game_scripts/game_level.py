@@ -1,36 +1,37 @@
 import pygame
 
-from source.game.game_scripts.enemy import Enemy
-
 from source.helping_scripts.imports import import_csv_layout
 from source.helping_scripts.imports import import_graphics
-from source.game.game_scripts.player import Player
-from source.game.game_scripts.weapon import Weapon
+
 from source.game.user_interface.game_ui import GameUI
-from source.game.game_scripts.tile import Tile
 
 from source.game.game_scripts.game_effects import ParticleEffect
-
+from source.game.game_scripts.weapon import Weapon
+from source.game.game_scripts.player import Player
 from source.game.game_scripts.magic import Magic
-
+from source.game.game_scripts.enemy import Enemy
+from source.game.game_scripts.tile import Tile
 
 from data.settings import *
+
+# ---------------------------------------------------------------------------------------------------------------------
 
 
 # КЛАСС ИГРОВОГО УРОВНЯ
 class Level:
+    # -----------------------------------------------------------------------------------------------------------------
     def __init__(self, level_index=0) -> None:
         """
         Функция инициализации объекта класса игрового уровня
         :param level_index: индекс уровня. 0 - уровень с картой основного мира, 1 - карта с боссом
         """
         self.display_surface = pygame.display.get_surface()  # ПОЛУЧЕНИЕ ТЕКУЩЕГО СЛОЯ ДЛЯ ОТРИСОВКИ
-        self.level_index = level_index
+        self.level_index = level_index  # ИНДЕКС УРОВНЯ: 0 - ГЛАВНАЯ КАРТА, ИНАЧЕ - ЛОКАЦИЯ С БОССОМ
 
-        if self.level_index:
-            map_ = "boss_map"
-        else:
-            map_ = "map"
+        if self.level_index:  # ЕСЛИ 1
+            map_ = "boss_map"  # ЛОКАЦИЯ С БОССОМ
+        else:  # ЕСЛИ 2
+            map_ = "map"  # ГЛАВНАЯ КАРТА
 
         self.passable_sprites = pygame.sprite.Group()  # СПРАЙТЫ, ЗА КОТОРЫМИ ИГРОК МОЖЕТ ПРЯТАТЬСЯ
         self.visible_sprites = Camera(map_)  # ВИДИМЫЕ СПРАЙТЫ
@@ -45,8 +46,9 @@ class Level:
         self.ui = GameUI()  # ОБЪЕКТ ДЛЯ ОТРИСОВКИ ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
 
         self.magic = Magic()  # ОБЪЕКТ, ОТВЕЧАЮЩИЙ ЗА ИСПОЛЬЗОВАНИЕ МАГИИ
-        self.game_time = 0
+        self.game_time = 0  # ИГРОВОЕ ВРЕМЯ - ПО УМОЛЧАНИЮ - 0
 
+    # -----------------------------------------------------------------------------------------------------------------
     def create_map(self) -> None:
         """Функция создания карты"""
 
@@ -74,8 +76,8 @@ class Level:
             for row_i, row in enumerate(layout):
                 for col_i, col in enumerate(row):
                     if col != "-1":
-                        x = col_i * TILESIZE
-                        y = row_i * TILESIZE
+                        x = col_i * TILESIZE  # КООРДИНАТА КАРТИНКИ ПО ИКСАМ
+                        y = row_i * TILESIZE  # КООРДИНАТА КАРТИНКИ ПО ИГРИКАМ
 
                         required_element = int(col) + 1  # НУЖНЫЙ ЭЛЕМЕНТ НА ИЗОБРАЖЕНИИ С ГРАФИКОЙ
 
@@ -98,7 +100,7 @@ class Level:
                             Tile((x, y), [self.passable_sprites, self.visible_sprites],
                                  "object", current_surface, int(col))
 
-                        if style == "door_open":
+                        if style == "door_open":  # ОТКРЫТАЯ ДВЕРЬ
                             w, h = graphics["Objects"].width // 64, graphics["Objects"].height // 64
                             i, j = int((required_element - 1) / w) * 64, (required_element - 1) % w * 64
 
@@ -106,7 +108,7 @@ class Level:
                             Tile((x, y), [self.passable_sprites, self.visible_sprites],
                                  "door_open", current_surface, int(col))
 
-                        if style == "door_closed":
+                        if style == "door_closed":  # ЗАКРЫТАЯ ДВЕРЬ
                             w, h = graphics["Objects"].width // 64, graphics["Objects"].height // 64
                             i, j = int((required_element - 1) / w) * 64, (required_element - 1) % w * 64
 
@@ -124,27 +126,30 @@ class Level:
                                     self.destroy_attack,
                                     self.create_magic
                                 )
-                                if self.level_index:
-                                    self.player.kill_counter = 16
-                            else:
+                                if self.level_index:  # ЕСЛИ ИГРОК НА ЛОКАЦИИ С БОССОМ
+                                    self.player.kill_counter = 16  # КОЛИЧЕСТВО ЕГО УБИЙСТВ РАВНО 16 (иначе он не мог
+                                    # туда попасть)
+                            else:  # СОЗДАНИЕ ВРАГОВ
                                 if required_element == 640:  # МОНСТР-ГЛАЗ
                                     monster_name = "Eye"
                                 if required_element == 638:  # БОСС БАМБУК
-                                    if self.level_index:
-                                        monster_name = "Bamboo"
-                                    else:
-                                        monster_name = "Eye"
+                                    if self.level_index:  # ЕСЛИ НА ЛОКАЦИИ С БОССОМ
+                                        monster_name = "Bamboo"  # ЭТО БОСС БАМБУК
+                                    else:  # ИНАЧЕ
+                                        monster_name = "Eye"  # МОНСТР-ГЛАЗ
                                 Enemy(monster_name,
                                       (x, y),
                                       [self.visible_sprites, self.attackable_sprites],
                                       self.obstacle_sprites,
                                       self.damage_player,
-                                      self.trigger_death_particles)
+                                      self.trigger_death_particles)  # СОЗДАНИЕ ВРАГА
 
+    # -----------------------------------------------------------------------------------------------------------------
     def create_attack(self) -> None:
         """Функция, создающая физическую атаку"""
         self.current_attack = Weapon(self.player, [self.visible_sprites, self.attack_sprites])
 
+    # -----------------------------------------------------------------------------------------------------------------
     def create_magic(self, style, strength, cost) -> None:
         """
         Функия, создающая магическую атаку
@@ -152,53 +157,71 @@ class Level:
         :param strength: сила магии
         :param cost: стоимость магии в энергии
         """
-        if style == "heal":
+        if style == "heal":  # ЛЕЧЕНИЕ
             if self.magic.heal(self.player, strength, cost):
                 ParticleEffect(self.player.rect.center, self.magic.animation_heal, [self.visible_sprites], 64)
 
-        if style == "flame":
+        if style == "flame":  # АТАКА ОГНЁМ
             self.magic.flame(self.player, cost, [self.visible_sprites, self.attack_sprites])
 
+    # -----------------------------------------------------------------------------------------------------------------
     def destroy_attack(self) -> None:
         """Функция, отменяющая атаку после её проведения"""
-        if self.current_attack is not None:
-            self.current_attack.kill()
-        self.current_attack = None
+        if self.current_attack is not None:  # ЕСЛИ АТАКА ПРОВЕЛАСЬ
+            self.current_attack.kill()  # УНИЧТОЖАЕМ СПРАЙТ АТАКИ
+        self.current_attack = None  # АТАКА ПРИОБРЕТАЕТ ТИП None
 
+    # -----------------------------------------------------------------------------------------------------------------
     def player_attack_logic(self) -> None:
         """Функция, отвечающая за получения урона врагами"""
-        if self.attack_sprites:
-            for attack_sprite in self.attack_sprites:
+        if self.attack_sprites:  # ЕСЛИ ЕСТЬ АТАКУЮЩИЕ СПРАЙТЫ
+            for attack_sprite in self.attack_sprites:  # ПРОВЕРКА СТОЛКНОВЕНИЯ
                 collision_sprites = pygame.sprite.spritecollide(attack_sprite, self.attackable_sprites, False)
-                if collision_sprites:
+                if collision_sprites:  # ЕСЛИ ЕСТЬ СТОЛКНОВЕНИЯ
                     for target_sprite in collision_sprites:
-                        target_sprite.get_damage(self.player, attack_sprite.sprite_type)
+                        target_sprite.get_damage(self.player, attack_sprite.sprite_type)  # НАНЕСЕНИЕ УРОНА
 
+    # -----------------------------------------------------------------------------------------------------------------
     def damage_player(self, amount, attack_type) -> None:
-        """Функция, отвечающая за получение урона игроком"""
-        if self.player.vulnerable:
-            self.player.health -= amount
-            self.player.vulnerable = False
-            self.player.hurt_time = pygame.time.get_ticks()
+        """
+        Функция, отвечающая за получение урона игроком
+        :param amount: урон
+        :param attack_type: тип атаки
+        """
+        if self.player.vulnerable:  # ЕСЛИ ИГРОК УЯЗВИМ
+            self.player.health -= amount  # ОТНИМАЕМ НУЖНОЕ КОЛИЧЕСТВО ЗДОРОВЬЯ
+            self.player.vulnerable = False  # ИГРОК СТАНОВИТСЯ НЕУЯЗВИМ
+            self.player.hurt_time = pygame.time.get_ticks()  # ВРЕМЯ, В КОТОРОЕ ИГРОКА АТАКОВАЛИ
 
+            # СОЗДАНИЕ ЭФФЕКТА УРОНА ИГРОКУ
             frames = pygame.image.load(F"data/images/sprites/attacks/{attack_type}.png").convert_alpha()
             ParticleEffect(self.player.rect.center, frames, [self.visible_sprites], 64)
 
+    # -----------------------------------------------------------------------------------------------------------------
     def trigger_death_particles(self, pos) -> None:
+        """
+        Метод, создающий анимацию смерти у врагов
+        :param pos: позиция спавна анимации
+        """
+        # СОЗДАНИЕ АНИМАЦИИ СМЕРТИ
         frames = pygame.image.load(F"data/images/sprites/death/death.png").convert_alpha()
         ParticleEffect(pos, frames, [self.visible_sprites], 64)
 
+    # -----------------------------------------------------------------------------------------------------------------
     def check_win(self) -> bool:
-        """Функция проверки на победу"""
+        """Метод проверки на победу"""
         if self.player.is_player_win:  # ЕСЛИ ИГРОК ПОБЕДИЛ ГЛАВНОГО БОССА
-            return True
-        return False
+            return True  # -> True
+        return False  # -> False
 
+    # -----------------------------------------------------------------------------------------------------------------
     def check_lose(self) -> bool:
-        if self.player.is_player_lose:
-            return True
-        return False
+        """Метод проверки на поражение"""
+        if self.player.is_player_lose:  # ЕСЛИ ИГРОК ПРОИГРАЛ (его уровень здоровья стал меньше 0
+            return True  # -> True
+        return False  # -> False
 
+    # -----------------------------------------------------------------------------------------------------------------
     def run(self) -> None:
         """Функция отрисовки и обновления уровня, отображения игрока"""
         self.visible_sprites.custom_draw(self.player, is_boss=self.level_index)  # ОТРИСОВКА ИГРОКА
@@ -207,11 +230,19 @@ class Level:
         self.player_attack_logic()  # ПРОВЕРКА АТАКИ ИГРОКОМ
         self.ui.display(self.player, self.game_time)  # ОТРИСОВКА ГРАФИЧЕСКОГО ИНТЕРФЕЙСА В ИГРЕ
 
+    # -----------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------
+
 
 # КЛАСС ИГРОВОЙ КАМЕРЫ
 class Camera(pygame.sprite.Group):
+    # -----------------------------------------------------------------------------------------------------------------
     def __init__(self, map_) -> None:
-        """Функция инициализации камеры"""
+        """
+        Конструктор объекта камеры
+        :param map_: на какой карте находится игрок (разное поведение камер: на карте с боссом есть границы, за которые
+        камера не может зайти, а на главной карте эту роль играет вода)
+        """
         super().__init__()
         self.display_surface = pygame.display.get_surface()  # ПОЛУЧЕНИЕ ИГРОВОЙ КАРТЫ
         self.half_w = self.display_surface.get_size()[0] // 2  # ПОЛОВИНА ОТ ШИРИНЫ
@@ -219,18 +250,19 @@ class Camera(pygame.sprite.Group):
         self.offset = pygame.math.Vector2()  # ВЕКТОР, ОТВЕЧАЮЩИЙ ЗА СДВИГ КАМЕРЫ
 
         self.floor_surface = pygame.image.load(F"data/game_map_files/{map_}/ground.png").convert()  # ЗАГРУЗКА КАРТЫ
-        self.floor_rect = self.floor_surface.get_rect(topleft=(0, 0))
+        self.floor_rect = self.floor_surface.get_rect(topleft=(0, 0))  # РАСПОЛОЖЕНИЕ КАРТЫ
 
+    # -----------------------------------------------------------------------------------------------------------------
     def custom_draw(self, player, is_boss=False) -> None:
         """
         Функция отрисовки изображения камеры
         :param is_boss: находится ли игрок в локации с боссом (в этом случае нужно, чтобы камера не заходила за стенки
         :param player: объект игрока
         """
-        self.offset.x = player.rect.centerx - self.half_w
-        self.offset.y = player.rect.centery - self.half_h
+        self.offset.x = player.rect.centerx - self.half_w  # СДВИГ КАМЕРЫ ПО ИКСАМ
+        self.offset.y = player.rect.centery - self.half_h  # СДВИГ КАМЕРЫ ПО ИГРИКАМ
 
-        if is_boss:
+        if is_boss:  # ЕСЛИ ИГРОК НАХОДИТСЯ НА ЛОКАЦИИ С БОССОМ НАСТРАИВАЕМ КАМЕРУ ПО СДВИГАМ ПОД НЕЁ
             if self.offset.x < 0:
                 self.offset.x = 0
             if self.offset.x > 517:
@@ -256,36 +288,40 @@ class Camera(pygame.sprite.Group):
         for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
             offset_rect = sprite.rect.topleft - self.offset
 
-            if sprite.sprite_type == "door_open" and player.kill_counter < 15:
+            if sprite.sprite_type == "door_open" and player.kill_counter < 15:  # ЕСЛИ ДВЕРЬ НЕЛЬЗЯ ОТКРЫТЬ
+                continue  # НИЧЕГО НЕ ПРОИСХОДИТ
+
+            if sprite.sprite_type == "door_closed":  # ЕСЛИ ОБРАБАТЫВАЕТСЯ СПРАЙТ ЗАКРЫТОЙ ДВЕРИ
+                if player.kill_counter >= 16:  # ЕСЛИ ВЫПОЛНЕНЫ УСЛОВИЯ ДЛЯ ОТКРЫТИЯ ДВЕРИ
+                    sprite.kill()  # ЕЁ СПРАЙТ УДАЛЯЕТСЯ И ИГРОК МОЖЕТ ПРОЙТИ ДАЛЬШЕ
+                else:  # ИНАЧЕ
+                    self.display_surface.blit(sprite.image, offset_rect)  # ОТРИСОВЫВАЕМ ЕГО
                 continue
 
-            if sprite.sprite_type == "door_closed":
-                if player.kill_counter >= 16:
-                    sprite.kill()
-                else:
-                    self.display_surface.blit(sprite.image, offset_rect)
-                continue
-
-            if sprite.sprite_id in PASSABLE_IDS:
-                continue
+            if sprite.sprite_id in PASSABLE_IDS:  # ЕСЛИ СПРАЙТ В PASSABLE_IDS (они к этому моменту отрисовану)
+                continue  # НИЧЕГО НЕ ПРОИСХОДИТ
 
             if sprite.sprite_type in ["tree", "object"]:  # ОТБОР СПРАЙТОВ, ПОД КОТОРЫМИ БУДЕТ ИГРОК
-                last.append(sprite)
+                last.append(sprite)  # ДОБАВЛЯЕМ ЭТИ СПРАЙТЫ В СПИСОК last
                 continue
 
-            self.display_surface.blit(sprite.image, offset_rect)
+            self.display_surface.blit(sprite.image, offset_rect)  # ОТРИСОВКА СПРАЙТОВ ИЗ ЗАГЛАВИЯ ЦИКЛА
 
         # ОТРИСОВКА ТЕХ СПРАЙТОВ, ПОД КОТОРЫМИ БУДЕТ ИГРОК
         for sprite in last:
             offset_rect = sprite.rect.topleft - self.offset
             self.display_surface.blit(sprite.image, offset_rect)
 
+    # -----------------------------------------------------------------------------------------------------------------
     def enemy_update(self, player) -> None:
         """
         Метод, обновляющий врагов
-        :param player:
+        :param player: объект игрока
         """
         enemy_sprites = [sprite for sprite in self.sprites() if hasattr(sprite, "sprite_type") and
                          sprite.sprite_type == "enemy"]  # ОТБОР СПРАЙТОВ ВРАГОВ
-        for enemy in enemy_sprites:  # ВВЫЗОВ  ОДНОИМЁННОГО МЕТОДА.enemy_update У ОБЪЕКТА ВРАГА
+        for enemy in enemy_sprites:  # ВВЫЗОВ  ОДНОИМЁННОГО МЕТОДА .enemy_update У ОБЪЕКТА ВРАГА
             enemy.enemy_update(player)
+
+    # -----------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------

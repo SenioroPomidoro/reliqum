@@ -2,9 +2,13 @@ import pygame
 
 import source.game.game_scripts.player
 
+# ---------------------------------------------------------------------------------------------------------------------
+
 
 # КЛАСС ОРУЖИЯ
 class Weapon(pygame.sprite.Sprite):
+
+    # -----------------------------------------------------------------------------------------------------------------
     def __init__(self, player, groups: list) -> None:
         """
         Инициализация объекта оружия
@@ -22,11 +26,14 @@ class Weapon(pygame.sprite.Sprite):
         self.image = pygame.image.load(full_path).convert_alpha()  # ЗАГРУЗКА ИЗОБРАЖЕНИЯ ПО ПОЛУЧЕННОМУ ПУТИ
 
         # РАСПОЛОЖЕНИЯ ОРУЖИЙ (всё по центру направлений)
-        if direction == "right":
+        if direction == "right":  # РАСПОЛОЖЕНИЕ СПРАВА
             self.rect = self.image.get_rect(midleft=player.rect.midright + pygame.math.Vector2(0, 12))
-        elif direction == "left":
+        elif direction == "left":  # РАПСОЛОЖЕНИЕ СЛЕВА
             self.rect = self.image.get_rect(midright=player.rect.midleft + pygame.math.Vector2(0, 12))
-        elif direction == "up":
+        elif direction == "up":  # РАСПОЛОЖЕНИЕ СВЕРХУ
             self.rect = self.image.get_rect(midbottom=player.rect.midtop + pygame.math.Vector2(-10, 0))
-        elif direction == "down":
+        elif direction == "down":  # РАСПОЛОЖЕНИЕ СНИЗУ
             self.rect = self.image.get_rect(midtop=player.rect.midbottom + pygame.math.Vector2(-10, 0))
+
+    # -----------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------

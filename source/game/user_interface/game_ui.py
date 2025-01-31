@@ -1,25 +1,27 @@
 import pygame
 import pygame_gui
+
 from data.settings import *
+
+# ---------------------------------------------------------------------------------------------------------------------
 
 
 # КЛАСС, КОТОРЫЙ ОТВЕЧАЕТ ЗА ТЕ ИЛИ ИНЫЕ ЭЛЕМЕНТЫ ГРАФИЧЕСКОГО ИНТЕРФЕЙСА ИГРОВОГО ОКНА
 class GameUI:
+    # -----------------------------------------------------------------------------------------------------------------
     def __init__(self) -> None:
         """Инициализация объекта графической части игрового окна"""
-
-        # ---
         self.display_surface = pygame.display.get_surface()  # ПОЛУЧЕНИЕ ТЕКУЩЕГО СЛОЯ ДЛЯ РИСОВАНИЯ
         self.font = pygame.font.Font("data/fonts/base_font.ttf", 30)  # ПОЛУЧЕНИЕ КАСТОМНОГО ШРИФТА
 
-        # ---
         self.health_bar_rect = pygame.Rect(600, 800, 200, 30)  # ОБЛАСТЬ ЭКРАНА ДЛЯ ПОЛОСЫ ЗДОРОВЬЯ
         self.energy_bar_rect = pygame.Rect(600, 834, 140, 30)  # ОБЛАСТЬ ЭКРАНА ДЛЯ ПОЛОСЫ ЭНЕРГИИ
 
-        # --- ЗАГРУЗКА ИКОНОК ОРУЖИЯ И МАГИИ
+        # ЗАГРУЗКА ИКОНОК ОРУЖИЯ И МАГИИ
         self.weapon_graphics = [pygame.image.load(weapon["graphic"]).convert_alpha() for weapon in weapon_data.values()]
         self.magic_graphics = [pygame.image.load(magic["graphic"]).convert_alpha() for magic in magic_data.values()]
 
+    # -----------------------------------------------------------------------------------------------------------------
     def show_bar(self, current: int, max_amount: int, bg_rect: pygame.Rect, color: str) -> None:
         """
         Функция отрисовки
@@ -38,6 +40,7 @@ class GameUI:
         pygame.draw.rect(self.display_surface, color, current_rect)  # ОТРИСОВКА ПОЛОСКИ
         pygame.draw.rect(self.display_surface, "black", bg_rect, 4)  # ОТРИСОВКА ФОНА У ПОЛОСКИ
 
+    # -----------------------------------------------------------------------------------------------------------------
     def selection_box(self, left: int, top: int, has_switched: bool) -> pygame.Rect:
         """
         Часть окна, изображающая выбранное оружие/магию
@@ -56,6 +59,7 @@ class GameUI:
             pygame.draw.rect(self.display_surface, "brown", bg_rect, 4)
         return bg_rect
 
+    # -----------------------------------------------------------------------------------------------------------------
     def weapon_overlay(self, weapon_index: int, has_switched: bool) -> None:
         """
         Изображение оружия
@@ -69,6 +73,7 @@ class GameUI:
 
         self.display_surface.blit(weapon_surf, weapon_rect)  # РАЗМЕЩЕНИЕ ИЗОБРАЖЕНИЯ ОРУЖИЯ В ОКОШКЕ ДЛЯ НЕГО
 
+    # -----------------------------------------------------------------------------------------------------------------
     def magic_overlay(self, magic_index: int, has_switched: bool) -> None:
         """
         Изображение магии
@@ -82,27 +87,29 @@ class GameUI:
 
         self.display_surface.blit(magic_surf, magic_rect)  # РАЗМЕЩЕНИЕ ИЗОБРАЖЕНИЯ МАГИИ В ОКОШКЕ ДЛЯ НЕЁ
 
+    # -----------------------------------------------------------------------------------------------------------------
     def show_kills_and_tp_and_time(self, kills, need_to_kill, player, time) -> None:
         """
-        Метод, отображающий количство убитых монстров
+        Метод, отображающий окно количства убитых монстров и некоторой
         :param player: объект игрока
         :param time: время, которое игрок пребывает на текущем уровне
         :param kills: количество убитых на данный момент монстров
         :param need_to_kill: количество монстров, которых нужно убить для продвижения на следующий уровень (с 1 на 2)
         """
-        x = self.display_surface.get_size()[0] - 20
-        y = self.display_surface.get_size()[1] - 20
+        x = self.display_surface.get_size()[0] - 20  # РАСПОЛОЖЕНИЕ ОКНА ПО ИКСАМ
+        y = self.display_surface.get_size()[1] - 20  # РАСПОЛОЖЕНИЕ ОКНА ПО ИГРИКАМ
 
-        seconds = str(int(time) % 60).rjust(2, "0")
-        minutes = str(int(time) // 60).rjust(2, "0")
-        str_time = F"{minutes}:{seconds}"
+        seconds = str(int(time) % 60).rjust(2, "0")  # КОЛИЧЕСТВО СЕКУНД
+        minutes = str(int(time) // 60).rjust(2, "0")  # КОЛИЧЕСТВО МИНУТ
+        str_time = F"{minutes}:{seconds}"  # ПРЕОБРАЗОВАНИЕ КОЛ-ВА СЕКУНД В ФОРМАТЕ MM:SS
 
+        #  В СЛУЧАЕ ВЫПОЛНЕНИЕ ОПРЕДЕЛЕННЫХ УСЛОВИЙ
         if kills == need_to_kill - 1 and 3250 <= player.rect.x <= 3500 and 850 <= player.rect.y <= 950:
-            text = F"T - ВОЙТИ | {str_time}"
-            player.can_change = True
-        else:
-            text = F"{kills} / {need_to_kill} | {str_time}"
-            player.can_change = False
+            text = F"T - ВОЙТИ | {str_time}"  # ОТОБРАЖЕНИЕ НАДПИСИ ТОГО, ЧТО ИГРОК МОЖЕТ ВОЙТИ В ЛОКАЦИЮ С БОССОМ
+            player.can_change = True  # СТАВИМ ВОЗМОЖНЫМ ПЕРЕМЕЩЕНИЕ В ЛОКАЦИЮ С БОССОМ
+        else:  # ИНАЧЕ
+            text = F"{kills} / {need_to_kill} | {str_time}"  # ОТОБРАЖЕНИЕ КОЛ-ВА УБИТЫХ ВРАГОВ И ВРЕМЕНИ
+            player.can_change = False  # ИГРОК НЕ МОЖЕТ ПЕРЕЙТИ В ЛОКАЦИЮ С БОССОМ
         text_surf = self.font.render(text, False, "black")  # УБИТЫЕ ВРАГИ
         text_rect = text_surf.get_rect(bottomright=(x, y))  # РАСПОЛОЖЕНИЯ ТЕКСТА НА ОКНЕ
 
@@ -110,6 +117,7 @@ class GameUI:
         self.display_surface.blit(text_surf, text_rect)  # ОТРИСВОКА ПОКАЗАТЕЛЯ УБИЙСТВ
         pygame.draw.rect(self.display_surface, "black", text_rect.inflate(20, 20), 3)  # ОТРИСОВКА ПИКСЕЛЕЙ ГРАНИЦЫ
 
+    # -----------------------------------------------------------------------------------------------------------------
     def display(self, player, time) -> None:
         """
         Функция для отобюражения всего, что описано в этом классе
@@ -120,16 +128,20 @@ class GameUI:
         self.show_bar(player.health, player.stats["health"], self.health_bar_rect, "red")
         self.show_bar(player.energy, player.stats["energy"], self.energy_bar_rect, "blue")
 
-        # ОТОБРАЖЕНИЕ ДАННЫХ ОБ ОПЫТЕ
+        # ОТОБРАЖЕНИЕ ДАННЫХ ИНФОРМАЦИОННОМ ОКНЕ
         self.show_kills_and_tp_and_time(player.kill_counter, player.need_to_kill, player, time)
 
         # ОТОБРАЖЕНИЕ ИЗОБРАЖЕНИЙ ВЫБРАННЫХ ОРУЖИЯ И МАГИИ СООТВЕТСВЕННО
         self.weapon_overlay(player.weapon_index, player.can_switch_weapon)
         self.magic_overlay(player.magic_index, player.can_switch_magic)
 
+    # -----------------------------------------------------------------------------------------------------------------
 
-def load_pause_ui(self):
-    """Подгрузка интерфейса во время паузы"""
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+def load_pause_ui(self) -> None:
+    """Функция подгрузки интерфейса во время паузы"""
     self.manager = pygame_gui.UIManager(self.size, "data/theme.json")  # МЕНЕДЖЕР ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
     pygame.display.set_caption("Reliqum")  # УСТАНОВКА НАЗВАНИЯ ОКНА
 
@@ -140,10 +152,17 @@ def load_pause_ui(self):
         manager=self.manager
     )
 
-    self.status = "pause"
+    self.status = "pause"  # СТАТУС ОКНА - ПАУЗА
+
+# ---------------------------------------------------------------------------------------------------------------------
 
 
-def load_end_ui(self, is_win=True):
+def load_end_ui(self, is_win=True) -> None:
+    """
+    Функция подгрузки интерфейса окончания игры
+    :param self: объект главного игрового потока
+    :param is_win: выйграл игрок или же проиграл
+    """
     self.manager = pygame_gui.UIManager(self.size, "data/theme.json")  # МЕНЕДЖЕР ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
     pygame.display.set_caption("Reliqum")  # УСТАНОВКА НАЗВАНИЯ ОКНА
 
@@ -154,7 +173,10 @@ def load_end_ui(self, is_win=True):
         manager=self.manager
     )
 
-    if is_win:
-        self.status = "end"
-    else:
-        self.status = "end_loser"
+    if is_win:  # ЕСЛИ ИГРОК ВЫЙГРАЛ
+        self.status = "end"  # СТАТУС ОКНА - КОНЕЦ (победа)
+    else:  # ИНАЧЕ
+        self.status = "end_loser"  # СТАТУС ОКНА - КОНЕЦ (поражение)
+
+
+# ---------------------------------------------------------------------------------------------------------------------

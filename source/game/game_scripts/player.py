@@ -1,9 +1,16 @@
 import pygame
+
 from data.settings import *
+
 from source.game.game_scripts.entity import Entity
 
+# ---------------------------------------------------------------------------------------------------------------------
 
+
+# КЛАСС ИГРОКА
 class Player(Entity):
+
+    # -----------------------------------------------------------------------------------------------------------------
     def __init__(self, pos: tuple, groups: list, obstacle_sprites: pygame.sprite.Group,
                  create_attack, destroy_attack, create_magic):
         """
@@ -72,9 +79,10 @@ class Player(Entity):
         self.need_to_kill = 17  # КОЛИЧЕСТВО ВРАГОВ, КОТОРЫХ НУЖНО УНИЧТОЖИТЬ ДЛЯ ПОБЕДЫ
         self.can_change = False  # МОЖЕТ ЛИ ИГРОК ВОЙТИ В ЛОКАЦИЮ С БОССОМ
 
-        self.is_player_win = False
-        self.is_player_lose = False
+        self.is_player_win = False  # ВЫИГРАЛ ЛИ ИГРОК
+        self.is_player_lose = False  # ПРОИГРАЛ ЛИ ИГРОК
 
+    # -----------------------------------------------------------------------------------------------------------------
     def import_player_assets(self) -> None:
         """Функция для импорта спрайтов игрока"""
         character_path = "data/images/sprites/main_hero/"  # ПУТЬ ДО ПАПКИ С ПАПКАМИ СПРАЙТОВ ИГРОКА
@@ -88,6 +96,7 @@ class Player(Entity):
             full_path = character_path + animation
             self.animations[animation] = pygame.image.load(F"{full_path}/{animation}.png").convert_alpha()
 
+    # -----------------------------------------------------------------------------------------------------------------
     def input(self) -> None:
         """Функция обработки нажатий на клавишы"""
         if self.attacking:  # ЕСЛИ ИГРОК В ДАННЫЙ МОМЕНТ АТАКУЕТ - НИЧЕГО НЕ ПРОИСХОДИТ
@@ -141,6 +150,7 @@ class Player(Entity):
             self.magic_index = (self.magic_index + 1) % len(list(magic_data.keys()))  # ПОЛУЧЕНИЕ НОВОГО ИНДЕКСА
             self.magic = list(magic_data.keys())[self.magic_index]  # ВЫБОР СЛЕДУЮЩЕЙ МАГИИ
 
+    # -----------------------------------------------------------------------------------------------------------------
     def get_status(self) -> None:
         """Функция для получения текущего статуса игрока"""
         if self.direction.x == 0 and self.direction.y == 0:  # ЕСЛИ ИГРОК СТОИТ И НЕ ДЕЛАЕТ НИКАКИХ ДЕЙСТВИЙ, ТО
@@ -161,6 +171,7 @@ class Player(Entity):
             if "attack" in self.status:
                 self.status = self.status.replace("_attack", "")
 
+    # -----------------------------------------------------------------------------------------------------------------
     def cooldowns(self) -> None:
         """Функция-таймер для отработки задержек между действиями"""
         current_time = pygame.time.get_ticks()  # ТЕКУЩИЙ МОМЕНТ ВРЕМЕНИ
@@ -183,6 +194,7 @@ class Player(Entity):
             if current_time - self.hurt_time >= self.invulnerability_duration:  # ЕСЛИ ВРЕМЯ НЕУЯЗВИМОСТИ ИСТЕКЛО
                 self.vulnerable = True  # ИГРОК ТЕПЕРЬ УЯЗВИМ
 
+    # -----------------------------------------------------------------------------------------------------------------
     def animate(self) -> None:
         """Функция, осуществляющая анимацию движения игрока"""
         animation = self.animations[self.status]  # ПОЛУЧЕНИЕ НУЖНО ИЗОБРАЖЕНИЯ ДЛЯ АНИМАЦИИ
@@ -206,18 +218,21 @@ class Player(Entity):
         else:  # ИНАЧЕ
             self.image.set_alpha(255)  # ИГРОК НЕ МИГАЕТ
 
+    # -----------------------------------------------------------------------------------------------------------------
     def get_full_weapon_damage(self) -> int:
         """Метод, получающий полный урон от конкретного вида оружия"""
         base_damage = self.stats["attack"]  # УРОН ИГРОКА БЕЗ ОРУЖИЯ
         weapon_damage = self.weapon_data[self.weapon]["damage"]  # УРОН ОРУЖИЯ
         return base_damage + weapon_damage  # ПОЛНЫЙ УРОН
 
+    # -----------------------------------------------------------------------------------------------------------------
     def get_full_magic_damage(self) -> int:
         """Метод, получающий полный урон от конкретного вида магии (атакующей)"""
         base_damage = self.stats["magic"]  # МАГИЧЕСКИЙ УРОН ИГРОКА
         spell_damage = magic_data[self.magic]["strength"]  # МАГИЧЕСКИЙ УРОН ЗАКЛИНАНИЯ
         return base_damage + spell_damage  # ПОЛНЫЙ УРОН
 
+    # -----------------------------------------------------------------------------------------------------------------
     def energy_recovery(self) -> None:
         """Метод, пополняющий значение энергии игрока"""
         if self.energy < self.stats["energy"]:  # ЕСЛИ ПОЛОСА ЭНЕРГИИ НЕ ПОЛНАЯ
@@ -225,10 +240,13 @@ class Player(Entity):
         else:  # ИНАЧЕ
             self.energy = self.stats["energy"]  # ЭНЕРГИЯ СТАНОВИТСЯ МАКСИМАЛЬНОЙ
 
-    def check_death(self):
-        if self.health <= 0:
-            self.is_player_lose = True
+    # -----------------------------------------------------------------------------------------------------------------
+    def check_death(self) -> None:
+        """Метод, проверяющий игрока на факт его смерти"""
+        if self.health <= 0:  # ЕСЛИ ЗДОРОВЬЕ МЕНЬШЕ 0
+            self.is_player_lose = True  # ИГРОК ПРОИГРАЛ
 
+    # -----------------------------------------------------------------------------------------------------------------
     def update(self) -> None:
         """Функция для обновления игрока"""
         self.input()  # ОБРАБОТКА КЛАВИШ
@@ -237,4 +255,7 @@ class Player(Entity):
         self.animate()  # АНИМАЦИЯ ИГРОКА
         self.move(self.speed)  # ПЕРЕДВИЖЕНИЕ ИРОКА
         self.energy_recovery()  # ПАСИВНОЕ ПОПОЛНЕНИЕ ЗАПАСА ЭНЕРГИИ (маны)
-        self.check_death()
+        self.check_death()  # ПРОВЕРКА СМЕРТИ ИГРОКА
+
+    # -----------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------

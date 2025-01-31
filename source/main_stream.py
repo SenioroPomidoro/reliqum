@@ -4,7 +4,7 @@ import pygame_gui
 from data.settings import *
 
 from source.menu.user_interface.draw_labels import draw_labels
-from source.helping_scripts.imports import import_settings
+from source.helping_scripts.imports import import_music_settings
 from source.menu.menu_scripts.main_scripts import start_exit_dialog
 from source.menu.menu_scripts.main_scripts import button_pressed_process
 from source.menu.menu_scripts.main_scripts import keydown_process
@@ -41,7 +41,8 @@ class MainStream:
         self.window_surface = pygame.display.set_mode(self.size)  # СОЗДАНИЕ ЭКРАННОЙ ПОВЕРХНОСТИ ДЛЯ МЕНЮ
 
         load_main_ui(self)  # ЗАГРУЗКА ГЛАВНОГО МЕНЮ - ПО УМОЛЧАНИЮ
-        import_settings(self)  # ПОЛУЧЕНИЕ НАСТРОЕК ИЗ ФАЙЛА settings.csv И ЗАПИСЬ В АТРИБУТЫ self (ГРОМКОСТЬ МУЗЫКИ)
+        import_music_settings(self)  # ПОЛУЧЕНИЕ НАСТРОЕК ИЗ ФАЙЛА settings.csv
+        # И ЗАПИСЬ В АТРИБУТЫ self (ГРОМКОСТЬ МУЗЫКИ)
 
     # -----------------------------------------------------------------------------------------------------------------
 
