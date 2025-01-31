@@ -71,5 +71,7 @@ class Magic:
                 y = player.rect.centery + offset_y + randint(-20, 20)  # ПОЛОЖЕНИЕ АТАКИ ПО ИГРИКАМ
 
                 ParticleEffect((x, y), self.animation_flame, groups, 24)  # СПАВН ЭФФЕКТА АТАКИ
+            return True
+        return False
 
 # ---------------------------------------------------------------------------------------------------------------------

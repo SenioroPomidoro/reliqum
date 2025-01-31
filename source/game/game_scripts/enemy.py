@@ -4,6 +4,7 @@ from data.settings import *
 
 from source.game.game_scripts.entity import Entity
 
+from source.helping_scripts.load_sounds import load_enemies_sounds
 # ---------------------------------------------------------------------------------------------------------------------
 
 
@@ -57,6 +58,8 @@ class Enemy(Entity):
         self.vulnerable = True  # МОЖЕТ ЛИ ВРАГ ПОЛУЧАТЬ УРОН
         self.hit_time = None  # МОМЕНТ ВРЕМЕНИ, В КОТОРЫЙ ВРАГ ПОЛУЧИЛ УРОН
         self.invincibility_duration = 200  # ДЛИТЕЛЬНОСТЬ НЕУЯЗВИМОСТИ ВРАГА ПОСЛЕ ПОЛУЧЕНИЯ УРОНА
+
+        load_enemies_sounds(self)
 
     # -----------------------------------------------------------------------------------------------------------------
     def import_graphics(self, name: str) -> None:
@@ -179,6 +182,7 @@ class Enemy(Entity):
                 self.health -= player.get_full_magic_damage()  # ОТНИМАЕ ЗДОРОВЬЕ У ВРАГА НА ПОЛНЫЙ МАГ. УРОНА ИГРОКА
             self.hit_time = pygame.time.get_ticks()  # ВРЕМЯ, В КОТОРОЕ ВРАГА АТКОВАЛИ
             self.vulnerable = False  # ВРАГ СТАНОВИТСЯ НЕУЯЗВИМ НА НЕКОТОРОЕ ВРЕМЯ
+            self.hit_sound.play()  # ПРОИГРЫВАНИЕ ЗВУКА ПОЛУЧЕНИЯ УРОНА
 
     # -----------------------------------------------------------------------------------------------------------------
     def check_death(self, player) -> None:
@@ -193,6 +197,8 @@ class Enemy(Entity):
 
             if self.monster_name == "Bamboo":  # ЕСЛИ БЫЛ УБИТ БОСС
                 player.is_player_win = True  # ПОБЕДИЛ ИГРОК
+
+            self.death_sound.play()
 
     # -----------------------------------------------------------------------------------------------------------------
     def hit_reaction(self) -> None:

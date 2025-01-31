@@ -3,6 +3,7 @@ import pygame_gui
 
 from data.settings import *
 
+from source.helping_scripts.load_sounds import off_all_game_music
 # ---------------------------------------------------------------------------------------------------------------------
 
 
@@ -173,10 +174,17 @@ def load_end_ui(self, is_win=True) -> None:
         manager=self.manager
     )
 
+    off_all_game_music(self)
+
     if is_win:  # ЕСЛИ ИГРОК ВЫЙГРАЛ
         self.status = "end"  # СТАТУС ОКНА - КОНЕЦ (победа)
+        self.win_music.play(100)  # ПРОИГРЫВАНИЕ МУЗЫКИ ПОБЕДЫ
+        self.win_music.set_volume(self.ingame_music_value / 100)  # УСТАНОВКА ГРОМКОСТИ МУЗЫКИ
+        self.is_win_music_playing = True  # МУЗЫКА ПОБЕДЫ ИГРАЕТ (параметр для дебага)
     else:  # ИНАЧЕ
         self.status = "end_loser"  # СТАТУС ОКНА - КОНЕЦ (поражение)
-
+        self.lose_music.play(100)  # ПРОИГРЫВАНИЕ МУЗЫКИ ПОРАЖЕНИЯ
+        self.lose_music.set_volume(self.ingame_music_value / 100)  # УСТАНОВКА ГРОМКОСТИ МУЗЫКИ
+        self.is_lose_music_playing = True  # МУЗЫКА ПОРАЖЕНИЯ ИГРАЕТ (параметр для дебага)
 
 # ---------------------------------------------------------------------------------------------------------------------

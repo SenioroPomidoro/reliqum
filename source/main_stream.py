@@ -3,19 +3,20 @@ import pygame_gui
 
 from data.settings import *
 
-from source.menu.user_interface.draw_labels import draw_labels
-from source.helping_scripts.imports import import_music_settings
 from source.menu.menu_scripts.main_scripts import start_exit_dialog
 from source.menu.menu_scripts.main_scripts import button_pressed_process
 from source.menu.menu_scripts.main_scripts import keydown_process
-from source.menu.user_interface.main_ui import load_main_ui
-from source.game.game_scripts.game_level import Level
 from source.menu.menu_scripts.settings_scripts import slider_moved_process
 
+from source.menu.user_interface.main_ui import load_main_ui
+from source.menu.user_interface.draw_labels import draw_labels
 
 from source.helping_scripts.races_append import append_result
+from source.helping_scripts.imports import import_music_settings
+from source.helping_scripts.load_sounds import load_music
 
 from source.game.user_interface.game_ui import load_end_ui
+from source.game.game_scripts.game_level import Level
 
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -33,15 +34,16 @@ class MainStream:
 
         self.fullscreen = False  # РЕЖИМ ЭКРАНА ПО УМОЛЧАНИЮ - ОКОННЫЙ
         self.w, self.h = self.size = w, h  # ЗАПИСЬ РАЗМЕРОВ ЭКРАНА
+        self.status = None  # СТАТУС ВКЛЮЧЕНО НА ДАННЫЙ МОМЕНТ ЭКРАНА (для отрисовки) ПО УМОЛЧАНИЮ - None
 
-        self.click = pygame.mixer.Sound("data/sounds/menu_sounds/click.mp3")  # ЗВУК КЛИКА
-        self.music = pygame.mixer.Sound("data/sounds/menu_sounds/main_music.mp3")
+        load_music(self)  # ЗАГРУЗКА МУЗЫКИ
 
         self.custom_font = pygame.font.Font("data/fonts/base_font.ttf", 40)  # ОПРЕДЕЛЕНИЕ СОБСТВЕННОГО ШРИФТА
         self.window_surface = pygame.display.set_mode(self.size)  # СОЗДАНИЕ ЭКРАННОЙ ПОВЕРХНОСТИ ДЛЯ МЕНЮ
 
+        self.import_music_settings = import_music_settings
+        self.import_music_settings(self)  # ПОЛУЧЕНИЕ НАСТРОЕК ИЗ ФАЙЛА settings.csv
         load_main_ui(self)  # ЗАГРУЗКА ГЛАВНОГО МЕНЮ - ПО УМОЛЧАНИЮ
-        import_music_settings(self)  # ПОЛУЧЕНИЕ НАСТРОЕК ИЗ ФАЙЛА settings.csv
         # И ЗАПИСЬ В АТРИБУТЫ self (ГРОМКОСТЬ МУЗЫКИ)
 
     # -----------------------------------------------------------------------------------------------------------------
@@ -53,9 +55,6 @@ class MainStream:
 
         self.background = pygame.Surface(self.size)  # ЗАДНИЙ ФОН
         self.background.fill(pygame.Color(BG_COLOR))  # ЗАПОЛНЕНИЯ ЗАДНЕГО ФОНА ЗАДАННЫМ ЦВЕТОМ
-
-        self.music.play(100)  # ВКЛЮЧЕНИЕ МУЗЫКИ
-        self.music.set_volume(self.main_music_value / 100)  # УСТАНОВКА ГРОМКОСТИ МУЗЫКИ
 
         self.level_type = 0  # ТИП УРОВНЯ: 0 - ПЕРВЫЙ, 1 - ВТОРОЙ
         self.level_1 = Level()  # ЗАГРУЗКА ПЕРВОГО УРОВНЯ
@@ -149,8 +148,20 @@ class MainStream:
 
         if self.is_game_started and not self.is_game_paused and not self.is_game_ended:  # ЕСЛИ ИГРА В ПРОЦЕССЕ
             if not self.level_type:  # ЕСЛИ ЭТО ПЕРВЫЙ УРОВЕНЬ
+                if not self.is_game_music_playing:
+                    self.main_music.stop()
+                    self.game_music.play(100)
+                    self.game_music.set_volume(self.ingame_music_value / 100)  # УСТАНОВКА ГРОМКОСТИ МУЗЫКИ
+                    self.is_game_music_playing = True
                 self.level_1.run()  # ОТРИСОВКА ПЕРВОГО УРОВНЯ
             else:  # ЕСЛИ ЭТО ВТОРОЙ УРОВЕНЬ
+                if not self.is_boss_music_playing:
+                    self.game_music.stop()
+                    self.is_game_music_playing = False
+
+                    self.boss_music.play(100)
+                    self.boss_music.set_volume(self.ingame_music_value / 100)  # УСТАНОВКА ГРОМКОСТИ МУЗЫКИ
+                    self.is_boss_music_playing = True
                 self.level_2.run()  # ОТРИСОВКА ВТОРОГО УРОВНЯ
 
         if not self.is_game_started or (self.is_game_started and self.is_game_paused):

@@ -2,6 +2,7 @@ import pygame
 
 from source.helping_scripts.imports import import_csv_layout
 from source.helping_scripts.imports import import_graphics
+from source.helping_scripts.load_sounds import load_player_sounds
 
 from source.game.user_interface.game_ui import GameUI
 
@@ -47,6 +48,7 @@ class Level:
 
         self.magic = Magic()  # ОБЪЕКТ, ОТВЕЧАЮЩИЙ ЗА ИСПОЛЬЗОВАНИЕ МАГИИ
         self.game_time = 0  # ИГРОВОЕ ВРЕМЯ - ПО УМОЛЧАНИЮ - 0
+        load_player_sounds(self)  # ЗАГРУЗКА ИГРОВЫХ ЗВУКОВ
 
     # -----------------------------------------------------------------------------------------------------------------
     def create_map(self) -> None:
@@ -148,6 +150,7 @@ class Level:
     def create_attack(self) -> None:
         """Функция, создающая физическую атаку"""
         self.current_attack = Weapon(self.player, [self.visible_sprites, self.attack_sprites])
+        self.slash_sound.play()
 
     # -----------------------------------------------------------------------------------------------------------------
     def create_magic(self, style, strength, cost) -> None:
@@ -158,11 +161,14 @@ class Level:
         :param cost: стоимость магии в энергии
         """
         if style == "heal":  # ЛЕЧЕНИЕ
-            if self.magic.heal(self.player, strength, cost):
+            if self.magic.heal(self.player, strength, cost):  # ЕСЛИ ИГРОК ВЫЛЕЧИЛСЯ
+                self.heal_sound.play()  # ПРОИГРЫВАНИЕ ЗВУКА ЛЕЧЕНИЯ
+                # ПРОИГРЫВАНИЕ ЭФФЕКТА ЛЕЧЕНИЯ
                 ParticleEffect(self.player.rect.center, self.magic.animation_heal, [self.visible_sprites], 64)
 
         if style == "flame":  # АТАКА ОГНЁМ
-            self.magic.flame(self.player, cost, [self.visible_sprites, self.attack_sprites])
+            if self.magic.flame(self.player, cost, [self.visible_sprites, self.attack_sprites]):
+                self.fire_sound.play()
 
     # -----------------------------------------------------------------------------------------------------------------
     def destroy_attack(self) -> None:
@@ -195,6 +201,7 @@ class Level:
 
             # СОЗДАНИЕ ЭФФЕКТА УРОНА ИГРОКУ
             frames = pygame.image.load(F"data/images/sprites/attacks/{attack_type}.png").convert_alpha()
+            self.oof.play()  # ВОСПРОИЗВЕДЕНИЕ ЗВУКА ПОЛУЧЕНИЯ УРОНА
             ParticleEffect(self.player.rect.center, frames, [self.visible_sprites], 64)
 
     # -----------------------------------------------------------------------------------------------------------------
