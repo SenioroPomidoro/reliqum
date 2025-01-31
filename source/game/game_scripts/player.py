@@ -75,7 +75,7 @@ class Player(Entity):
         self.hurt_time = None  # ВРЕМЯ, В КОТОРОЕ ИГРОКА УДАРИЛИ
         self.invulnerability_duration = 500  # ВРЕМЯ, КОТОРОЕ ИГРОК БУДЕТ НЕУЯЗВИМ
 
-        self.kill_counter = 16  # КОЛИЧЕТСВО УНИЧТОЖЕННЫХ НА ДАННЫЙ МОМЕНТ ВРАГОВ
+        self.kill_counter = 0  # КОЛИЧЕТСВО УНИЧТОЖЕННЫХ НА ДАННЫЙ МОМЕНТ ВРАГОВ
         self.need_to_kill = 17  # КОЛИЧЕСТВО ВРАГОВ, КОТОРЫХ НУЖНО УНИЧТОЖИТЬ ДЛЯ ПОБЕДЫ
         self.can_change = False  # МОЖЕТ ЛИ ИГРОК ВОЙТИ В ЛОКАЦИЮ С БОССОМ
 

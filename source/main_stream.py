@@ -132,7 +132,7 @@ class MainStream:
             self.is_game_paused = True  # ИГРА СТАВИТСЯ НА ПАУЗУ
             self.lose = True  # ИГРОК ПРОИГРЫВАЕТ
             self.play_time = t  # УСТАНАВЛИВАЕТСЯ ТЕКУЩЕЕ ИГРОВОЕ ВРЕМЯ
-            self.killed = self.levels[self.level_type].player.kill_counter  # КОЛИЧЕСТВО УБИТЫХ ВРАГОВ
+            self.killed = self.level_1.player.kill_counter  # КОЛИЧЕСТВО УБИТЫХ ВРАГОВ
             append_result(self.play_time, self.killed)  # ЗАГРУЗКА РЕЗУЛЬТАТА В csv ФАЙЛ С РЕЗУЛЬТАТАМИ ЗАБЕГОВ
             load_end_ui(self, False)  # ЗАГРУЗКА МЕНЮ ОКОНЧАНИЯ (пораженеие)
 

@@ -295,7 +295,7 @@ class Camera(pygame.sprite.Group):
         for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
             offset_rect = sprite.rect.topleft - self.offset
 
-            if sprite.sprite_type == "door_open" and player.kill_counter < 15:  # ЕСЛИ ДВЕРЬ НЕЛЬЗЯ ОТКРЫТЬ
+            if sprite.sprite_type == "door_open" and player.kill_counter < 16:  # ЕСЛИ ДВЕРЬ НЕЛЬЗЯ ОТКРЫТЬ
                 continue  # НИЧЕГО НЕ ПРОИСХОДИТ
 
             if sprite.sprite_type == "door_closed":  # ЕСЛИ ОБРАБАТЫВАЕТСЯ СПРАЙТ ЗАКРЫТОЙ ДВЕРИ

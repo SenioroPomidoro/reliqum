@@ -8,6 +8,7 @@ def load_music(self) -> None:
     :param self: объект главного потока (куда будет загружаться музыка)
     """
     self.click = pygame.mixer.Sound("data/sounds/menu_sounds/click.mp3")  # ЗВУК КЛИКА
+
     self.main_music = pygame.mixer.Sound("data/sounds/menu_sounds/main_music.mp3")  # МУЗЫКА В ГЛАВНО МЕНЮ
 
     self.game_music = pygame.mixer.Sound("data/sounds/game_sounds/game_music.ogg")  # ИГРОВАЯ МУЗЫКА (до битвы с боссом)
@@ -57,16 +58,16 @@ def off_all_game_music(self) -> None:
     :param self: объект главного потока (куда будет загружаться музыка)
     """
 
-    self.game_music.stop()
+    self.game_music.stop()  # ОСТАНОВКА ИГРОВОЙ МУЗЫКИ НА ГЛАВНОМ УРОВНЕ
     self.is_game_music_playing = False
 
-    self.boss_music.stop()
+    self.boss_music.stop()  # ОСТАНОВКА ИГРОВОЙ МУЗЫКИ НА УРОВНЕ С БОССОМ
     self.is_boss_music_playing = False
 
-    self.win_music.stop()
+    self.win_music.stop()  # ОСТАНОВКА ПОБЕДНОЙ МУЗЫКИ
     self.is_win_music_playing = False
 
-    self.lose_music.stop()
+    self.lose_music.stop()  # ОСТАНОВКА МУЗЫКИ ПОРАЖЕНИЯ
     self.is_lose_music_playing = False
 
 # ---------------------------------------------------------------------------------------------------------------------
