@@ -6,7 +6,7 @@ from source.menu.menu_scripts.statistics_scripts import grab_best_races
 # ---------------------------------------------------------------------------------------------------------------------
 
 
-def load_statistics_ui(self):
+def load_statistics_ui(self) -> None:
     # -----------------------------------------------------------------------------------------------------------------
     """Подгрузка интерфейса окна статистики"""
     self.manager = pygame_gui.UIManager(self.size, "data/theme.json")  # МЕНЕДЖЕР ГРАФИЧЕСКОГО ИНТЕРФЕЙСА

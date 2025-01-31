@@ -35,7 +35,7 @@ class Magic:
         return False  # -> False
 
     # -----------------------------------------------------------------------------------------------------------------
-    def flame(self, player, cost, groups):
+    def flame(self, player, cost, groups) -> bool:
         """
         Метод, реализующий скилл удара огнём
         :param player: объект игрока

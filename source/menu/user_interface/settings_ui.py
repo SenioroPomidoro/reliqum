@@ -6,7 +6,7 @@ from source.helping_scripts.imports import import_music_settings
 # ---------------------------------------------------------------------------------------------------------------------
 
 
-def load_settings_ui(self):
+def load_settings_ui(self) -> None:
     """Подгрузка интерфейса окна настроек"""
     # -----------------------------------------------------------------------------------------------------------------
     self.manager = pygame_gui.UIManager(self.size, "data/theme.json")  # МЕНЕДЖЕР ГРАФИЧЕСКОГО ИНТЕРФЕЙСА

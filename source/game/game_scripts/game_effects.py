@@ -6,7 +6,7 @@ import pygame
 # КЛАСС ВИЗУАЛЬНЫХ ЭФФЕКТОВ
 class ParticleEffect(pygame.sprite.Sprite):
     # -----------------------------------------------------------------------------------------------------------------
-    def __init__(self, pos, animation_frames, groups, box_size):
+    def __init__(self, pos, animation_frames, groups, box_size) -> None:
         """
         Конструктор объектов класса визуальных эффектов
         :param pos: позиция эффекта
@@ -27,7 +27,7 @@ class ParticleEffect(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=pos)  # РАСПОЛОЖЕНИЕ КАДРА НА ЭКРАНЕ
 
     # -----------------------------------------------------------------------------------------------------------------
-    def animate(self):
+    def animate(self) -> None:
         """Метод, анимиирующий объект визуального эффекта"""
         self.frame_index += self.animation_speed  # ПРИБАВЛЯЕМ К ЗНАЧЕНИЮ КАДРА СКОРОСТЬ АНИМАЦИИ
         if self.frame_index >= self.frames.width / self.box_size:  # ЕСЛИ АНИМАЦИЯ ЗАВЕРШЕНА
@@ -37,7 +37,7 @@ class ParticleEffect(pygame.sprite.Sprite):
                                                  self.box_size, self.box_size))  # СПАВНИМ ИЗОБРАЖЕНИЕ ТЕКУЩЕГО КАДРА
 
     # -----------------------------------------------------------------------------------------------------------------
-    def update(self):
+    def update(self) -> None:
         """Метод, обновляющий объект класса визуальных эффектов"""
         self.animate()  # ВЫЗОВ МЕТОДА АНИМАЦИИ
 

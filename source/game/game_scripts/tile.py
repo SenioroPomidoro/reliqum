@@ -10,7 +10,7 @@ class Tile(pygame.sprite.Sprite):
 
     # -----------------------------------------------------------------------------------------------------------------
     def __init__(self, pos: tuple, groups: list, sprite_type: str, surface=pygame.Surface((TILESIZE, TILESIZE)),
-                 sprite_id=-1):
+                 sprite_id=-1) -> None:
         """
         Инициализация объекта плитки
         :param pos: позиция плитки на игровой поверхности

@@ -12,7 +12,7 @@ class Player(Entity):
 
     # -----------------------------------------------------------------------------------------------------------------
     def __init__(self, pos: tuple, groups: list, obstacle_sprites: pygame.sprite.Group,
-                 create_attack, destroy_attack, create_magic):
+                 create_attack, destroy_attack, create_magic) -> None:
         """
         Инициализация объекта игрока
         :param pos: позиция игрока на карте
@@ -22,30 +22,31 @@ class Player(Entity):
         :param destroy_attack: функция, удаляющая атаку
         :param create_magic: функция, создающая магию
         """
+        # =============================
         super().__init__(groups)  # ВЫЗОВ РОДИТЕЛЬСКОЙ ФУНКЦИИ ИНИЦИАЛИЗАЦИИ ДЛЯ ЗАПИСИ СПРАЙТА В ГРУППЫ ИЗ groups
-
+        # =============================
         # ПОДГРУЗКА И РАСПОЛОЖЕНИЕ ИГРОКА В СТАНДАРТНОЙ ПОЗИЦИИ - СТОИТ И СМОТРИТ ВНИЗ
         self.image = pygame.image.load('data/images/sprites/main_hero/down_idle/down_idle.png').convert_alpha()
         self.image = self.image.subsurface(pygame.Rect(0, 0, 50, 50))  # ВЫРЕЗКА ЧЕЛОВЕЧЕКА 50 НА 50 ПИКСЕЛЕЙ
-
+        # =============================
         self.obstacle_sprites = obstacle_sprites  # ЗАПИСЬ ГРУППЫ СПРАЙТОВ, ЧЕРЕЗ КОТОРЫЕ
         # ИГРОК НЕ МОЖЕТ ПРОЙТИ В АТРИБУТЫ ОБЪЕКТА ИГРОКА
         self.sprite_type = "None"  # ТИП СПРАЙТА - None
         self.sprite_id = -1  # УНИКАЛЬНЫЙ НОМЕР СПРАЙТА -1 (ничего не значит)
-
+        # =============================
         self.rect = self.image.get_rect(topleft=pos)  # ПОЛУЧЕНИЕ ЧЕТЫРЕХУГОЛЬНИКА, В КОТОРОМ НАХОДИТСЯ ИЗОБРАЖЕНИЕ
         self.hitbox = self.rect.inflate(0, -6)  # УМЕНЬШЕНИЕ ХИТБОКСА НА 3 ПИКСЕЛЯ СВЕРХУ И СНИЗУ (для более гармо-
         # ничного пересечения спрайтов)
-
+        # =============================
         # ГРАФИКА
         self.import_player_assets()  # ЗАГРУЗКА СПРАЙТОВ ИГРОКА
         self.status = "down"  # СТАТУС ИГРОКА, ОПРЕДЕЛЯЮЩИЙ НАПРАВЛЕНИЕ И ХАРАКТЕР ДВИЖЕНИЯ, ИЗНАЧАЛЬНО ДВИЖЕТСЯ ВНИЗ.
-
+        # =============================
         # ОРИЕНТАЦИЯ ИГРОКА
         self.attacking = False  # АТАКУЕТ ЛИ ИГРОК. ИЗНАЧАЛЬНО - НЕТ
         self.attack_cooldown = 200  # ПРОМЕЖУТОК МЕЖДУ АТАКАМИ ИГРОКА
         self.attack_time = None  # ВРЕМЯ АТАКИ
-
+        # =============================
         # ОРУЖИЕ
         self.create_attack = create_attack  # ЗАПИСЬ ФУНКЦИИ, СОЗДАЮЩЕЙ АТАКУ В АТРИБУТЫ ОБЪЕКТА
         self.destroy_attack = destroy_attack  # ЗАПИСЬ ФУНКЦИИ, УНИЧТОЖАЮЩЕЙ АТАКУ В АТРИБУТЫ ОБЪЕКТА
@@ -54,31 +55,31 @@ class Player(Entity):
         self.weapon_data = weapon_data  # СЛОВАРЬ С ОРУЖИЕМ ЗАПИСЫВАЕТСЯ В АТРИБУТЫ
         self.can_switch_weapon = True  # МОЖЕТ ЛИ ИГРОК СМЕНИТЬ ОРУЖИЕ. ПО УМОЛЧАНИЮ - ДА
         self.weapon_switch_time = None  # ВРЕМЯ, КОТОРОЕ ИГРОК МЕНЯЕТ ОРУЖИЕ
-
+        # =============================
         # МАГИЯ
         self.create_magic = create_magic  # ЗАПИСЬ ФУНКЦИИ, СОЗДАЮЩЕЙ МАГИЧЕСКУ АТАКУ В АТРИБУТЫ ОБЪЕКТА
         self.magic_index = 0  # ИНДЕКС ВЫБРАННОЙ МАГИИ, ПО УМОЛЧАНИЮ - 0
         self.magic = list(magic_data.keys())[self.magic_index]  # СПИСОК ДАННЫХ ОБ ОРУЖИИ
         self.can_switch_magic = True  # МОЖЕТ ЛИ ИГРОК СМЕНИТЬ МАГИЮ. ПО УМОЛЧАННИЮ - ДА
         self.magic_switch_time = None  # ВРЕМЯ, КОТОРОЕ ИГРОК МЕНЯЕТ МАГИЮ
-
+        # =============================
         self.switch_duration_cooldown = 500  # ВРЕМЯ МЕЖДУ СМЕНОЙ ОРУЖИЯ И МАГИИ
-
+        # =============================
         # ЗАПИСЬ ПОКАЗАТЕЛЕЙ ПЕРСОНАЖА В АТРИБУТЫ ОБЪЕКТА ПЕРСОНАЖА
         # УРОН = УРОН ОРУЖИЯ + УРОН ИГРОКА / АНАЛОГИЧНО С МАГИЕЙ
         self.stats = {"health": 100, "energy": 60, "attack": 0, "magic": 4, "speed": 6}
         self.health = self.stats["health"]  # ЗАПИСЬ ЗДОРОВЬЯ ПЕРСОНАЖА
         self.energy = self.stats["energy"]  # ЗАПИСЬ ЭНЕРГИИ ПЕРСОНАЖА
         self.speed = self.stats["speed"]  # ЗАПИСЬ СКОРОСТИ ПЕРСОНАЖА
-
+        # =============================
         self.vulnerable = True  # УЯЗВИМ ЛИ ИГРОК (можно ли нанести урон)
         self.hurt_time = None  # ВРЕМЯ, В КОТОРОЕ ИГРОКА УДАРИЛИ
         self.invulnerability_duration = 500  # ВРЕМЯ, КОТОРОЕ ИГРОК БУДЕТ НЕУЯЗВИМ
-
+        # =============================
         self.kill_counter = 0  # КОЛИЧЕТСВО УНИЧТОЖЕННЫХ НА ДАННЫЙ МОМЕНТ ВРАГОВ
         self.need_to_kill = 17  # КОЛИЧЕСТВО ВРАГОВ, КОТОРЫХ НУЖНО УНИЧТОЖИТЬ ДЛЯ ПОБЕДЫ
         self.can_change = False  # МОЖЕТ ЛИ ИГРОК ВОЙТИ В ЛОКАЦИЮ С БОССОМ
-
+        # =============================
         self.is_player_win = False  # ВЫИГРАЛ ЛИ ИГРОК
         self.is_player_lose = False  # ПРОИГРАЛ ЛИ ИГРОК
 

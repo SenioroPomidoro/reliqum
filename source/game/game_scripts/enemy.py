@@ -21,45 +21,46 @@ class Enemy(Entity):
         :param damage_player: урон, наносимый врагом игрокау
         :param death_particles: анимация смерти врага
         """
+        # =============================
         super().__init__(groups)  # ВЫЗВОВ КОНСТРУКТОРА РОДИТЕЛЬСКОГО КЛАССА
         self.sprite_type = "enemy"  # ЗАПИСЬ ТИАП СПРАЙТА В АТРИБУТЫ
         self.sprite_id = None  # ЗАПИСЬ ID СПРАЙТА В АТРИБУТЫ
-
+        # =============================
         self.import_graphics(monster_name)  # ПОДГРУЗКА ГРАФИКИ ВРАГА
         self.status = "idle"  # ЗАПИСЬ ИЗНАЧАЛЬНОГО СТАТУСА МОНСТРА В АТРИБУТЫ - СТОЙКА НА МЕСТЕ
         self.image = (pygame.image.load("data/images/sprites/monsters/Eye/idle/idle.png").
                       subsurface((0, 0, 48, 48)).convert_alpha())  # ЗАГРУЗКА НАЧАЛЬНОГО ИЗОБРАЖЕНИЯ ВРАГА
-
+        # =============================
         # ДВИЖЕНИЕ
         self.rect = self.image.get_rect(topleft=pos)  # ОПРЕДЕЛЕНИЕ НАЧАЛЬНОГО ПОЛОЖЕНИЯ ВРАГА В ПРОСТРАНСТВЕ
         self.hitbox = self.rect.inflate(0, -10)  # ОПРЕДЕЛЕНИЕ ХИТБОКСА ВРАГА (сверху и снизу -5 пикселей)
         self.obstacle_sprites = obstacle_sprites  # ЗАПИСЬ СПРАЙТОВ, ЧЕРЕЗ КОТОРЫЕ ВРАГ НЕ МОЖЕТ ПРОЙТИ В АТРИБУТЫ
-
+        # =============================
         # ПОКАЗАТЕЛИ ВРАГА
         self.monster_name = monster_name  # ЗАПИСЬ ИМЕНИ ВРАГА
         monster_info = monster_data[self.monster_name]  # ИНФОРМАЦИЯ О ВРАГЕ В ВИДЕ СЛОВАРЯ
         self.health = monster_info["health"]  # ЗАПИСЬ ЗДОРОВЬЯ ВРАГА
-        self.exp = monster_info["exp"]  # ЗАПИСЬ КОЛИЧЕСТВА ОПЫТА, ДАЮЩЕГОСЯ ЗА ВРАГА
         self.speed = monster_info["speed"]  # ЗАПИСЬ СКОРОСТИ ВРАГА
         self.attack_damage = monster_info["damage"]  # ЗАПИСЬ УРОНА ВРАГА
         self.resistance = monster_info["resistance"]  # ЗАПИСЬ ТОГО, НАСКОЛЬКО СИЛЬНО ВРАГ ОТКИДЫВАЕТСЯ ПОСЛЕ УРОНА
         self.attack_radius = monster_info["attack_radius"]  # ЗАПИСЬ РАДИУСА АТАКИ ВРАГА
         self.notice_radius = monster_info["notice_radius"]  # ЗАПИСЬ РАДИУСА ОБНАРУЖЕНИЯ ВРАГА
         self.attack_type = monster_info["attack_type"]  # ЗАПИСЬ ТИПА АТАКИ ВРАГА
-
+        # =============================
         # ВЗАИМОДЕЙСТВИЕ ВРАГА С ИГРОКОМ
         self.can_attack = True  # МОЖЕТ ЛИ ВРАГ АТАКОВАТЬ ВРАГА
         self.attack_time = None  # МОМЕНТ ВРЕМЕНИ В КОТОРЫЙ ВРАГ НАНЁС УРОН
         self.attack_cooldown = 400  # КУЛДАУН МЕЖДУ УДАРАМИ ВРАГА
         self.damage_player = damage_player  # ФУНКЦИЯ, ОБРАБАТЫВАЮЩАЯ НАНЕСЕНИЕ УРОНА ИГРОКУ
         self.trigger_death_particles = death_particles  # КАДРЫ СМЕРТИ ВРАГА
-
+        # =============================
         # ТАЙМЕР БЕССМЕРТИЯ
         self.vulnerable = True  # МОЖЕТ ЛИ ВРАГ ПОЛУЧАТЬ УРОН
         self.hit_time = None  # МОМЕНТ ВРЕМЕНИ, В КОТОРЫЙ ВРАГ ПОЛУЧИЛ УРОН
         self.invincibility_duration = 200  # ДЛИТЕЛЬНОСТЬ НЕУЯЗВИМОСТИ ВРАГА ПОСЛЕ ПОЛУЧЕНИЯ УРОНА
-
+        # =============================
         load_enemies_sounds(self)
+        # =============================
 
     # -----------------------------------------------------------------------------------------------------------------
     def import_graphics(self, name: str) -> None:
@@ -198,7 +199,7 @@ class Enemy(Entity):
             if self.monster_name == "Bamboo":  # ЕСЛИ БЫЛ УБИТ БОСС
                 player.is_player_win = True  # ПОБЕДИЛ ИГРОК
 
-            self.death_sound.play()
+            self.death_sound.play()  # ПРОИГРЫВАНИЕ ЗВУКА СМЕРТИ ИГРОКА
 
     # -----------------------------------------------------------------------------------------------------------------
     def hit_reaction(self) -> None:

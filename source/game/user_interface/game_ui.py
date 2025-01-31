@@ -174,7 +174,7 @@ def load_end_ui(self, is_win=True) -> None:
         manager=self.manager
     )
 
-    off_all_game_music(self)
+    off_all_game_music(self)  # ВЫКЛЮЧЕНИЕ ВСЕЙ ИГРОВОЙ МУЗЫКИ
 
     if is_win:  # ЕСЛИ ИГРОК ВЫЙГРАЛ
         self.status = "end"  # СТАТУС ОКНА - КОНЕЦ (победа)

@@ -270,6 +270,7 @@ class Camera(pygame.sprite.Group):
         self.offset.y = player.rect.centery - self.half_h  # СДВИГ КАМЕРЫ ПО ИГРИКАМ
 
         if is_boss:  # ЕСЛИ ИГРОК НАХОДИТСЯ НА ЛОКАЦИИ С БОССОМ НАСТРАИВАЕМ КАМЕРУ ПО СДВИГАМ ПОД НЕЁ
+            # (значения подобраны экспериментальным путём, приблизительно)
             if self.offset.x < 0:
                 self.offset.x = 0
             if self.offset.x > 517:
@@ -314,8 +315,7 @@ class Camera(pygame.sprite.Group):
 
             self.display_surface.blit(sprite.image, offset_rect)  # ОТРИСОВКА СПРАЙТОВ ИЗ ЗАГЛАВИЯ ЦИКЛА
 
-        # ОТРИСОВКА ТЕХ СПРАЙТОВ, ПОД КОТОРЫМИ БУДЕТ ИГРОК
-        for sprite in last:
+        for sprite in last:  # ОТРИСОВКА ТЕХ СПРАЙТОВ, ПОД КОТОРЫМИ БУДЕТ ИГРОК
             offset_rect = sprite.rect.topleft - self.offset
             self.display_surface.blit(sprite.image, offset_rect)
 

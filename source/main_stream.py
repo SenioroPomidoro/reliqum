@@ -31,43 +31,45 @@ class MainStream:
         :param h: высота экрана
         :param music: музыка, проигрывающаяся в меню
         """
-
+        # ===================
         self.fullscreen = False  # РЕЖИМ ЭКРАНА ПО УМОЛЧАНИЮ - ОКОННЫЙ
         self.w, self.h = self.size = w, h  # ЗАПИСЬ РАЗМЕРОВ ЭКРАНА
         self.status = None  # СТАТУС ВКЛЮЧЕНО НА ДАННЫЙ МОМЕНТ ЭКРАНА (для отрисовки) ПО УМОЛЧАНИЮ - None
-
+        # ===================
         load_music(self)  # ЗАГРУЗКА МУЗЫКИ
-
+        # ===================
         self.custom_font = pygame.font.Font("data/fonts/base_font.ttf", 40)  # ОПРЕДЕЛЕНИЕ СОБСТВЕННОГО ШРИФТА
         self.window_surface = pygame.display.set_mode(self.size)  # СОЗДАНИЕ ЭКРАННОЙ ПОВЕРХНОСТИ ДЛЯ МЕНЮ
-
+        # ===================
         self.import_music_settings = import_music_settings
         self.import_music_settings(self)  # ПОЛУЧЕНИЕ НАСТРОЕК ИЗ ФАЙЛА settings.csv
         load_main_ui(self)  # ЗАГРУЗКА ГЛАВНОГО МЕНЮ - ПО УМОЛЧАНИЮ
         # И ЗАПИСЬ В АТРИБУТЫ self (ГРОМКОСТЬ МУЗЫКИ)
-
+        # ===================
     # -----------------------------------------------------------------------------------------------------------------
 
     def start_menu(self) -> None:
         """Запуск основного игрового потока"""
-
-        # -------------------------------------------------------------------------------------------------------------
-
+        # ===================
+        # УСТАНОВКА ИКОНКИ ИГРЫ
+        pygame.display.set_icon(pygame.image.load("data/images/main_images/game_icon.png"))
+        # ===================
         self.background = pygame.Surface(self.size)  # ЗАДНИЙ ФОН
         self.background.fill(pygame.Color(BG_COLOR))  # ЗАПОЛНЕНИЯ ЗАДНЕГО ФОНА ЗАДАННЫМ ЦВЕТОМ
-
+        # ===================
         self.level_type = 0  # ТИП УРОВНЯ: 0 - ПЕРВЫЙ, 1 - ВТОРОЙ
         self.level_1 = Level()  # ЗАГРУЗКА ПЕРВОГО УРОВНЯ
         self.level_2 = Level(1)  # ЗАГРУЗКА ВТОРОГО УРОВНЯ
         self.levels = [self.level_1, self.level_2]  # СПИСОК ИЗ ДВУХ УРОВНЕЙ
-
+        # ===================
         self.is_game_started = False  # ЗАПУЩЕНА ЛИ ИГРА
         self.is_game_paused = False  # ПОСТАВЛЕНА ЛИ ИГРА НА ПАУЗУ
         self.is_game_ended = False  # ЗАКОНЧИЛАСЬ ЛИ ИГРА (проиграл игрок/выйграл)
         self.win = False  # ПОБЕДИЛ ЛИ ИГРОК
         self.lose = False  # ПРОИГРАЛ ЛИ ИГРОК
-
+        # ===================
         self.clock = pygame.time.Clock()  # ОПРЕДЕЛЕНИЕ ОБЪЕКТА ЧАСОВ
+        # ===================
 
         # -------------------------------------------------------------------------------------------------------------
         self.running = True  # ОПРЕДЕЛЕНИЕ ПАРАМЕТРА, ОПРЕДЕЛЯЮЩЕГО ЗАПУЩЕНО ПРИЛОЖЕНИЕ ИЛИ НЕТ
@@ -81,13 +83,12 @@ class MainStream:
             self.check_end_game()  # ПРОВЕРКА ИГРЫ НА ВЫИГРЫШ / ПРОИГРЫШ
 
             pygame.display.update()  # ОБНОВЛЕНИЕ ОКНА
-
         # -------------------------------------------------------------------------------------------------------------
+
     # -----------------------------------------------------------------------------------------------------------------
     def update_time(self):
         """Метод, обновляющий игровое время в процессе забега"""
-        self.time_delta = self.clock.tick(
-            FPS) / 1000.0  # ПОЛУЧЕНИЯ ПРОШЕДШЕГО ВРЕМЕНИ С ПРОШЛОГО ТИКА ИГРОВЫХ ЧАСОВ
+        self.time_delta = self.clock.tick(FPS) / 1000.0  # ПОЛУЧЕНИЯ ПРОШЕДШЕГО ВРЕМЕНИ С ПРОШЛОГО ТИКА ИГРОВЫХ ЧАСОВ
         if self.is_game_started and not self.is_game_ended:  # ОБНОВЛЕНИЕ ИГРОВОГО ТАЙМЕРА, ЕСЛИ ЗАПУЩЕН ИГРОВОЙ УРОВЕНЬ
             if not self.level_type:  # ЕСЛИ ТИП ИГРОВОГО УРОВНЯ РАВЕН 0 (начальный уровень)
                 self.level_1.game_time += self.time_delta  # ОБНОВЛЕНИЕ ВРЕМЕНИ НА НАЧАЛЬНОМ УРОВНЕ
@@ -117,22 +118,27 @@ class MainStream:
     def check_end_game(self) -> None:
         """Метод, осуществляющий проверку того, закончилась ли игра (умер игрок или победил)"""
         if self.level_2.check_win() and not self.win:  # ЕСЛИ ИГРОК ПОБЕЖДАЕТ
+            # ===================
             self.is_game_paused = True  # ИГРА СТАВИТСЯ НА ПАУЗУ
             self.win = True  # ИГРОК ПОБЕЖДАЕТ
             self.play_time = self.level_2.game_time  # УСТАНАВЛИВАЕТСЯ ИГРОВОЕ ВРЕМЯ
             self.killed = 17  # РАЗ ИГРОК ПОБЕДИЛ, ТО ОН ОДОЛЕЛ ВСЕХ ВРАГОВ - А ВСЕГО ИХ 17
+            # ===================
             append_result(self.play_time, 17)  # ЗАГРУЗКА РЕЗУЛЬТАТА В csv ФАЙЛ С РЕЗУЛЬТАТАМИ ЗАБЕГОВ
             load_end_ui(self)  # ЗАГРУЗКА МЕНЮ ОКОНЧАНИЯ (победа)
 
         if (self.level_1.check_lose() or self.level_2.check_lose()) and not self.lose:  # ЕСЛИ ИГРОК УМИРАЕТ
+            # ===================
             if self.level_1.check_lose():  # ЕСЛИ ИГРОК УМИРАЕТ НА ПЕРВОМ УРОВНЕ
                 t = self.level_1.game_time  # БЕРЁТСЯ ВРЕМЯ С ПЕРВОГО УРОВНЯ
             else:  # ИНАЧЕ
                 t = self.level_2.game_time  # БЕРЁТСЯ ВРЕМЯ СО ВТОРОГО УРОВНЯ
+            # ===================
             self.is_game_paused = True  # ИГРА СТАВИТСЯ НА ПАУЗУ
             self.lose = True  # ИГРОК ПРОИГРЫВАЕТ
             self.play_time = t  # УСТАНАВЛИВАЕТСЯ ТЕКУЩЕЕ ИГРОВОЕ ВРЕМЯ
             self.killed = self.level_1.player.kill_counter  # КОЛИЧЕСТВО УБИТЫХ ВРАГОВ
+            # ===================
             append_result(self.play_time, self.killed)  # ЗАГРУЗКА РЕЗУЛЬТАТА В csv ФАЙЛ С РЕЗУЛЬТАТАМИ ЗАБЕГОВ
             load_end_ui(self, False)  # ЗАГРУЗКА МЕНЮ ОКОНЧАНИЯ (пораженеие)
 
@@ -140,32 +146,39 @@ class MainStream:
     def main_render(self) -> None:
         """Метод, осуществляющий отрисовку тех или иных частей приложения,
          в зависимости от процессов, в нём происходящих"""
-
+        # ===================
         if not self.is_game_started:  # ЕСЛИ ИГРОВОЙ ПРОЦЕСС НЕ НАЧАТ
             self.window_surface.blit(self.background, (0, 0))  # ЗАПОЛНЕНИЕ ОСНОВНОГО СЛОЯ ФОНОМ ГЛАВНОГО МЕНЮ
-
+        # ===================
         draw_labels(self)  # ОТРИСОВКА ДОПОЛНИТЕЛЬНЫХ ЧАСТЕЙ ОКНА (тексты, примечания и т.п.)
-
+        # ===================
         if self.is_game_started and not self.is_game_paused and not self.is_game_ended:  # ЕСЛИ ИГРА В ПРОЦЕССЕ
-            if not self.level_type:  # ЕСЛИ ЭТО ПЕРВЫЙ УРОВЕНЬ
-                if not self.is_game_music_playing:
-                    self.main_music.stop()
-                    self.game_music.play(100)
-                    self.game_music.set_volume(self.ingame_music_value / 100)  # УСТАНОВКА ГРОМКОСТИ МУЗЫКИ
-                    self.is_game_music_playing = True
-                self.level_1.run()  # ОТРИСОВКА ПЕРВОГО УРОВНЯ
-            else:  # ЕСЛИ ЭТО ВТОРОЙ УРОВЕНЬ
-                if not self.is_boss_music_playing:
-                    self.game_music.stop()
-                    self.is_game_music_playing = False
-
-                    self.boss_music.play(100)
-                    self.boss_music.set_volume(self.ingame_music_value / 100)  # УСТАНОВКА ГРОМКОСТИ МУЗЫКИ
-                    self.is_boss_music_playing = True
-                self.level_2.run()  # ОТРИСОВКА ВТОРОГО УРОВНЯ
-
+            self.draw_levels()  # ОТРИСОВКА УРОВНЯ
+        # ===================
+        # СЛУЧАЙ, КОГДА ИГРА НЕ ЗАПУЩЕНА, ИЛИ ИГРА НА ПАУЗЕ
         if not self.is_game_started or (self.is_game_started and self.is_game_paused):
             self.manager.update(self.time_delta)  # ОБНОВЛЕНИЕ МЕНЕДЖЕРА ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
             self.manager.draw_ui(self.window_surface)  # ОТРИСОВКА ЧАСТЕЙ ОКНА, ОТВЕЧАЮЩИХ ЗА ГРАФИЧЕСКИЙ ИНТЕРФЕЙС
+        # ===================
+
     # -----------------------------------------------------------------------------------------------------------------
+    def draw_levels(self):
+        # ===================
+        if not self.level_type:  # ЕСЛИ ЭТО ПЕРВЫЙ УРОВЕНЬ
+            if not self.is_game_music_playing:  # ЕСЛИ ИГРОВАЯ МУЗЫКА ЕЩЁ НЕ ЗАПУЩЕНА (А СООТВЕТСВЕННО И УРОВЕНЬ)
+                self.main_music.stop()  # ОСТАНОВКА МУЗЫКИ ИЗ МЕНЮ
+                self.game_music.play(100)  # ВКЛЮЧЕНИЕ ИГРОВОЙ МУЗЫКИ
+                self.game_music.set_volume(self.ingame_music_value / 100)  # УСТАНОВКА ГРОМКОСТИ ИГРОВОЙ МУЗЫКИ
+                self.is_game_music_playing = True  # МУЗЫКА НА ГЛАВНОМ УРОВНЕ ИГРАЕТ
+            self.level_1.run()  # ОТРИСОВКА ПЕРВОГО УРОВНЯ
+
+        else:  # ЕСЛИ ЭТО ВТОРОЙ УРОВЕНЬ
+            if not self.is_boss_music_playing:  # ЕСЛИ ИГРОВАЯ МУЗЫКА ЕЩЁ НЕ ЗАПУЩЕНА (А СООТВЕТСВЕННО И БОЙ С БОССОМ)
+                self.game_music.stop()  # ОСТАНОВКА МУЗЫКИ С ПЕРВОГО УРОВНЯ
+                self.boss_music.play(100)  # ВКЛЮЧЕНИЕ МУЗЫКИ БИТВЫ С БОССОМ
+                self.boss_music.set_volume(self.ingame_music_value / 100)  # УСТАНОВКА ГРОМКОСТИ МУЗЫКИ БОССА
+                self.is_boss_music_playing = True  # МУЗЫКА БИТВЫ С БОССОМ ИГРАЕТ
+                self.is_game_music_playing = False  # МУЗЫКА НА ГЛАВНОМ УРОВНЕ НЕ ИГРАЕТ
+            self.level_2.run()  # ОТРИСОВКА ВТОРОГО УРОВНЯ
+        # ===================
 # ---------------------------------------------------------------------------------------------------------------------

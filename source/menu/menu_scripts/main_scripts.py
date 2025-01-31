@@ -82,7 +82,7 @@ def button_pressed_process(self, event) -> None:
 
 
 # ---------------------------------------------------------------------------------------------------------------------
-def keydown_process(self, event, player):
+def keydown_process(self, event, player) -> None:
     """
     Функция, обрабатывающая нажатия на кнопки клавиатуры
     :param self: объект главного потока
