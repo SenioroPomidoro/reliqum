@@ -5,24 +5,106 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 31 jan commit -----&#10;Организованы все нужные звуковые моменты">
-      <change afterPath="$PROJECT_DIR$/data/images/main_images/game_icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sounds/music_volume.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/sounds/music_volume.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/enemy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/game_effects.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/game_effects.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/game_level.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/magic.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/magic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/tile.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/game_scripts/tile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/game/user_interface/game_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/game/user_interface/game_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/main_stream.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/main_stream.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/menu_scripts/main_scripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/menu_scripts/main_scripts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/user_interface/draw_labels.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/user_interface/draw_labels.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/user_interface/main_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/user_interface/main_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/user_interface/settings_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/user_interface/settings_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/menu/user_interface/statistics_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/menu/user_interface/statistics_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fonts/base_font.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/boss_map/ground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/boss_map/map_Details.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/boss_map/map_Enemies.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/boss_map/map_Floor.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/boss_map/map_FloorBlocks.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/boss_map/map_Objects.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/boss_map/map_lepeha.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/level/map_develop(TEMPRORAY)/Floor.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/level/map_develop(TEMPRORAY)/Objects.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/level/map_develop(TEMPRORAY)/Trees.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/level/map_develop(TEMPRORAY)/map.tmx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/ground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/map_Details.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/map_Doors_closed.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/map_Doors_open.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/map_Enemies.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/map_Floor.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/map_FloorBlocks.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/map_Objects.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game_map_files/map/map_Trees.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/main_images/game_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/main_images/game_label.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/attacks/bamboo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/attacks/slash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/death/death.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/magic/flame/fire.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/magic/flame/fire_attack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/magic/heal/heal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/magic/heal/heal_attack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/main_hero/down/down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/main_hero/down_attack/down_attack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/main_hero/down_idle/down_idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/main_hero/left/left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/main_hero/left_attack/left_attack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/main_hero/left_idle/left_idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/main_hero/right/right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/main_hero/right_attack/right_attack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/main_hero/right_idle/right_idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/main_hero/up/up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/main_hero/up_attack/up_attack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/main_hero/up_idle/up_idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/monsters/Bamboo/attack/attack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/monsters/Bamboo/idle/idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/monsters/Bamboo/move/move.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/monsters/Eye/attack/attack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/monsters/Eye/idle/idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/monsters/Eye/move/move.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/weapons/axe/down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/weapons/axe/full.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/weapons/axe/left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/weapons/axe/right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/weapons/axe/up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/weapons/lance/down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/weapons/lance/full.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/weapons/lance/left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/weapons/lance/right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/sprites/weapons/lance/up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/tileset_images/Floor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/tileset_images/Objects.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/images/tileset_images/Trees.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/races/races.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/game_sounds/boss_music.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/game_sounds/end/lose.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/game_sounds/end/win.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/game_sounds/entities/enemies/hit.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/game_sounds/entities/enemies/monster_death.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/game_sounds/entities/player/death_sound.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/game_sounds/entities/player/fire.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/game_sounds/entities/player/heal.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/game_sounds/entities/player/oof.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/game_sounds/entities/player/slash.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/game_sounds/game_music.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/menu_sounds/click.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/menu_sounds/main_music.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sounds/music_volume.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/theme.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/enemy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/entity.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/game_effects.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/game_level.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/magic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/player.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/tile.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/game_scripts/weapon.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/game/user_interface/game_ui.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/helping_scripts/imports.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/helping_scripts/load_sounds.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/helping_scripts/races_append.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/main_stream.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_scripts/main_scripts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_scripts/settings_scripts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/menu_scripts/statistics_scripts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/user_interface/draw_labels.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/user_interface/main_ui.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/user_interface/settings_ui.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/menu/user_interface/statistics_ui.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,14 +175,36 @@
       <recent name="$PROJECT_DIR$/data/images/spriites/weapons/lance" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/data/images/main_images" />
       <recent name="$PROJECT_DIR$/data/sounds/game_sounds/entities/enemies" />
       <recent name="$PROJECT_DIR$/data/sounds/game_sounds/entities" />
       <recent name="$PROJECT_DIR$/data/sounds/game_sounds/entities/player" />
-      <recent name="$PROJECT_DIR$/data/sounds/game_sounds/enemies" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
+    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyGAME" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Reliqum" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Reliqum/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyGAME" />
       <option name="ENV_FILES" value="" />
@@ -189,35 +293,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pyGAME" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.statistics_scripts" />
         <item itemvalue="Python.races_append" />
         <item itemvalue="Python.test (1)" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
