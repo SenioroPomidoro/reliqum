@@ -52,10 +52,9 @@ class Level:
 
     # -----------------------------------------------------------------------------------------------------------------
     def create_map(self) -> None:
-        """Функция создания карты"""
+        """Метод создания карты"""
 
-        # ЗАГРУЗКА РАЗЛИЧНЫХ СЛОЁВ ПЕРВОГО УРОВНЯ
-        if self.level_index == 0:
+        if self.level_index == 0:  # ЗАГРУЗКА СЛОЁВ ПЕРВОГО УРОВНЯ
             layouts = {
                 "boundary": import_csv_layout(F"data/game_map_files/map/map_FloorBlocks.csv"),
                 "Trees": import_csv_layout(F"data/game_map_files/map/map_Trees.csv"),
@@ -64,7 +63,7 @@ class Level:
                 "door_closed": import_csv_layout(F"data/game_map_files/map/map_Doors_closed.csv"),
                 "door_open": import_csv_layout(F"data/game_map_files/map/map_Doors_open.csv")
             }
-        else:
+        else:  # ЗАГРУЗКА СЛОЁВ УРОВНЯ С БОССОМ
             layouts = {
                 "boundary": import_csv_layout(F"data/game_map_files/boss_map/map_FloorBlocks.csv"),
                 "Objects": import_csv_layout(F"data/game_map_files/boss_map/map_Objects.csv"),
@@ -73,7 +72,7 @@ class Level:
                 }
         graphics = import_graphics("data/images/tileset_images")  # ЗАГРУЗКА ИЗОБРАЖЕНИЙ С ГРАФИКОЙ
 
-        # ОТРИСОВКА КАРТЫ
+        # СОЗДАНИЕ КАРТЫ
         for style, layout in layouts.items():
             for row_i, row in enumerate(layout):
                 for col_i, col in enumerate(row):
@@ -262,7 +261,7 @@ class Camera(pygame.sprite.Group):
     # -----------------------------------------------------------------------------------------------------------------
     def custom_draw(self, player, is_boss=False) -> None:
         """
-        Функция отрисовки изображения камеры
+        Метод отрисовки изображения с камеры
         :param is_boss: находится ли игрок в локации с боссом (в этом случае нужно, чтобы камера не заходила за стенки
         :param player: объект игрока
         """
@@ -270,7 +269,6 @@ class Camera(pygame.sprite.Group):
         self.offset.y = player.rect.centery - self.half_h  # СДВИГ КАМЕРЫ ПО ИГРИКАМ
 
         if is_boss:  # ЕСЛИ ИГРОК НАХОДИТСЯ НА ЛОКАЦИИ С БОССОМ НАСТРАИВАЕМ КАМЕРУ ПО СДВИГАМ ПОД НЕЁ
-            # (значения подобраны экспериментальным путём, приблизительно)
             if self.offset.x < 0:
                 self.offset.x = 0
             if self.offset.x > 517:
