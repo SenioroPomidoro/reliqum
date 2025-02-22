@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 22 feb commit -----&#10;Обновление следующий моментов:&#10;- Добавлен мини-гайд при нажатии на паузу во время игры.&#10;- Исправлена проблема со шрифтами&#10;- Добавлены и изменены комментарии в соответствии с содержанием коммита.&#10;- draw_labels.py перемещен в папку helping_scripts (в частности из-за того, что его действие распространяется не только на меню, но и на всю игру в целом)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 22 feb commit -----&#10;Обновлён файл README.md (2)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,39 +34,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.2.executor": "Run",
-    "Python.BUTTON_EXAMPLES.executor": "Run",
-    "Python.BUTTON_SWITCH.executor": "Run",
-    "Python.UI_EXAMPLE.executor": "Run",
-    "Python.chain.executor": "Run",
-    "Python.draw_labels.executor": "Run",
-    "Python.game_level.executor": "Run",
-    "Python.game_main.executor": "Run",
-    "Python.game_ui.executor": "Run",
-    "Python.import_csv_layout.executor": "Run",
-    "Python.imports.executor": "Run",
-    "Python.labyrinth_example.executor": "Run",
-    "Python.load_window.executor": "Run",
-    "Python.main (1).executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.main_game.executor": "Run",
-    "Python.main_menu (1).executor": "Run",
-    "Python.main_menu.executor": "Run",
-    "Python.player.executor": "Run",
-    "Python.sounds.executor": "Run",
-    "Python.statistics_append.executor": "Run",
-    "Python.statistics_scripts.executor": "Run",
-    "Python.test (1).executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.write.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/maxim/Prog/Python/projects/pyGAME/data/sounds/game_sounds",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BUTTON_EXAMPLES.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BUTTON_SWITCH.executor&quot;: &quot;Run&quot;,
+    &quot;Python.UI_EXAMPLE.executor&quot;: &quot;Run&quot;,
+    &quot;Python.chain.executor&quot;: &quot;Run&quot;,
+    &quot;Python.draw_labels.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game_level.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game_main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game_ui.executor&quot;: &quot;Run&quot;,
+    &quot;Python.import_csv_layout.executor&quot;: &quot;Run&quot;,
+    &quot;Python.imports.executor&quot;: &quot;Run&quot;,
+    &quot;Python.labyrinth_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.load_window.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_game.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_menu (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_menu.executor&quot;: &quot;Run&quot;,
+    &quot;Python.player.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sounds.executor&quot;: &quot;Run&quot;,
+    &quot;Python.statistics_append.executor&quot;: &quot;Run&quot;,
+    &quot;Python.statistics_scripts.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.write.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/maxim/Prog/Python/projects/pyGAME/data/sounds/game_sounds&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/data/sounds/game_sounds" />
@@ -367,7 +364,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740207774060</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="----- 22 feb commit -----&#10;Обновлён файл README.md">
+      <option name="closed" value="true" />
+      <created>1740208136708</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1740208136708</updated>
+    </task>
+    <task id="LOCAL-00020" summary="----- 22 feb commit -----&#10;Обновлён файл README.md (2)">
+      <option name="closed" value="true" />
+      <created>1740208277764</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1740208277764</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -404,6 +417,8 @@
     <MESSAGE value="----- 1 feb commit -----&#10;Проект свёрнут в .exe файл, main.py остаётся.&#10;Все основные файлы убраны в папку Reliqum." />
     <MESSAGE value="----- 1 feb commit FIXED -----&#10;Проект свёрнут в .exe файл, main.py остаётся.&#10;Все основные файлы убраны в папку Reliqum.&#10;В ПРОШЛЫХ КОММИТАХ ЗАБЫЛ ДОБАВИТЬ НОВЫЕ ФАЙЛЫ" />
     <MESSAGE value="----- 22 feb commit -----&#10;Обновление следующий моментов:&#10;- Добавлен мини-гайд при нажатии на паузу во время игры.&#10;- Исправлена проблема со шрифтами&#10;- Добавлены и изменены комментарии в соответствии с содержанием коммита.&#10;- draw_labels.py перемещен в папку helping_scripts (в частности из-за того, что его действие распространяется не только на меню, но и на всю игру в целом)" />
-    <option name="LAST_COMMIT_MESSAGE" value="----- 22 feb commit -----&#10;Обновление следующий моментов:&#10;- Добавлен мини-гайд при нажатии на паузу во время игры.&#10;- Исправлена проблема со шрифтами&#10;- Добавлены и изменены комментарии в соответствии с содержанием коммита.&#10;- draw_labels.py перемещен в папку helping_scripts (в частности из-за того, что его действие распространяется не только на меню, но и на всю игру в целом)" />
+    <MESSAGE value="----- 22 feb commit -----&#10;Обновлён файл README.md" />
+    <MESSAGE value="----- 22 feb commit -----&#10;Обновлён файл README.md (2)" />
+    <option name="LAST_COMMIT_MESSAGE" value="----- 22 feb commit -----&#10;Обновлён файл README.md (2)" />
   </component>
 </project>
