@@ -2,6 +2,7 @@ import pygame
 
 from data.settings import BG_COLOR
 
+
 # ---------------------------------------------------------------------------------------------------------------------
 
 
@@ -52,9 +53,25 @@ def draw_labels(self) -> None:
         background.fill(BG_COLOR)  # ЗАПОЛНЕНИЕ ФОНА ЦВЕТОМ ДЛЯ ФОНА
         self.window_surface.blit(background, (self.w // 4, self.h // 7))  # РАЗМЕЩЕНИЕ ФОНА НА ОСНОВНОМ ХОЛСТЕ ИГРЫ
 
-        pause_label = self.custom_font.render("ПАУЗА", 1, (0, 0, 0))  # НАДПИСЬ "ПАУЗА"
-        self.window_surface.blit(pause_label, (self.w // 4 + 300, self. h // 7 + 50))  # РАЗМЕЩЕНИЕ НАДПИСИ "ПАУЗА"
+        pause_text = "ПАУЗА"
+        pause_label = self.custom_font.render(pause_text, 1, (0, 0, 0))  # НАДПИСЬ "ПАУЗА"
+        self.window_surface.blit(pause_label, (self.w // 4 + 265, self.h // 7 + 10))  # РАЗМЕЩЕНИЕ НАДПИСИ "ПАУЗА"
 
+        text = "Z - Атака оружием\nQ - Смена оружия\nX - Использование магии\nE - Смена магии\nСтрелочки - перемещение"
+        help_label_1 = self.custom_font.render(text, 1, (0, 0, 0))  # ТЕКСТ С ОПИСАНИЕМ УПРАВЛЕНИЯ
+        self.window_surface.blit(help_label_1, (self.w // 3 - 80, self.h // 7 + 50))  # РАЗМЕЩЕНИЕ ТЕКСТА С ПОДСКАЗКОЙ
+
+        # ПОДСКАЗКИ О ДЕЙСТВИЯХ ИГРОКА ДЛЯ ПОБЕДЫ
+        text = ("Уничтожьте всех 16 врагов на первой локации\n"
+                " и направляйтесь в самый верх карты за дверь\n"
+                " - на бой с боссом!")
+        help_label_2 = self.custom_font_small.render(text, 1, (0, 0, 0))  # ТЕКСТ С ОПИСАНИЕМ НУЖНЫХ ДЛЯ ИГРОКА ДЕЙСТВИЙ
+        self.window_surface.blit(help_label_2, (self.w // 3 - 90, self.h // 7 + 320))  # РАЗМЕЩЕНИЕ ТЕКСТА С ПОДСКАЗКОЙ
+
+        # МИНИ-НАДПИСЬ О ЗКАРЫТИИ ОКНА ПАУЗЫ
+        pause_exit_text = "ESC - НАЗАД К ИГРЕ"
+        pause_exit_label = self.custom_font_small.render(pause_exit_text, 1, (0, 0, 0))
+        self.window_surface.blit(pause_exit_label, (self.w // 3 - 80, self.h // 2 + 285))
     # -----------------------------------------------------------------------------------------------------------------
     elif self.status == "end":  # ОТРИСОВКА ОКНА ОКОНЧАНИЯ ИГРЫ (в случае победы)
         background = pygame.surface.Surface((self.w // 2, self.h * 4 // 5))  # ФОН ОКНА ОКАНЧАНИЯ

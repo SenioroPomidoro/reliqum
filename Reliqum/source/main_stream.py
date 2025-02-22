@@ -3,16 +3,16 @@ import pygame_gui
 
 from data.settings import *
 
-from source.menu.menu_scripts.main_scripts import start_exit_dialog
-from source.menu.menu_scripts.main_scripts import button_pressed_process
-from source.menu.menu_scripts.main_scripts import keydown_process
 from source.menu.menu_scripts.settings_scripts import slider_moved_process
+from source.menu.menu_scripts.main_scripts import button_pressed_process
+from source.menu.menu_scripts.main_scripts import start_exit_dialog
+from source.menu.menu_scripts.main_scripts import keydown_process
 
 from source.menu.user_interface.main_ui import load_main_ui
-from source.menu.user_interface.draw_labels import draw_labels
 
-from source.helping_scripts.races_append import append_result
 from source.helping_scripts.imports import import_music_settings
+from source.helping_scripts.races_append import append_result
+from source.helping_scripts.draw_labels import draw_labels
 from source.helping_scripts.load_sounds import load_music
 
 from source.game.user_interface.game_ui import load_end_ui
@@ -39,6 +39,7 @@ class MainStream:
         load_music(self)  # ЗАГРУЗКА МУЗЫКИ
         # ===================
         self.custom_font = pygame.font.Font("data/fonts/base_font.ttf", 40)  # ОПРЕДЕЛЕНИЕ СОБСТВЕННОГО ШРИФТА
+        self.custom_font_small = pygame.font.Font("data/fonts/base_font.ttf", size=25)  # ШРИФТ МЕНЬШЕГО РАЗМЕРА
         self.window_surface = pygame.display.set_mode(self.size)  # СОЗДАНИЕ ЭКРАННОЙ ПОВЕРХНОСТИ ДЛЯ МЕНЮ
         # ===================
         self.import_music_settings = import_music_settings
@@ -86,7 +87,7 @@ class MainStream:
         # -------------------------------------------------------------------------------------------------------------
 
     # -----------------------------------------------------------------------------------------------------------------
-    def update_time(self):
+    def update_time(self) -> None:
         """Метод, обновляющий игровое время в процессе забега"""
         self.time_delta = self.clock.tick(FPS) / 1000.0  # ПОЛУЧЕНИЯ ПРОШЕДШЕГО ВРЕМЕНИ С ПРОШЛОГО ТИКА ИГРОВЫХ ЧАСОВ
         if self.is_game_started and not self.is_game_ended:  # ОБНОВЛЕНИЕ ИГРОВОГО ТАЙМЕРА, ЕСЛИ ЗАПУЩЕН ИГРОВОЙ УРОВЕНЬ
@@ -162,7 +163,7 @@ class MainStream:
         # ===================
 
     # -----------------------------------------------------------------------------------------------------------------
-    def draw_levels(self):
+    def draw_levels(self) -> None:
         # ===================
         if not self.level_type:  # ЕСЛИ ЭТО ПЕРВЫЙ УРОВЕНЬ
             if not self.is_game_music_playing:  # ЕСЛИ ИГРОВАЯ МУЗЫКА ЕЩЁ НЕ ЗАПУЩЕНА (А СООТВЕТСВЕННО И УРОВЕНЬ)

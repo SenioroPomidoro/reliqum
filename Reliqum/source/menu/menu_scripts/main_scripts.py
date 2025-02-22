@@ -18,12 +18,12 @@ def start_exit_dialog(self) -> None:
     self.exit_dialog = pygame_gui.windows.UIConfirmationDialog(
         rect=pygame.Rect((self.w / 3, self.h / 4), (self.w / 3, self.h / 4)),
         manager=self.manager,  # МЕНЕДЖЕР ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
-        window_title="Подтверждение выхода из игры",  # НАЗВАНИЕ ВСПЛЫВАЮЩЕГО ОКНА
+        window_title="Подтверждение выхода",  # НАЗВАНИЕ ВСПЛЫВАЮЩЕГО ОКНА
         action_long_desc="ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ ВЫЙТИ ИЗ ИГРЫ?",  # ВОПРОС О ВЫХОДЕ ИЗ ИГРЫ
-        action_short_name="ДА",  # НАДПИСЬ НА КНОПКЕ ПОДТВЕРЖДЕНИЯ
+        action_short_name="да",  # НАДПИСЬ НА КНОПКЕ ПОДТВЕРЖДЕНИЯ
         blocking=True  # БЛОКИРОВКА ЛЮБОГО НАЖАТИЯ ДО РЕАКЦИИ НА ВСПЛЫВАЮЩЕЕ ОКНО
     )
-    self.exit_dialog.cancel_button.set_text("НЕТ")  # НАДПИСЬ НА КНОПКЕ ОТКАЗА
+    self.exit_dialog.cancel_button.set_text("нет")  # НАДПИСЬ НА КНОПКЕ ОТКАЗА
 # ---------------------------------------------------------------------------------------------------------------------
 
 

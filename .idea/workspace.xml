@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 1 feb commit FIXED -----&#10;Проект свёрнут в .exe файл, main.py остаётся.&#10;Все основные файлы убраны в папку Reliqum.&#10;В ПРОШЛЫХ КОММИТАХ ЗАБЫЛ ДОБАВИТЬ НОВЫЕ ФАЙЛЫ">
-      <change afterPath="$PROJECT_DIR$/Новая презентация.pptx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/data/races/races.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/data/races/races.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/game_level.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/data/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/data/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/data/theme.json" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/data/theme.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/user_interface/game_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/user_interface/game_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/main_stream.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/main_stream.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/menu/menu_scripts/main_scripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/menu/menu_scripts/main_scripts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/menu/user_interface/draw_labels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/helping_scripts/draw_labels.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,37 +42,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.BUTTON_EXAMPLES.executor&quot;: &quot;Run&quot;,
-    &quot;Python.BUTTON_SWITCH.executor&quot;: &quot;Run&quot;,
-    &quot;Python.UI_EXAMPLE.executor&quot;: &quot;Run&quot;,
-    &quot;Python.chain.executor&quot;: &quot;Run&quot;,
-    &quot;Python.game_level.executor&quot;: &quot;Run&quot;,
-    &quot;Python.game_main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.import_csv_layout.executor&quot;: &quot;Run&quot;,
-    &quot;Python.imports.executor&quot;: &quot;Run&quot;,
-    &quot;Python.labyrinth_example.executor&quot;: &quot;Run&quot;,
-    &quot;Python.load_window.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_game.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_menu (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_menu.executor&quot;: &quot;Run&quot;,
-    &quot;Python.player.executor&quot;: &quot;Run&quot;,
-    &quot;Python.sounds.executor&quot;: &quot;Run&quot;,
-    &quot;Python.statistics_append.executor&quot;: &quot;Run&quot;,
-    &quot;Python.statistics_scripts.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.write.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/maxim/Prog/Python/projects/pyGAME/data/sounds/game_sounds&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.2.executor": "Run",
+    "Python.BUTTON_EXAMPLES.executor": "Run",
+    "Python.BUTTON_SWITCH.executor": "Run",
+    "Python.UI_EXAMPLE.executor": "Run",
+    "Python.chain.executor": "Run",
+    "Python.draw_labels.executor": "Run",
+    "Python.game_level.executor": "Run",
+    "Python.game_main.executor": "Run",
+    "Python.game_ui.executor": "Run",
+    "Python.import_csv_layout.executor": "Run",
+    "Python.imports.executor": "Run",
+    "Python.labyrinth_example.executor": "Run",
+    "Python.load_window.executor": "Run",
+    "Python.main (1).executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.main_game.executor": "Run",
+    "Python.main_menu (1).executor": "Run",
+    "Python.main_menu.executor": "Run",
+    "Python.player.executor": "Run",
+    "Python.sounds.executor": "Run",
+    "Python.statistics_append.executor": "Run",
+    "Python.statistics_scripts.executor": "Run",
+    "Python.test (1).executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.write.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/maxim/Prog/Python/projects/pyGAME/data/sounds/game_sounds",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/data/sounds/game_sounds" />
@@ -79,14 +84,58 @@
       <recent name="$PROJECT_DIR$/data/images/spriites/weapons/lance" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Reliqum/source/helping_scripts" />
+      <recent name="$PROJECT_DIR$/Reliqum/source/menu/menu_scripts" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/data/images/main_images" />
       <recent name="$PROJECT_DIR$/data/sounds/game_sounds/entities/enemies" />
-      <recent name="$PROJECT_DIR$/data/sounds/game_sounds/entities" />
-      <recent name="$PROJECT_DIR$/data/sounds/game_sounds/entities/player" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main (1)">
+    <configuration name="draw_labels" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyGAME" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Reliqum/source/menu/user_interface" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Reliqum/source/menu/menu_scripts/draw_labels.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="game_ui" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyGAME" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Reliqum/source/game/user_interface" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Reliqum/source/game/user_interface/game_ui.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyGAME" />
       <option name="ENV_FILES" value="" />
@@ -131,28 +180,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="races_append" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pyGAME" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/source/helping_scripts" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/source/helping_scripts/races_append.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="statistics_scripts" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyGAME" />
       <option name="ENV_FILES" value="" />
@@ -175,35 +202,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pyGAME" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.draw_labels" />
+        <item itemvalue="Python.game_ui" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.statistics_scripts" />
-        <item itemvalue="Python.races_append" />
-        <item itemvalue="Python.test (1)" />
       </list>
     </recent_temporary>
   </component>

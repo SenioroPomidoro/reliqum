@@ -32,10 +32,26 @@
          },
          "font":
          {
-             "size": "25",
+             "name": "base",
+             "size": "30",
+             "bold": "0",
+             "italic": 1,
+
              "regular_resource": {
-                 "package": "data/fonts",
-                 "resource": "base_font.ttf"
+                  "package": "data.fonts",
+                  "resource": "base_font.ttf"
+             },
+             "bold_resource": {
+                  "package": "data.fonts",
+                  "resource": "base_font.ttf"
+             },
+             "italic_resource": {
+                  "package": "data.fonts",
+                  "resource": "base_font.ttf"
+             },
+             "bold_italic_resource": {
+                  "package": "data.fonts",
+                  "resource": "base_font.ttf"
              }
          }
      }

@@ -22,6 +22,9 @@ class GameUI:
         self.weapon_graphics = [pygame.image.load(weapon["graphic"]).convert_alpha() for weapon in weapon_data.values()]
         self.magic_graphics = [pygame.image.load(magic["graphic"]).convert_alpha() for magic in magic_data.values()]
 
+        # ТЕКСТ ОБ ОТКРЫТИИ / ЗАКРЫТИИ ОКНА ПАЗУЫ
+        self.pause_text = self.font.render("ESC - ПАУЗА", 1, (0, 0, 0))
+
     # -----------------------------------------------------------------------------------------------------------------
     def show_bar(self, current: int, max_amount: int, bg_rect: pygame.Rect, color: str) -> None:
         """
@@ -136,6 +139,10 @@ class GameUI:
         self.weapon_overlay(player.weapon_index, player.can_switch_weapon)
         self.magic_overlay(player.magic_index, player.can_switch_magic)
 
+        # ОТОБРАЖЕНИЕ НАДПИСИ О ПАУЗЕ
+        x, y = self.display_surface.get_size()
+        self.display_surface.blit(self.pause_text, (20, y - 50))
+
     # -----------------------------------------------------------------------------------------------------------------
 
 
@@ -145,6 +152,8 @@ def load_pause_ui(self) -> None:
     """Функция подгрузки интерфейса во время паузы"""
     self.manager = pygame_gui.UIManager(self.size, "data/theme.json")  # МЕНЕДЖЕР ГРАФИЧЕСКОГО ИНТЕРФЕЙСА
     pygame.display.set_caption("Reliqum")  # УСТАНОВКА НАЗВАНИЯ ОКНА
+    font = pygame.font.Font("data/fonts/base_font.ttf", 30)  # ВРЕМЕННАЯ ПЕРЕМЕННАЯ ШРИФТА
+    display_surface = pygame.display.get_surface()
 
     # КНОПКА ВОЗВРАЩЕНИЯ В ГЛАВНОЕ МЕНЮ
     self.quit_button = pygame_gui.elements.UIButton(
