@@ -6,13 +6,14 @@ import pygame
 # КЛАСС ВИЗУАЛЬНЫХ ЭФФЕКТОВ
 class ParticleEffect(pygame.sprite.Sprite):
     # -----------------------------------------------------------------------------------------------------------------
-    def __init__(self, pos, animation_frames, groups, box_size) -> None:
+    def __init__(self, pos, animation_frames, groups, box_size, player=None) -> None:
         """
         Конструктор объектов класса визуальных эффектов
         :param pos: позиция эффекта
         :param animation_frames: анимация эффекта (по кадрам) - изображение
         :param groups: группы спрайтов, в которых будет находиться эффект
         :param box_size: кадра эффекта
+        :param player: объект игрока
         """
         super().__init__(groups)  # ПОМЕЩЕНИЕ СПРАЙТОВ В ГРУППЫ groups
 
@@ -25,6 +26,7 @@ class ParticleEffect(pygame.sprite.Sprite):
         self.frames = animation_frames  # КАДРЫ АНИМАЦИИ
         self.image = self.frames.subsurface((int(self.frame_index) * box_size, 0, box_size, box_size))  # ПЕРВЫЙ КАДР
         self.rect = self.image.get_rect(center=pos)  # РАСПОЛОЖЕНИЕ КАДРА НА ЭКРАНЕ
+        self.player = player  # ОБЪЕКТ ИГРОКА
 
     # -----------------------------------------------------------------------------------------------------------------
     def animate(self) -> None:

@@ -30,6 +30,9 @@ def load_player_sounds(self) -> None:
     # ЗВУК ПОЛУЧЕНИЯ УРОНА
     self.oof = pygame.mixer.Sound("data/sounds/game_sounds/entities/player/oof.mp3")
 
+    # ЗВУК ГРАВИТАЦИОННОЙ АТАКИ ПО ИГРОКУ
+    self.gravity_oof = pygame.mixer.Sound("data/sounds/game_sounds/entities/player/gravity_oof.mp3")
+
     # ЗВУК ИСПОЛЬЗОВАНИЯ ЗАКЛИНАНИЯ ЛЕЧЕНИЯ
     self.heal_sound = pygame.mixer.Sound("data/sounds/game_sounds/entities/player/heal.wav")
 

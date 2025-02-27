@@ -7,7 +7,7 @@ def append_result(time: int, kills: int) -> None:
     """
     Функция, добавляющая результат забега в общий список забегов
     :param time: игровое время забега
-    :param kills: количветсво поверженых врагов (из 17 возможных)
+    :param kills: количветсво поверженых врагов (из 39 возможных)
     """
     with open("data/races/races.csv", "r", newline="") as file:  # ОТКРЫТИЕ csv ФАЙЛА С ЗАБЕГАМИ
         headers = [{"time": "time", "monsters_killed": "monsters_killed"}]  # ЗАГОЛОВКИ csv ФАЙЛА

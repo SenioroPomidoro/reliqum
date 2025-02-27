@@ -128,7 +128,7 @@ class Level:
                                     self.create_magic
                                 )
                                 if self.level_index:  # ЕСЛИ ИГРОК НА ЛОКАЦИИ С БОССОМ
-                                    self.player.kill_counter = 16  # КОЛИЧЕСТВО ЕГО УБИЙСТВ РАВНО 16 (иначе он не мог
+                                    self.player.kill_counter = 36  # КОЛИЧЕСТВО ЕГО УБИЙСТВ РАВНО 16 (иначе он не мог
                                     # туда попасть)
                             else:  # СОЗДАНИЕ ВРАГОВ
                                 if required_element == 640:  # МОНСТР-ГЛАЗ
@@ -138,6 +138,10 @@ class Level:
                                         monster_name = "Bamboo"  # ЭТО БОСС БАМБУК
                                     else:  # ИНАЧЕ
                                         monster_name = "Eye"  # МОНСТР-ГЛАЗ
+                                if required_element == 641:
+                                    monster_name = "Spirit"
+                                if required_element == 642:
+                                    monster_name = "Owl"
                                 Enemy(monster_name,
                                       (x, y),
                                       [self.visible_sprites, self.attackable_sprites],
@@ -200,8 +204,19 @@ class Level:
 
             # СОЗДАНИЕ ЭФФЕКТА УРОНА ИГРОКУ
             frames = pygame.image.load(F"data/images/sprites/attacks/{attack_type}.png").convert_alpha()
-            self.oof.play()  # ВОСПРОИЗВЕДЕНИЕ ЗВУКА ПОЛУЧЕНИЯ УРОНА
-            ParticleEffect(self.player.rect.center, frames, [self.visible_sprites], 64)
+
+            if attack_type == "gravity":  # УДАР СОВЫ (СМЕНА ПОЛОЖЕНИЯ ЭКРАНА)
+                self.player.is_concussed = not self.player.is_concussed  # ЭКРАН ПЕРЕВОРАЧИВАЕТСЯ
+                if self.player.is_concussed:
+                    self.player.concussed_time = pygame.time.get_ticks()  # ВРЕМЯ, В КОТОРОЕ ИЗМЕНИЛИ ЭКРАН У ИГРОКА
+                box_size = 120  # РАЗМЕР СТОРОНЫ КВАДРАТА КАДРА АНИМАЦИИ
+                rect = (self.player.rect.centerx, self.player.rect.centery - 5)  # ПОЗИЦИЯ СТАРТА АНИМАЦИИ
+                self.gravity_oof.play()  # ВОСПРОИЗВЕДЕНИЕ ЗВУКА ПОЛУЧЕНИЯ УРОНА
+            else:
+                box_size = 64  # РАЗМЕР СТОРОНЫ КВАДРАТА КАДРА АНИМАЦИИ
+                rect = self.player.rect.center  # ПОЗИЦИЯ СТАРТА АНИМАЦИИ
+                self.oof.play()  # ВОСПРОИЗВЕДЕНИЕ ЗВУКА ПОЛУЧЕНИЯ УРОНА
+            ParticleEffect(rect, frames, [self.visible_sprites], box_size)
 
     # -----------------------------------------------------------------------------------------------------------------
     def trigger_death_particles(self, pos) -> None:
@@ -232,8 +247,16 @@ class Level:
         """Функция отрисовки и обновления уровня, отображения игрока"""
         self.visible_sprites.custom_draw(self.player, is_boss=self.level_index)  # ОТРИСОВКА ИГРОКА
         self.visible_sprites.update()  # ОТРИСОВКА ВИДИМЫХ СПРАЙТОВ
-        self.visible_sprites.enemy_update(self.player)  # ОБНОВЛЕНИЯ ПОВЕДЕНИЯ ВРАГОВ
+        self.visible_sprites.enemy_update(self.player)  # ОБНОВЛЕНИЕ ПОВЕДЕНИЯ ВРАГОВ
         self.player_attack_logic()  # ПРОВЕРКА АТАКИ ИГРОКОМ
+
+        if self.player.is_concussed:  # ПЕРЕВОРОТ ЭКРАНА В СЛУЧАЕ НЕОБХОДИМОСТИ
+            purple_surface = pygame.Surface(self.display_surface.get_size(), pygame.SRCALPHA)
+            purple_surface.fill((114, 0, 163, 122))
+            rotated_surface = pygame.transform.rotate(self.display_surface, 180)
+            rotated_surface.blit(purple_surface)
+            self.display_surface.blit(rotated_surface)
+
         self.ui.display(self.player, self.game_time)  # ОТРИСОВКА ГРАФИЧЕСКОГО ИНТЕРФЕЙСА В ИГРЕ
 
     # -----------------------------------------------------------------------------------------------------------------
@@ -294,11 +317,11 @@ class Camera(pygame.sprite.Group):
         for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
             offset_rect = sprite.rect.topleft - self.offset
 
-            if sprite.sprite_type == "door_open" and player.kill_counter < 16:  # ЕСЛИ ДВЕРЬ НЕЛЬЗЯ ОТКРЫТЬ
+            if sprite.sprite_type == "door_open" and player.kill_counter < 35:  # ЕСЛИ ДВЕРЬ НЕЛЬЗЯ ОТКРЫТЬ
                 continue  # НИЧЕГО НЕ ПРОИСХОДИТ
 
             if sprite.sprite_type == "door_closed":  # ЕСЛИ ОБРАБАТЫВАЕТСЯ СПРАЙТ ЗАКРЫТОЙ ДВЕРИ
-                if player.kill_counter >= 16:  # ЕСЛИ ВЫПОЛНЕНЫ УСЛОВИЯ ДЛЯ ОТКРЫТИЯ ДВЕРИ
+                if player.kill_counter >= 36:  # ЕСЛИ ВЫПОЛНЕНЫ УСЛОВИЯ ДЛЯ ОТКРЫТИЯ ДВЕРИ
                     sprite.kill()  # ЕЁ СПРАЙТ УДАЛЯЕТСЯ И ИГРОК МОЖЕТ ПРОЙТИ ДАЛЬШЕ
                 else:  # ИНАЧЕ
                     self.display_surface.blit(sprite.image, offset_rect)  # ОТРИСОВЫВАЕМ ЕГО

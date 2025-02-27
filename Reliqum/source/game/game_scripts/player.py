@@ -77,8 +77,13 @@ class Player(Entity):
         self.invulnerability_duration = 500  # ВРЕМЯ, КОТОРОЕ ИГРОК БУДЕТ НЕУЯЗВИМ
         # =============================
         self.kill_counter = 0  # КОЛИЧЕТСВО УНИЧТОЖЕННЫХ НА ДАННЫЙ МОМЕНТ ВРАГОВ
-        self.need_to_kill = 17  # КОЛИЧЕСТВО ВРАГОВ, КОТОРЫХ НУЖНО УНИЧТОЖИТЬ ДЛЯ ПОБЕДЫ
+        self.need_to_kill = 39  # КОЛИЧЕСТВО ВРАГОВ, КОТОРЫХ НУЖНО УНИЧТОЖИТЬ ДЛЯ ПОБЕДЫ
         self.can_change = False  # МОЖЕТ ЛИ ИГРОК ВОЙТИ В ЛОКАЦИЮ С БОССОМ
+        # =============================
+        self.is_concussed = False  # КОНТУЖЕН ЛИ ИГРОК (смена ориентации экрана, проще говоря его переворот)
+        self.concussed_time = None  # ВРЕМЯ, В КОТОРОЕ НА ИГРОКА НАЧАЛ ДЕЙСТВОВАТЬ ЭФФЕКТ
+        self.concussed_duration = 2000  # ВРЕМЯ, КОТОРОЕ ЭКРАН БУДЕТ ПЕРЕВЕРНУТ (если до этого сова не вернёт
+        # его на место)
         # =============================
         self.is_player_win = False  # ВЫИГРАЛ ЛИ ИГРОК
         self.is_player_lose = False  # ПРОИГРАЛ ЛИ ИГРОК
@@ -194,6 +199,10 @@ class Player(Entity):
         if not self.vulnerable:  # ЕСЛИ ИГРОК НЕУЯЗВИМ
             if current_time - self.hurt_time >= self.invulnerability_duration:  # ЕСЛИ ВРЕМЯ НЕУЯЗВИМОСТИ ИСТЕКЛО
                 self.vulnerable = True  # ИГРОК ТЕПЕРЬ УЯЗВИМ
+
+        if self.is_concussed:  # ЕСЛИ ИГРОК КОНТУЖЕН
+            if current_time - self.concussed_time >= self.concussed_duration:  # ЕСЛИ ВРЕМЯ КОНТУЗИИ ИСТЕКЛО
+                self.is_concussed = False  # СТАВИМ ЭКРАН НА МЕСТО
 
     # -----------------------------------------------------------------------------------------------------------------
     def animate(self) -> None:

@@ -62,7 +62,7 @@ def draw_labels(self) -> None:
         self.window_surface.blit(help_label_1, (self.w // 3 - 80, self.h // 7 + 50))  # РАЗМЕЩЕНИЕ ТЕКСТА С ПОДСКАЗКОЙ
 
         # ПОДСКАЗКИ О ДЕЙСТВИЯХ ИГРОКА ДЛЯ ПОБЕДЫ
-        text = ("Уничтожьте всех 16 врагов на первой локации\n"
+        text = ("Уничтожьте 36 врагов на первой локации\n"
                 " и направляйтесь в самый верх карты за дверь\n"
                 " - на бой с боссом!")
         help_label_2 = self.custom_font_small.render(text, 1, (0, 0, 0))  # ТЕКСТ С ОПИСАНИЕМ НУЖНЫХ ДЛЯ ИГРОКА ДЕЙСТВИЙ
@@ -87,7 +87,7 @@ def draw_labels(self) -> None:
                                              F"{str(t % 60).rjust(2, "0")}", 1, (0, 0, 0))
         self.window_surface.blit(time_label, (self.w // 4 + 20, self.h // 2))  # РАЗМЕЩЕНИЕ ИГРОВОГО ВРЕМЕНИ
 
-        kill_label = self.custom_font.render(F"ВРАГОВ ПОБЕЖДЕНО: 17 / 17", 1, (0, 0, 0))  # ПОБЕЖДЕННЫЕ ВРАГИ
+        kill_label = self.custom_font.render(F"ВРАГОВ ПОБЕЖДЕНО: 39 / 39", 1, (0, 0, 0))  # ПОБЕЖДЕННЫЕ ВРАГИ
         self.window_surface.blit(kill_label, (self.w // 4 + 20, self.h // 2 - 100))  # РАЗМЕЩЕНИЕ ИХ НА ЭКРАНЕ
 
     # -----------------------------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ def draw_labels(self) -> None:
                                              F"{str(t % 60).rjust(2, "0")}", 1, (0, 0, 0))
         self.window_surface.blit(time_label, (self.w // 4 + 20, self.h // 2))  # РАЗМЕЩЕНИЕ ИГРОВОГО ВРЕМЕНИ
 
-        kill_label = self.custom_font.render(F"ВРАГОВ ПОБЕЖДЕНО: {self.killed} / 17", 1, (0, 0, 0))  # ПОБЕЖДЕННЫЕ ВРАГИ
+        kill_label = self.custom_font.render(F"ВРАГОВ ПОБЕЖДЕНО: {self.killed} / 39", 1, (0, 0, 0))  # ПОБЕЖДЕННЫЕ ВРАГИ
         self.window_surface.blit(kill_label, (self.w // 4 + 20, self.h // 2 - 100))  # РАЗМЕЩЕНИЕ ИХ НА ЭКРАНЕ
 
     # -----------------------------------------------------------------------------------------------------------------

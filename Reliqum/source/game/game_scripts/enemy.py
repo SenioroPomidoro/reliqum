@@ -28,7 +28,7 @@ class Enemy(Entity):
         # =============================
         self.import_graphics(monster_name)  # ПОДГРУЗКА ГРАФИКИ ВРАГА
         self.status = "idle"  # ЗАПИСЬ ИЗНАЧАЛЬНОГО СТАТУСА МОНСТРА В АТРИБУТЫ - СТОЙКА НА МЕСТЕ
-        self.image = (pygame.image.load("data/images/sprites/monsters/Eye/idle/idle.png").
+        self.image = (pygame.image.load(f"data/images/sprites/monsters/{monster_name}/idle/idle.png").
                       subsurface((0, 0, 48, 48)).convert_alpha())  # ЗАГРУЗКА НАЧАЛЬНОГО ИЗОБРАЖЕНИЯ ВРАГА
         # =============================
         # ДВИЖЕНИЕ
@@ -131,13 +131,22 @@ class Enemy(Entity):
         animation = self.animations[self.status]  # НАБОР С АНИМАЦИИ ДЛЯ ТЕКУЩЕГО ВРАГА
         self.frame_index += self.animation_speed  # ПРИБАВЛЯЕМ НЕКОТОРОЕ ЗНАЧЕНИЕ К ПОКАДРОВОЙ АНИМАЦИИ
 
-        if self.monster_name == "Eye":  # ЕСЛИ ВРАГ - ГЛАЗ
+        if self.monster_name == "Eye" or self.monster_name == "Spirit":  # ЕСЛИ ВРАГ - ГЛАЗ ИЛИ ЛЕТУЧАЯ ДУША:
             if self.frame_index >= animation.height / 48:  # ЕСЛИ ЦИКЛ АНИМАЦИИ ТЕКУЩЕГО ДЕЙСТВИЯ ЗАВЕРШЕН
                 if self.status == "attack":  # ЕСЛИ ВРАГ АТАКОВАЛ
                     self.can_attack = False  # ВРАГ АТАКОВАТЬ БОЛЬШЕ НЕ МОЖЕТ
                 self.frame_index = 0  # ПОКАДРОВАЯ АНИМАЦИЯ НАЧИНАЕТСЯ С НУЛЕВОГО КАДРА
 
             self.image = animation.subsurface((0, int(self.frame_index) * 48, 48, 48))  # ПОЛУЧЕНИЕ НУЖНОГО КАДРА
+            self.rect = self.image.get_rect(center=self.hitbox.center)  # ПОЛУЧЕНИЕ РАСПОЛОЖЕНИЯ ТЕКУЩЕГО КАДРА
+
+        if self.monster_name == "Owl":
+            if self.frame_index >= animation.height / 64:  # ЕСЛИ ЦИКЛ АНИМАЦИИ ТЕКУЩЕГО ДЕЙСТВИЯ ЗАВЕРШЕН
+                if self.status == "attack":  # ЕСЛИ ВРАГ АТАКОВАЛ
+                    self.can_attack = False  # ВРАГ АТАКОВАТЬ БОЛЬШЕ НЕ МОЖЕТ
+                self.frame_index = 0  # ПОКАДРОВАЯ АНИМАЦИЯ НАЧИНАЕТСЯ С НУЛЕВОГО КАДРА
+
+            self.image = animation.subsurface((0, int(self.frame_index) * 64, 64, 64))  # ПОЛУЧЕНИЕ НУЖНОГО КАДРА
             self.rect = self.image.get_rect(center=self.hitbox.center)  # ПОЛУЧЕНИЕ РАСПОЛОЖЕНИЯ ТЕКУЩЕГО КАДРА
 
         if self.monster_name == "Bamboo":  # ЕСЛИ ВРАГ - БОСС-БАМБУК
@@ -150,7 +159,7 @@ class Enemy(Entity):
             self.rect = self.image.get_rect(center=self.hitbox.center)  # ПОЛУЧЕНИЕ РАСПОЛОЖЕНИЯ ТЕКУЩЕГО КАДРА
 
         if not self.vulnerable:  # ЕСЛИ ВРАГ НЕУЯЗВИМ
-            alpha = self.wave_value()  # ПОЛУЧЯЕМ ЗНАЧЕНИЕ ПРОЗРАЧНОСТИ ЕГО СПРАЙТА В СООТВЕТСВИИ С СИНУСОИДОЙ
+            alpha = self.wave_value()  # ПОЛУЧАЕМ ЗНАЧЕНИЕ ПРОЗРАЧНОСТИ ЕГО СПРАЙТА В СООТВЕТСВИИ С СИНУСОИДОЙ
             self.image.set_alpha(alpha)  # УСТАНАВЛИВАЕМ НУЖНОЕ ЗНАЧЕНИЕ ПРОЗРАЧНОСТИ
         else:  # ИНАЧЕ
             self.image.set_alpha(255)  # СПРАЙТ ВРАГА НЕ ПРОЗРАЧЕН
@@ -196,10 +205,10 @@ class Enemy(Entity):
             self.kill()  # ВРАГ УМИРАЕТ (его спрайт, а соответсвенно и объект уничтожается)
             player.kill_counter += 1  # КОЛИЧЕСТВО ПОБЕЖДЕННЫХ ВРАГОВ СТАНОВИТСЯ БОЛЬШИМ НА ЕДЕНИЦУ
 
-            if self.monster_name == "Bamboo":  # ЕСЛИ БЫЛ УБИТ БОСС
+            if player.kill_counter == 37:  # ЕСЛИ БЫЛ УБИТ БОСС
                 player.is_player_win = True  # ПОБЕДИЛ ИГРОК
 
-            self.death_sound.play()  # ПРОИГРЫВАНИЕ ЗВУКА СМЕРТИ ИГРОКА
+            self.death_sound.play()  # ПРОИГРЫВАНИЕ ЗВУКА СМЕРТИ ВРАГА
 
     # -----------------------------------------------------------------------------------------------------------------
     def hit_reaction(self) -> None:
@@ -211,7 +220,7 @@ class Enemy(Entity):
     def update(self) -> None:
         """Метод, обновляющий врага как объект"""
         self.hit_reaction()  # РЕАКЦИЯ ВРАГА НА УДАР
-        self.move(self.speed)  # ДВИЖЕНИЕ ВРАГА
+        self.move(self.speed, is_god=self.monster_name == "Spirit")  # ДВИЖЕНИЕ ВРАГА
         self.animate()  # АНИМАЦИЯ ВРАГА
         self.cooldowns()  # ПЕРЕЗАРЯДКИ ВРАГА
 

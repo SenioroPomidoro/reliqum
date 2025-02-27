@@ -108,7 +108,7 @@ class GameUI:
         str_time = F"{minutes}:{seconds}"  # ПРЕОБРАЗОВАНИЕ КОЛ-ВА СЕКУНД В ФОРМАТЕ MM:SS
 
         #  В СЛУЧАЕ ВЫПОЛНЕНИЕ ОПРЕДЕЛЕННЫХ УСЛОВИЙ
-        if kills == need_to_kill - 1 and 3250 <= player.rect.x <= 3500 and 850 <= player.rect.y <= 950:
+        if kills == need_to_kill - 3 and 3250 <= player.rect.x <= 3500 and 850 <= player.rect.y <= 950:
             text = F"T - ВОЙТИ | {str_time}"  # ОТОБРАЖЕНИЕ НАДПИСИ ТОГО, ЧТО ИГРОК МОЖЕТ ВОЙТИ В ЛОКАЦИЮ С БОССОМ
             player.can_change = True  # СТАВИМ ВОЗМОЖНЫМ ПЕРЕМЕЩЕНИЕ В ЛОКАЦИЮ С БОССОМ
         else:  # ИНАЧЕ

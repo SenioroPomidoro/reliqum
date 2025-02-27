@@ -41,10 +41,11 @@ class Entity(pygame.sprite.Sprite):
                         self.hitbox.top = sprite.hitbox.bottom
 
     # -----------------------------------------------------------------------------------------------------------------
-    def move(self, speed: int) -> None:
+    def move(self, speed: int, is_god=False) -> None:
         """
         Метод, выполняющий механику движения игрока
         :param speed: СКОРОСТЬ ДВИЖЕНИЯ ИГРОКА
+        :param is_god: МОЖЕТ ЛИ ВРАГ ПРОХОДИТЬ СКВОЗЬ ПРЕПЯТСТВИЯ
         """
 
         # МОМЕНТУ НИЖЕ СТОИТЬ УДЕЛИТЬ ЧУТЬ БОЛЬШЕ ВНИМАНИЯ: ЕСЛИ У НАС ПРОИСХОДИТ ОДНОВРЕМЕННОЕ ПЕРЕМЕЩЕНИЕ И
@@ -57,10 +58,12 @@ class Entity(pygame.sprite.Sprite):
             self.direction = self.direction.normalize()
 
         self.hitbox.x += self.direction.x * speed  # ПЕРМЕЩАЕМ ХИТБОКС МОНСТРА НА ЗНАЧЕНИЕ СКОРОСТИ (по иксам)
-        self.collision("horizontal")  # ПРОВЕРЯЕМ СТОЛКНОВЕНИЯ
+        if not is_god:  # ЕСЛИ НЕ МОЖЕТ ПРОХОДИТЬ ЧЕРЕЗ ПРЕПЯТСТВИЯ
+            self.collision("horizontal")  # ПРОВЕРЯЕМ СТОЛКНОВЕНИЯ
 
         self.hitbox.y += self.direction.y * speed  # ПЕРЕМЕЩАЕМ ХИТБОКС МОНСТРА НА ЗНАЧЕНИЕ СКОРОСТИ (по игрикам)
-        self.collision("vertical")  # ПРОВЕРЯЕМ СТОЛКНОВЕНИЯ
+        if not is_god:  # ЕСЛИ НЕ МОЖЕТ ПРОХОДИТЬ ЧЕРЕЗ ПРЕПЯТСТВИЯ
+            self.collision("vertical")  # ПРОВЕРЯЕМ СТОЛКНОВЕНИЯ
 
         self.rect.center = self.hitbox.center  # ЗАМЕНЯЕМ РАМКУ В КОТОРОЙ НАХОДИТСЯ МОНСТР НА ЕГО ХИТБОКС
         # (т.к. переместили мы его)

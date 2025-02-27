@@ -123,9 +123,9 @@ class MainStream:
             self.is_game_paused = True  # ИГРА СТАВИТСЯ НА ПАУЗУ
             self.win = True  # ИГРОК ПОБЕЖДАЕТ
             self.play_time = self.level_2.game_time  # УСТАНАВЛИВАЕТСЯ ИГРОВОЕ ВРЕМЯ
-            self.killed = 17  # РАЗ ИГРОК ПОБЕДИЛ, ТО ОН ОДОЛЕЛ ВСЕХ ВРАГОВ - А ВСЕГО ИХ 17
+            self.killed = 39  # РАЗ ИГРОК ПОБЕДИЛ, ТО ОН ОДОЛЕЛ ВСЕХ ВРАГОВ - А ВСЕГО ИХ 39
             # ===================
-            append_result(self.play_time, 17)  # ЗАГРУЗКА РЕЗУЛЬТАТА В csv ФАЙЛ С РЕЗУЛЬТАТАМИ ЗАБЕГОВ
+            append_result(self.play_time, self.killed)  # ЗАГРУЗКА РЕЗУЛЬТАТА В csv ФАЙЛ С РЕЗУЛЬТАТАМИ ЗАБЕГОВ
             load_end_ui(self)  # ЗАГРУЗКА МЕНЮ ОКОНЧАНИЯ (победа)
 
         if (self.level_1.check_lose() or self.level_2.check_lose()) and not self.lose:  # ЕСЛИ ИГРОК УМИРАЕТ
@@ -181,5 +181,9 @@ class MainStream:
                 self.is_boss_music_playing = True  # МУЗЫКА БИТВЫ С БОССОМ ИГРАЕТ
                 self.is_game_music_playing = False  # МУЗЫКА НА ГЛАВНОМ УРОВНЕ НЕ ИГРАЕТ
             self.level_2.run()  # ОТРИСОВКА ВТОРОГО УРОВНЯ
+
+        # if self.level_1.player.is_concussed:
+        #     rotated_surface = pygame.transform.rotate(self.window_surface, 180)
+        #     self.window_surface.blit(rotated_surface, (0, 0))
         # ===================
 # ---------------------------------------------------------------------------------------------------------------------

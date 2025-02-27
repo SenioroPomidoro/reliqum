@@ -48,10 +48,14 @@ magic_data = {
     :param notice_radius: радиус, в котором враг начинает сближаться с игроком
 """
 monster_data = {
-    "Eye": {"health": 75, "damage": 10, "attack_type": "slash",
+    "Eye": {"health": 75, "damage": 15, "attack_type": "slash",
             "speed": 3.5, "resistance": 2, "attack_radius": 50, "notice_radius": 360},
-    "Bamboo": {"health": 600, "damage": 25, "attack_type": "bamboo",
-               "speed": 4, "resistance": 0.5, "attack_radius": 160, "notice_radius": 2000}
+    "Bamboo": {"health": 600, "damage": 30, "attack_type": "bamboo",
+               "speed": 4, "resistance": 0.5, "attack_radius": 160, "notice_radius": 2000},
+    "Spirit": {"health": 150, "damage": 7, "attack_type": "spirit",
+               "speed": 6, "resistance": 1, "attack_radius": 50, "notice_radius": 400},
+    "Owl": {"health": 300, "damage": 0, "attack_type": "gravity",
+            "speed": 4.5, "resistance": 0.5, "attack_radius": 40, "notice_radius": 2000}
 }
 
 # ----------------------------------------------------------------------------------------------------------------------

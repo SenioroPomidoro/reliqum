@@ -4,7 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 22 feb commit -----&#10;Обновлён файл README.md (2)" />
+    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 22 feb commit -----&#10;Обновлён файл main.exe">
+      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/attacks/gravity.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/attacks/spirit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/attack/attack.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/idle/idle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/move/move.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Spirit/attack/attack.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Spirit/idle/idle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Spirit/move/move.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Reliqum/data/sounds/game_sounds/entities/player/gravity_oof.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/data/game_map_files/boss_map/map_Enemies.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/data/game_map_files/boss_map/map_Enemies.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/data/game_map_files/map/map_Enemies.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/data/game_map_files/map/map_Enemies.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/data/races/races.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/data/races/races.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/data/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/data/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/enemy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/entity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/game_effects.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/game_effects.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/game_level.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/tile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/tile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/user_interface/game_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/user_interface/game_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/helping_scripts/draw_labels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/helping_scripts/draw_labels.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/helping_scripts/load_sounds.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/helping_scripts/load_sounds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/helping_scripts/races_append.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/helping_scripts/races_append.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/main_stream.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/main_stream.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/source/menu/menu_scripts/statistics_scripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/menu/menu_scripts/statistics_scripts.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,53 +61,53 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.BUTTON_EXAMPLES.executor&quot;: &quot;Run&quot;,
-    &quot;Python.BUTTON_SWITCH.executor&quot;: &quot;Run&quot;,
-    &quot;Python.UI_EXAMPLE.executor&quot;: &quot;Run&quot;,
-    &quot;Python.chain.executor&quot;: &quot;Run&quot;,
-    &quot;Python.draw_labels.executor&quot;: &quot;Run&quot;,
-    &quot;Python.game_level.executor&quot;: &quot;Run&quot;,
-    &quot;Python.game_main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.game_ui.executor&quot;: &quot;Run&quot;,
-    &quot;Python.import_csv_layout.executor&quot;: &quot;Run&quot;,
-    &quot;Python.imports.executor&quot;: &quot;Run&quot;,
-    &quot;Python.labyrinth_example.executor&quot;: &quot;Run&quot;,
-    &quot;Python.load_window.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_game.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_menu (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_menu.executor&quot;: &quot;Run&quot;,
-    &quot;Python.player.executor&quot;: &quot;Run&quot;,
-    &quot;Python.sounds.executor&quot;: &quot;Run&quot;,
-    &quot;Python.statistics_append.executor&quot;: &quot;Run&quot;,
-    &quot;Python.statistics_scripts.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.write.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/maxim/Prog/Python/projects/pyGAME/data/sounds/game_sounds&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.2.executor": "Run",
+    "Python.BUTTON_EXAMPLES.executor": "Run",
+    "Python.BUTTON_SWITCH.executor": "Run",
+    "Python.UI_EXAMPLE.executor": "Run",
+    "Python.chain.executor": "Run",
+    "Python.draw_labels.executor": "Run",
+    "Python.game_level.executor": "Run",
+    "Python.game_main.executor": "Run",
+    "Python.game_ui.executor": "Run",
+    "Python.import_csv_layout.executor": "Run",
+    "Python.imports.executor": "Run",
+    "Python.labyrinth_example.executor": "Run",
+    "Python.load_window.executor": "Run",
+    "Python.main (1).executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.main_game.executor": "Run",
+    "Python.main_menu (1).executor": "Run",
+    "Python.main_menu.executor": "Run",
+    "Python.player.executor": "Run",
+    "Python.sounds.executor": "Run",
+    "Python.statistics_append.executor": "Run",
+    "Python.statistics_scripts.executor": "Run",
+    "Python.test (1).executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.write.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/maxim/Prog/Python/projects/pyGAME/Reliqum/data/images/sprites/monsters/Owl/move",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/data/sounds/game_sounds" />
-      <recent name="$PROJECT_DIR$/data/images/sprites/monsters/Eye" />
-      <recent name="$PROJECT_DIR$/data/images/sprites/monsters" />
-      <recent name="$PROJECT_DIR$/data/images/spriites/magic/flame" />
-      <recent name="$PROJECT_DIR$/data/images/spriites/weapons/lance" />
+      <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/move" />
+      <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/idle" />
+      <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/attack" />
+      <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/attacks" />
+      <recent name="$PROJECT_DIR$/Reliqum" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Reliqum/source/helping_scripts" />
-      <recent name="$PROJECT_DIR$/Reliqum/source/menu/menu_scripts" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/data/images/main_images" />
-      <recent name="$PROJECT_DIR$/data/sounds/game_sounds/entities/enemies" />
+      <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/idle" />
+      <recent name="$PROJECT_DIR$/Reliqum/data/sounds/game_sounds/entities/player" />
+      <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/attacks" />
+      <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Spirit/attack" />
+      <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Spirit/move" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main (1)">
@@ -98,6 +125,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Reliqum/source/menu/menu_scripts/draw_labels.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="game_level" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyGAME" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Reliqum/source/game/game_scripts" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Reliqum/source/game/game_scripts/game_level.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -172,35 +221,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="statistics_scripts" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pyGAME" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/source/menu/menu_windows/menu_scripts/statistics_scripts.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.game_level" />
         <item itemvalue="Python.draw_labels" />
         <item itemvalue="Python.game_ui" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.statistics_scripts" />
       </list>
     </recent_temporary>
   </component>
@@ -380,7 +407,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740208277764</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="----- 22 feb commit -----&#10;Обновлён файл main.exe">
+      <option name="closed" value="true" />
+      <created>1740212303044</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1740212303044</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -419,6 +454,7 @@
     <MESSAGE value="----- 22 feb commit -----&#10;Обновление следующий моментов:&#10;- Добавлен мини-гайд при нажатии на паузу во время игры.&#10;- Исправлена проблема со шрифтами&#10;- Добавлены и изменены комментарии в соответствии с содержанием коммита.&#10;- draw_labels.py перемещен в папку helping_scripts (в частности из-за того, что его действие распространяется не только на меню, но и на всю игру в целом)" />
     <MESSAGE value="----- 22 feb commit -----&#10;Обновлён файл README.md" />
     <MESSAGE value="----- 22 feb commit -----&#10;Обновлён файл README.md (2)" />
-    <option name="LAST_COMMIT_MESSAGE" value="----- 22 feb commit -----&#10;Обновлён файл README.md (2)" />
+    <MESSAGE value="----- 22 feb commit -----&#10;Обновлён файл main.exe" />
+    <option name="LAST_COMMIT_MESSAGE" value="----- 22 feb commit -----&#10;Обновлён файл main.exe" />
   </component>
 </project>
