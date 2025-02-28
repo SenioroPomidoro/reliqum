@@ -80,6 +80,7 @@ class Player(Entity):
         self.need_to_kill = 39  # КОЛИЧЕСТВО ВРАГОВ, КОТОРЫХ НУЖНО УНИЧТОЖИТЬ ДЛЯ ПОБЕДЫ
         self.can_change = False  # МОЖЕТ ЛИ ИГРОК ВОЙТИ В ЛОКАЦИЮ С БОССОМ
         # =============================
+        self.reverse_movement = 1  # НУЖНО ЛИ ИЗМЕНЯТЬ НАПРАВЛЕНИЕ ДВИЖЕНИЯ
         self.is_concussed = False  # КОНТУЖЕН ЛИ ИГРОК (смена ориентации экрана, проще говоря его переворот)
         self.concussed_time = None  # ВРЕМЯ, В КОТОРОЕ НА ИГРОКА НАЧАЛ ДЕЙСТВОВАТЬ ЭФФЕКТ
         self.concussed_duration = 2000  # ВРЕМЯ, КОТОРОЕ ЭКРАН БУДЕТ ПЕРЕВЕРНУТ (если до этого сова не вернёт
@@ -111,20 +112,20 @@ class Player(Entity):
         keys = pygame.key.get_pressed()  # СЛОВРЬ С НАЖАТЫМИ В ДАННЫЙ МОМЕНТ КЛАВИШАМИ
 
         # ДВИЖЕНИЕ
-        if keys[pygame.K_UP]:  # ДВИЖЕНИЕ ВВЕРХ
-            self.direction.y = -1
+        if keys[pygame.K_UP]:  # ДВИЖЕНИЕ ВВЕРХ / В ОБРАТНУЮ СТОРОНУ
+            self.direction.y = -1 * self.reverse_movement
             self.status = "up"
-        elif keys[pygame.K_DOWN]:  # ДВИЖЕНИЕ ВНИЗ
-            self.direction.y = 1
+        elif keys[pygame.K_DOWN]:  # ДВИЖЕНИЕ ВНИЗ / В ОБРАТНУЮ СТОРОНУ
+            self.direction.y = 1 * self.reverse_movement
             self.status = "down"
         else:
             self.direction.y = 0
 
-        if keys[pygame.K_RIGHT]:  # ДВИЖЕНИЕ ВПРАВО
-            self.direction.x = 1
+        if keys[pygame.K_RIGHT]:  # ДВИЖЕНИЕ ВПРАВО / В ОБРАТНУЮ СТОРОНУ
+            self.direction.x = 1 * self.reverse_movement
             self.status = "right"
-        elif keys[pygame.K_LEFT]:  # ДВИЖЕНИЕ ВЛЕВО
-            self.direction.x = -1
+        elif keys[pygame.K_LEFT]:  # ДВИЖЕНИЕ ВЛЕВО / В ОБРАТНУЮ СТОРОНУ
+            self.direction.x = -1 * self.reverse_movement
             self.status = "left"
         else:
             self.direction.x = 0
@@ -203,6 +204,7 @@ class Player(Entity):
         if self.is_concussed:  # ЕСЛИ ИГРОК КОНТУЖЕН
             if current_time - self.concussed_time >= self.concussed_duration:  # ЕСЛИ ВРЕМЯ КОНТУЗИИ ИСТЕКЛО
                 self.is_concussed = False  # СТАВИМ ЭКРАН НА МЕСТО
+                self.reverse_movement = 1  # СТАВИМ АДЕКВАТНОЕ НАПРАВЛЕНИЕ ДВИЖЕНИЯ
 
     # -----------------------------------------------------------------------------------------------------------------
     def animate(self) -> None:

@@ -31,7 +31,7 @@ def load_player_sounds(self) -> None:
     self.oof = pygame.mixer.Sound("data/sounds/game_sounds/entities/player/oof.mp3")
 
     # ЗВУК ГРАВИТАЦИОННОЙ АТАКИ ПО ИГРОКУ
-    self.gravity_oof = pygame.mixer.Sound("data/sounds/game_sounds/entities/player/gravity_oof.mp3")
+    self.gravity_oof = pygame.mixer.Sound("data/sounds/game_sounds/entities/player/gravity_oof.wav")
 
     # ЗВУК ИСПОЛЬЗОВАНИЯ ЗАКЛИНАНИЯ ЛЕЧЕНИЯ
     self.heal_sound = pygame.mixer.Sound("data/sounds/game_sounds/entities/player/heal.wav")
@@ -52,6 +52,9 @@ def load_enemies_sounds(self) -> None:
 
     # ЗВУК СМЕРТИ ВРАГА
     self.death_sound = pygame.mixer.Sound("data/sounds/game_sounds/entities/enemies/monster_death.wav")
+
+    # ЗВУК ПЕРЕМЕЩЕНИЯ СОВЫ
+    self.owl_step_sound = pygame.mixer.Sound("data/sounds/game_sounds/entities/enemies/owl_step.mp3")
 
 
 # ---------------------------------------------------------------------------------------------------------------------

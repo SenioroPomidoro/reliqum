@@ -212,6 +212,7 @@ class Level:
                 box_size = 120  # РАЗМЕР СТОРОНЫ КВАДРАТА КАДРА АНИМАЦИИ
                 rect = (self.player.rect.centerx, self.player.rect.centery - 5)  # ПОЗИЦИЯ СТАРТА АНИМАЦИИ
                 self.gravity_oof.play()  # ВОСПРОИЗВЕДЕНИЕ ЗВУКА ПОЛУЧЕНИЯ УРОНА
+                self.player.reverse_movement *= -1
             else:
                 box_size = 64  # РАЗМЕР СТОРОНЫ КВАДРАТА КАДРА АНИМАЦИИ
                 rect = self.player.rect.center  # ПОЗИЦИЯ СТАРТА АНИМАЦИИ

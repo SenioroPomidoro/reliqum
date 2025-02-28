@@ -4,33 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 22 feb commit -----&#10;Обновлён файл main.exe">
-      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/attacks/gravity.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/attacks/spirit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/attack/attack.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/idle/idle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/move/move.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Spirit/attack/attack.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Spirit/idle/idle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Spirit/move/move.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Reliqum/data/sounds/game_sounds/entities/player/gravity_oof.mp3" afterDir="false" />
+    <list default="true" id="6dea7ed9-e936-4436-ae4e-7b64be57bf2d" name="Changes" comment="----- 27 feb commit -----&#10;Добавлено 2 новых врага. Один на главной локации, от которого нельзя убежать. И один на локации с боссом, переворачивающий игровой экран при ударе. При это последний не наносит урона. Ещё будут доработки. (.EXE файл обновлю потом)">
+      <change afterPath="$PROJECT_DIR$/Reliqum/data/sounds/game_sounds/entities/enemies/owl_step.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Reliqum/data/sounds/game_sounds/entities/player/gravity_oof.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/data/game_map_files/boss_map/map_Enemies.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/data/game_map_files/boss_map/map_Enemies.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/data/game_map_files/map/map_Enemies.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/data/game_map_files/map/map_Enemies.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/data/races/races.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/data/races/races.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Reliqum/data/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/data/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reliqum/data/sounds/game_sounds/entities/player/gravity_oof.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/enemy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/entity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/game_effects.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/game_effects.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/game_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/game_level.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/tile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/game_scripts/tile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/source/game/user_interface/game_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/game/user_interface/game_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/source/helping_scripts/draw_labels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/helping_scripts/draw_labels.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Reliqum/source/helping_scripts/load_sounds.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/helping_scripts/load_sounds.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/source/helping_scripts/races_append.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/helping_scripts/races_append.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/source/main_stream.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/main_stream.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reliqum/source/menu/menu_scripts/statistics_scripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reliqum/source/menu/menu_scripts/statistics_scripts.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,39 +44,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.2.executor": "Run",
-    "Python.BUTTON_EXAMPLES.executor": "Run",
-    "Python.BUTTON_SWITCH.executor": "Run",
-    "Python.UI_EXAMPLE.executor": "Run",
-    "Python.chain.executor": "Run",
-    "Python.draw_labels.executor": "Run",
-    "Python.game_level.executor": "Run",
-    "Python.game_main.executor": "Run",
-    "Python.game_ui.executor": "Run",
-    "Python.import_csv_layout.executor": "Run",
-    "Python.imports.executor": "Run",
-    "Python.labyrinth_example.executor": "Run",
-    "Python.load_window.executor": "Run",
-    "Python.main (1).executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.main_game.executor": "Run",
-    "Python.main_menu (1).executor": "Run",
-    "Python.main_menu.executor": "Run",
-    "Python.player.executor": "Run",
-    "Python.sounds.executor": "Run",
-    "Python.statistics_append.executor": "Run",
-    "Python.statistics_scripts.executor": "Run",
-    "Python.test (1).executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.write.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/maxim/Prog/Python/projects/pyGAME/Reliqum/data/images/sprites/monsters/Owl/move",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BUTTON_EXAMPLES.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BUTTON_SWITCH.executor&quot;: &quot;Run&quot;,
+    &quot;Python.UI_EXAMPLE.executor&quot;: &quot;Run&quot;,
+    &quot;Python.chain.executor&quot;: &quot;Run&quot;,
+    &quot;Python.draw_labels.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game_level.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game_main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game_ui.executor&quot;: &quot;Run&quot;,
+    &quot;Python.import_csv_layout.executor&quot;: &quot;Run&quot;,
+    &quot;Python.imports.executor&quot;: &quot;Run&quot;,
+    &quot;Python.labyrinth_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.load_window.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_game.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_menu (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_menu.executor&quot;: &quot;Run&quot;,
+    &quot;Python.player.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sounds.executor&quot;: &quot;Run&quot;,
+    &quot;Python.statistics_append.executor&quot;: &quot;Run&quot;,
+    &quot;Python.statistics_scripts.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.write.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/maxim/Prog/Python/projects/pyGAME/Reliqum/data/images/sprites/monsters/Owl/move&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/move" />
@@ -103,11 +86,11 @@
       <recent name="$PROJECT_DIR$/Reliqum" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/idle" />
+      <recent name="$PROJECT_DIR$/Reliqum/data/sounds/game_sounds/entities/enemies" />
       <recent name="$PROJECT_DIR$/Reliqum/data/sounds/game_sounds/entities/player" />
+      <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Owl/idle" />
       <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/attacks" />
       <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Spirit/attack" />
-      <recent name="$PROJECT_DIR$/Reliqum/data/images/sprites/monsters/Spirit/move" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main (1)">
@@ -415,7 +398,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740212303044</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="----- 27 feb commit -----&#10;Добавлено 2 новых врага. Один на главной локации, от которого нельзя убежать. И один на локации с боссом, переворачивающий игровой экран при ударе. При это последний не наносит урона. Ещё будут доработки. (.EXE файл обновлю потом)">
+      <option name="closed" value="true" />
+      <created>1740667641475</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1740667641475</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -455,6 +446,7 @@
     <MESSAGE value="----- 22 feb commit -----&#10;Обновлён файл README.md" />
     <MESSAGE value="----- 22 feb commit -----&#10;Обновлён файл README.md (2)" />
     <MESSAGE value="----- 22 feb commit -----&#10;Обновлён файл main.exe" />
-    <option name="LAST_COMMIT_MESSAGE" value="----- 22 feb commit -----&#10;Обновлён файл main.exe" />
+    <MESSAGE value="----- 27 feb commit -----&#10;Добавлено 2 новых врага. Один на главной локации, от которого нельзя убежать. И один на локации с боссом, переворачивающий игровой экран при ударе. При это последний не наносит урона. Ещё будут доработки. (.EXE файл обновлю потом)" />
+    <option name="LAST_COMMIT_MESSAGE" value="----- 27 feb commit -----&#10;Добавлено 2 новых врага. Один на главной локации, от которого нельзя убежать. И один на локации с боссом, переворачивающий игровой экран при ударе. При это последний не наносит урона. Ещё будут доработки. (.EXE файл обновлю потом)" />
   </component>
 </project>

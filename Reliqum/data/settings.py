@@ -54,8 +54,8 @@ monster_data = {
                "speed": 4, "resistance": 0.5, "attack_radius": 160, "notice_radius": 2000},
     "Spirit": {"health": 150, "damage": 7, "attack_type": "spirit",
                "speed": 6, "resistance": 1, "attack_radius": 50, "notice_radius": 400},
-    "Owl": {"health": 300, "damage": 0, "attack_type": "gravity",
-            "speed": 4.5, "resistance": 0.5, "attack_radius": 40, "notice_radius": 2000}
+    "Owl": {"health": 300, "damage": 5, "attack_type": "gravity",
+            "speed": 4.5, "resistance": 1, "attack_radius": 70, "notice_radius": 2000}
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
