@@ -49,13 +49,15 @@ magic_data = {
 """
 monster_data = {
     "Eye": {"health": 75, "damage": 15, "attack_type": "slash",
-            "speed": 3.5, "resistance": 2, "attack_radius": 50, "notice_radius": 360},
-    "Bamboo": {"health": 600, "damage": 30, "attack_type": "bamboo",
-               "speed": 4, "resistance": 0.5, "attack_radius": 160, "notice_radius": 2000},
+            "speed": 3.5, "resistance": 2, "attack_radius": 50, "notice_radius": 500},
+    "Bamboo": {"health": 700, "damage": 25, "attack_type": "bamboo",
+               "speed": 3, "resistance": 0.5, "attack_radius": 160, "notice_radius": 2000},
     "Spirit": {"health": 150, "damage": 7, "attack_type": "spirit",
                "speed": 6, "resistance": 1, "attack_radius": 50, "notice_radius": 400},
-    "Owl": {"health": 300, "damage": 5, "attack_type": "gravity",
-            "speed": 4.5, "resistance": 1, "attack_radius": 70, "notice_radius": 2000}
+    "Owl": {"health": 400, "damage": 3, "attack_type": "gravity",
+            "speed": 4, "resistance": 1, "attack_radius": 70, "notice_radius": 2000},
+    "Flam": {"health": 250, "damage": 20, "attack_type": "flame",
+             "speed": 4, "resistance": 1, "attack_radius": 70, "notice_radius": 400}
 }
 
 # ----------------------------------------------------------------------------------------------------------------------

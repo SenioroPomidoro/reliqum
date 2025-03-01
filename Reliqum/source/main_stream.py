@@ -164,6 +164,7 @@ class MainStream:
 
     # -----------------------------------------------------------------------------------------------------------------
     def draw_levels(self) -> None:
+        """Метод для отрисовки уровня"""
         # ===================
         if not self.level_type:  # ЕСЛИ ЭТО ПЕРВЫЙ УРОВЕНЬ
             if not self.is_game_music_playing:  # ЕСЛИ ИГРОВАЯ МУЗЫКА ЕЩЁ НЕ ЗАПУЩЕНА (А СООТВЕТСВЕННО И УРОВЕНЬ)
@@ -182,8 +183,5 @@ class MainStream:
                 self.is_game_music_playing = False  # МУЗЫКА НА ГЛАВНОМ УРОВНЕ НЕ ИГРАЕТ
             self.level_2.run()  # ОТРИСОВКА ВТОРОГО УРОВНЯ
 
-        # if self.level_1.player.is_concussed:
-        #     rotated_surface = pygame.transform.rotate(self.window_surface, 180)
-        #     self.window_surface.blit(rotated_surface, (0, 0))
         # ===================
 # ---------------------------------------------------------------------------------------------------------------------

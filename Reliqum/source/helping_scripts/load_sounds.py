@@ -15,7 +15,12 @@ def load_music(self) -> None:
     self.is_game_music_playing = False
 
     self.boss_music = pygame.mixer.Sound("data/sounds/game_sounds/boss_music.ogg")  # МУЗЫКА БИТВЫ С БОССОМ
+    # (до пробуждения)
     self.is_boss_music_playing = False
+
+    self.boss_awaken_music = pygame.mixer.Sound("data/sounds/game_sounds/boss_awaken_music.mp3")  # МУЗЫКА БИТВЫ
+    # С БОССОМ (после пробуждения)
+    self.is_boss_awaken_music_playing = False
 
     self.win_music = pygame.mixer.Sound("data/sounds/game_sounds/end/win.ogg")  # МУЗЫКА ПОБЕДЫ
     self.is_win_music_playing = False
@@ -56,6 +61,9 @@ def load_enemies_sounds(self) -> None:
     # ЗВУК ПЕРЕМЕЩЕНИЯ СОВЫ
     self.owl_step_sound = pygame.mixer.Sound("data/sounds/game_sounds/entities/enemies/owl_step.mp3")
 
+    # ЗВУК ПРОБУЖДЕНИЯ БОССА
+    self.boss_awaken_sound = pygame.mixer.Sound("data/sounds/game_sounds/entities/enemies/boss_awaken.mp3")
+
 
 # ---------------------------------------------------------------------------------------------------------------------
 def off_all_game_music(self) -> None:
@@ -69,11 +77,14 @@ def off_all_game_music(self) -> None:
 
     self.boss_music.stop()  # ОСТАНОВКА ИГРОВОЙ МУЗЫКИ НА УРОВНЕ С БОССОМ
     self.is_boss_music_playing = False
+    self.boss_awaken_music.stop()
+    self.is_boss_awaken_music_playing = False
 
     self.win_music.stop()  # ОСТАНОВКА ПОБЕДНОЙ МУЗЫКИ
     self.is_win_music_playing = False
 
     self.lose_music.stop()  # ОСТАНОВКА МУЗЫКИ ПОРАЖЕНИЯ
     self.is_lose_music_playing = False
+
 
 # ---------------------------------------------------------------------------------------------------------------------

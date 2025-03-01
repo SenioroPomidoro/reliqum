@@ -5,6 +5,8 @@ from data.settings import *
 from source.game.game_scripts.entity import Entity
 
 from source.helping_scripts.load_sounds import load_enemies_sounds
+
+from random import choice
 # ---------------------------------------------------------------------------------------------------------------------
 
 
@@ -46,6 +48,7 @@ class Enemy(Entity):
         self.attack_radius = monster_info["attack_radius"]  # ЗАПИСЬ РАДИУСА АТАКИ ВРАГА
         self.notice_radius = monster_info["notice_radius"]  # ЗАПИСЬ РАДИУСА ОБНАРУЖЕНИЯ ВРАГА
         self.attack_type = monster_info["attack_type"]  # ЗАПИСЬ ТИПА АТАКИ ВРАГА
+        self.is_awaken = False  # ПАРАМЕТР, ОПРЕДЕЛЯЮЩИЙ ПРОБУЖДЁН ВРАГ ИЛИ НЕТ (меняются его статы)
         # =============================
         # ВЗАИМОДЕЙСТВИЕ ВРАГА С ИГРОКОМ
         self.can_attack = True  # МОЖЕТ ЛИ ВРАГ АТАКОВАТЬ ВРАГА
@@ -60,7 +63,7 @@ class Enemy(Entity):
         self.hit_time = None  # МОМЕНТ ВРЕМЕНИ, В КОТОРЫЙ ВРАГ ПОЛУЧИЛ УРОН
         self.invincibility_duration = 200  # ДЛИТЕЛЬНОСТЬ НЕУЯЗВИМОСТИ ВРАГА ПОСЛЕ ПОЛУЧЕНИЯ УРОНА
         # =============================
-        load_enemies_sounds(self)  # ЗАГРУЗКА ЗВУКОВ ИОНСТРОВ
+        load_enemies_sounds(self)  # ЗАГРУЗКА ЗВУКОВ МОНСТРОВ
         # =============================
 
     # -----------------------------------------------------------------------------------------------------------------
@@ -138,16 +141,16 @@ class Enemy(Entity):
                     self.can_attack = False  # ВРАГ АТАКОВАТЬ БОЛЬШЕ НЕ МОЖЕТ
                 self.frame_index = 0  # ПОКАДРОВАЯ АНИМАЦИЯ НАЧИНАЕТСЯ С НУЛЕВОГО КАДРА
 
-            self.image = animation.subsurface((0, int(self.frame_index) * 48, 48, 48))  # ПОЛУЧЕНИЕ НУЖНОГО КАДРА
+            self.image = animation.subsurface((0, int(self.frame_index) * 48 + 1, 48, 47))  # ПОЛУЧЕНИЕ НУЖНОГО КАДРА
             self.rect = self.image.get_rect(center=self.hitbox.center)  # ПОЛУЧЕНИЕ РАСПОЛОЖЕНИЯ ТЕКУЩЕГО КАДРА
 
-        if self.monster_name == "Owl":
+        if self.monster_name == "Owl" or self.monster_name == "Flam":
             if self.frame_index >= animation.height / 64:  # ЕСЛИ ЦИКЛ АНИМАЦИИ ТЕКУЩЕГО ДЕЙСТВИЯ ЗАВЕРШЕН
                 if self.status == "attack":  # ЕСЛИ ВРАГ АТАКОВАЛ
                     self.can_attack = False  # ВРАГ АТАКОВАТЬ БОЛЬШЕ НЕ МОЖЕТ
                 self.frame_index = 0  # ПОКАДРОВАЯ АНИМАЦИЯ НАЧИНАЕТСЯ С НУЛЕВОГО КАДРА
 
-            self.image = animation.subsurface((0, int(self.frame_index) * 64, 64, 64))  # ПОЛУЧЕНИЕ НУЖНОГО КАДРА
+            self.image = animation.subsurface((0, int(self.frame_index) * 64 + 2, 64, 62))  # ПОЛУЧЕНИЕ НУЖНОГО КАДРА
             self.rect = self.image.get_rect(center=self.hitbox.center)  # ПОЛУЧЕНИЕ РАСПОЛОЖЕНИЯ ТЕКУЩЕГО КАДРА
 
         if self.monster_name == "Bamboo":  # ЕСЛИ ВРАГ - БОСС-БАМБУК
@@ -157,6 +160,7 @@ class Enemy(Entity):
                 self.frame_index = 0   # ПОКАДРОВАЯ АНИМАЦИЯ НАЧИНАЕТСЯ С НУЛЕВОГО КАДРА
 
             self.image = animation.subsurface((int(self.frame_index) * 186, 0, 186, 186))  # ПОЛУЧЕНИЕ НУЖНОГО КАДРА
+
             self.rect = self.image.get_rect(center=self.hitbox.center)  # ПОЛУЧЕНИЕ РАСПОЛОЖЕНИЯ ТЕКУЩЕГО КАДРА
 
         if not self.vulnerable:  # ЕСЛИ ВРАГ НЕУЯЗВИМ
@@ -190,6 +194,8 @@ class Enemy(Entity):
             if attack_type == "Weapon":  # ЕСЛИ УДАРИЛИ ОРУЖИЕМ
                 self.health -= player.get_full_weapon_damage()  # ОТНИМАЕМ ПОЛНЫЙ УРОН ОТ ОРУЖИЯ ПО ВРАГУ
             else:
+                if self.monster_name in ["Flam", "Owl"]:  # МАГИЧЕСКИЙ УРОН (урон от огня) НЕ ПРОХОДИТ ПО ОГОНЬКУ И СОВЕ
+                    return
                 self.health -= player.get_full_magic_damage()  # ОТНИМАЕМ ЗДОРОВЬЕ У ВРАГА НА ПОЛНЫЙ МАГ. УРОНА ИГРОКА
             self.hit_counter += 1
             self.hit_time = pygame.time.get_ticks()  # ВРЕМЯ, В КОТОРОЕ ВРАГА АТКОВАЛИ
@@ -207,7 +213,7 @@ class Enemy(Entity):
             self.kill()  # ВРАГ УМИРАЕТ (его спрайт, а соответсвенно и объект уничтожается)
             player.kill_counter += 1  # КОЛИЧЕСТВО ПОБЕЖДЕННЫХ ВРАГОВ СТАНОВИТСЯ БОЛЬШИМ НА ЕДЕНИЦУ
 
-            if player.kill_counter == 37:  # ЕСЛИ БЫЛ УБИТ БОСС
+            if player.kill_counter == 39:  # ЕСЛИ ИГРОК УНИЧТОЖИЛ ВСЕХ ВРАГОВ
                 player.is_player_win = True  # ПОБЕДИЛ ИГРОК
 
             self.death_sound.play()  # ПРОИГРЫВАНИЕ ЗВУКА СМЕРТИ ВРАГА
@@ -219,23 +225,29 @@ class Enemy(Entity):
             self.direction *= -self.resistance  # ВРАГ ДВИГАЕТСЯ НАЗАД НА НЕКОТОРОЕ РАССТОЯНИЕ НЕКОТОРОЕ ВРЕМЯ
 
     # -----------------------------------------------------------------------------------------------------------------
-    def update(self) -> None:
-        """Метод, обновляющий врага как объект"""
-        self.hit_reaction()  # РЕАКЦИЯ ВРАГА НА УДАР
-        self.move(self.speed, is_god=self.monster_name == "Spirit")  # ДВИЖЕНИЕ ВРАГА
-        self.animate()  # АНИМАЦИЯ ВРАГА
-        self.cooldowns()  # ПЕРЕЗАРЯДКИ ВРАГА
+
+    def hp_reaction(self) -> None:
+        """Метод, обрабатывающий количество очков здоровья у врагов"""
+        if self.monster_name == "Bamboo":  # ОБРАБОТКА ХП У БОССА
+            if not self.is_awaken and self.health < 300:  # ЕСЛИ ХП БОССА МЕНЬШЕ 300 И БОСС ЕЩЁ НЕ ПРОБУЖДЁН
+                self.speed = 4  # СКОРОСТЬ БОССА УВЕЛИЧИВАЕТСЯ С 3 ДО 4
+                self.damage = 30  # УРОН БОССА УВЕЛИЧИВАЕТСЯ С 25 ДО 30
+                self.is_awaken = True  # РЕЖИМ ПРОБУЖДЕНИЯ ВКЛЮЧАЕТСЯ (теперь босс проходит сквозь препятствия)
+                self.boss_awaken_sound.play()  # ИГРАЕТ ЗВУК ПРОБУЖДЕНИЯ ГЛАЗА КТУХЛУ ИЗ ТЕРРАРИИ
+                self.import_graphics("Bamboo_awaken")  # ЗАГРУЖАЮТСЯ НОВЫЕ СПРАЙТЫ АНИМАЦИИ БОССА
 
     # -----------------------------------------------------------------------------------------------------------------
 
-    def hit_process(self, player):
+    def hit_process(self, player) -> None:
         """Метод, обрабатывающий количество полученных ударов врагом"""
-        if self.monster_name == "Owl":  # ОБРАБОТКА ДЛЯ СОВЫ (каждый третий удар сова появляется за спиной игрока)
+        if self.monster_name in ["Owl", "Flam"]:
+            # ОБРАБОТКА ДЛЯ СОВЫ И ОГОНЬКА(каждый третий удар сова и огонёк появляется за спиной игрока)
             if self.hit_counter != 0 and self.hit_counter % 3 == 0:  # КАЖДЫЙ ТРЕТИЙ УДАР
                 self.hit_counter = 0  # ОБНУЛЕНИЕ КОЛИЧЕСТВА ПРИНЯТЫХ УДАРОВ ВРАГОМ
                 direction = player.status.split("_")[0]  # НАПРАВЛЕНИЕ ДВИЖЕНИЯ ИГРОКА
-                new_pos = {"down": (0, -115), "up": (0, 115), "left": (115, 0), "right": (-115, 0)}[direction]
-                x, y = player.rect.x, player.rect.y  # ПОЗИЦИЯ ИГРОКА
+                poses = {"down": (0, -115), "up": (0, 115), "left": (115, 0), "right": (-115, 0)}
+                new_pos = poses[direction]  # НОВАЯ ПОЗИЦИЯ ВРАГА
+                x, y = int(player.rect.x), int(player.rect.y)  # ПОЗИЦИЯ ИГРОКА
 
                 # ПЕРЕМЕЩЕНИЕ ХИТБОКСА ВРАГА ЗА СПИНУ ИГРОКА
                 self.hitbox.x = x + new_pos[0]
@@ -247,6 +259,28 @@ class Enemy(Entity):
                 self.owl_step_sound.play()  # ЗВУК ПЕРЕМЕЩЕНИЯ СОВЫ
 
     # -----------------------------------------------------------------------------------------------------------------
+
+    def check_awaken(self, player) -> None:
+        """
+        Метод, осуществляющий проверку того, находится ли враг в пробуждённом состоянии и записывающий результат в атри-
+        буты врага
+        :param player: объект игрока
+        """
+        if self.is_awaken and not player.is_boss_awaken:
+            player.is_boss_awaken = True
+
+    # -----------------------------------------------------------------------------------------------------------------
+
+    def update(self) -> None:
+        """Метод, обновляющий врага как объект"""
+        self.hit_reaction()  # РЕАКЦИЯ ВРАГА НА УДАР
+        self.hp_reaction()  # РЕАКЦИЯ НА КОЛИЧЕСТВО ЗДОРОВЬЯ У ВРАГОВ
+        self.move(self.speed, is_god=self.monster_name in ["Spirit", "Flam", "Owl"] or self.is_awaken)  # ДВИЖЕНИЕ ВРАГА
+        self.animate()  # АНИМАЦИЯ ВРАГА
+        self.cooldowns()  # ПЕРЕЗАРЯДКИ ВРАГА
+
+    # -----------------------------------------------------------------------------------------------------------------
+
     def enemy_update(self, player) -> None:
         """
         Метод обновляющий врага относительно игрока
@@ -256,6 +290,7 @@ class Enemy(Entity):
         self.actions(player)  # ОБРАБОТКА СТАТУСА ДЕЙСТВИЯ ВРАГА
         self.check_death(player)  # ПРОВЕРКА СМЕРТИ ВРАГА
         self.hit_process(player)  # ОБРАБОТКА СОБЫТИЙ КАСАЮЩИХСЯ КОЛИЧЕСТВА ПОЛУЧЕННЫХ УДАРОВ ВРАГОМ
+        self.check_awaken(player)  # ПРОВЕРКА НА ПРОБУЖДЕНИЕ
 
     # -----------------------------------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------------------------------------

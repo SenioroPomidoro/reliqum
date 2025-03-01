@@ -88,6 +88,7 @@ class Player(Entity):
         # =============================
         self.is_player_win = False  # ВЫИГРАЛ ЛИ ИГРОК
         self.is_player_lose = False  # ПРОИГРАЛ ЛИ ИГРОК
+        self.is_boss_awaken = False  # ПРОБУДИЛ ЛИ ИГРОК БОССА
 
     # -----------------------------------------------------------------------------------------------------------------
     def import_player_assets(self) -> None:

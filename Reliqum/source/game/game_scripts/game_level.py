@@ -1,8 +1,9 @@
 import pygame
 
+from source.helping_scripts.load_sounds import load_player_sounds
 from source.helping_scripts.imports import import_csv_layout
 from source.helping_scripts.imports import import_graphics
-from source.helping_scripts.load_sounds import load_player_sounds
+
 
 from source.game.user_interface.game_ui import GameUI
 
@@ -134,14 +135,13 @@ class Level:
                                 if required_element == 640:  # МОНСТР-ГЛАЗ
                                     monster_name = "Eye"
                                 if required_element == 638:  # БОСС БАМБУК
-                                    if self.level_index:  # ЕСЛИ НА ЛОКАЦИИ С БОССОМ
-                                        monster_name = "Bamboo"  # ЭТО БОСС БАМБУК
-                                    else:  # ИНАЧЕ
-                                        monster_name = "Eye"  # МОНСТР-ГЛАЗ
+                                    monster_name = "Bamboo"  # ЭТО БОСС БАМБУК
                                 if required_element == 641:
-                                    monster_name = "Spirit"
+                                    monster_name = "Spirit"  # МОНСТР-ДУША
                                 if required_element == 642:
-                                    monster_name = "Owl"
+                                    monster_name = "Owl"  # МОНСТР-СОВА
+                                if required_element == 643:  # МОНСТР-ОГОНЁК
+                                    monster_name = "Flam"
                                 Enemy(monster_name,
                                       (x, y),
                                       [self.visible_sprites, self.attackable_sprites],
@@ -212,7 +212,7 @@ class Level:
                 box_size = 120  # РАЗМЕР СТОРОНЫ КВАДРАТА КАДРА АНИМАЦИИ
                 rect = (self.player.rect.centerx, self.player.rect.centery - 5)  # ПОЗИЦИЯ СТАРТА АНИМАЦИИ
                 self.gravity_oof.play()  # ВОСПРОИЗВЕДЕНИЕ ЗВУКА ПОЛУЧЕНИЯ УРОНА
-                self.player.reverse_movement *= -1
+                self.player.reverse_movement *= -1  # СМЕНА ОРИЕНТАЦИИ ДВИЖЕНИЯ ИГРОКА
             else:
                 box_size = 64  # РАЗМЕР СТОРОНЫ КВАДРАТА КАДРА АНИМАЦИИ
                 rect = self.player.rect.center  # ПОЗИЦИЯ СТАРТА АНИМАЦИИ
